@@ -1,0 +1,6 @@
+{
+  "name": "Junk Trucks",
+  "description": "Ottawa's #1 Eco-Friendly Residential & Commercial Junk Removal Service. Upfront transparent pricing, same-day hauling, and eco-diversion donations.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

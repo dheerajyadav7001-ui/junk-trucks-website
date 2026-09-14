@@ -1,0 +1,88 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Poppins', system-ui, -apple-system, sans-serif;
+  --font-mono: 'Poppins', system-ui, -apple-system, sans-serif;
+
+  --color-brand-green: #025337;
+  --color-brand-green-dark: #012D19;
+  --color-brand-green-light: #2B6651;
+  --color-brand-green-subtle: #EDF5F1;
+
+  --color-brand-orange: #F2661C;
+  --color-brand-orange-hover: #DB540F;
+  --color-brand-orange-light: #FFF1E9;
+  --color-brand-orange-dark: #C64A0A;
+}
+
+:root {
+  --brand-green: #025337;
+  --brand-orange: #F2661C;
+}
+
+body {
+  font-family: 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: #FBFBFA;
+  color: #1c1917;
+  overflow-x: hidden;
+}
+
+.font-mono,
+.price-tag {
+  /* A refined sans replaces the old typewriter-style monospace look
+     used for eyebrow labels, badges and small tags across the site. */
+  font-family: 'Poppins', system-ui, -apple-system, sans-serif;
+  letter-spacing: 0.06em;
+}
+
+/* Custom utility helpers */
+.bg-brand-green {
+  background-color: #025337;
+}
+.bg-brand-green-dark {
+  background-color: #012D19;
+}
+.bg-brand-green-light {
+  background-color: #2B6651;
+}
+.bg-brand-green-subtle {
+  background-color: #EDF5F1;
+}
+.text-brand-green {
+  color: #025337;
+}
+.border-brand-green {
+  border-color: #025337;
+}
+
+.bg-brand-orange {
+  background-color: #F2661C;
+}
+.bg-brand-orange-hover:hover {
+  background-color: #DB540F;
+}
+.bg-brand-orange-light {
+  background-color: #FFF1E9;
+}
+.text-brand-orange {
+  color: #F2661C;
+}
+.border-brand-orange {
+  border-color: #F2661C;
+}
+
+/* Smooth custom scrollbars and transitions */
+html {
+  scroll-behavior: smooth;
+}
+
+
+/* Winter campaign — gentle falling snow */
+@keyframes snow-fall {
+  0% {
+    transform: translateY(0) translateX(0);
+  }
+  100% {
+    transform: translateY(105vh) translateX(var(--drift, 0px));
+  }
+}
