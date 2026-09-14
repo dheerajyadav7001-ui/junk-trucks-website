@@ -83,8 +83,10 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
               key={src}
               src={src}
               alt="Junk Trucks team on site in Ottawa"
-              className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${
-                src === '/winter-campaign.jpg' ? 'object-top' : 'object-center'
+              className={`absolute inset-0 w-full h-full transition-opacity duration-1000 ease-in-out ${
+                src === '/winter-campaign.jpg'
+                  ? 'object-contain sm:object-cover object-top bg-[#012D19]'
+                  : 'object-cover object-center'
               } ${
                 i === heroSlide ? 'opacity-100' : 'opacity-0'
               }`}
