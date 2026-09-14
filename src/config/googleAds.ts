@@ -9,8 +9,8 @@
 //      "AbC-D_efGhIjKlmNoP") below.
 // Until you do, the tag safely no-ops — nothing breaks, it just won't
 // report data to Google yet.
-export const GOOGLE_ADS_CONVERSION_ID = 'AW-XXXXXXXXX'; // TODO: replace with your real Conversion ID
-export const GOOGLE_ADS_CONVERSION_LABEL = 'XXXXXXXXXXXXXXXXXXXX'; // TODO: replace with your real conversion label
+export const GOOGLE_ADS_CONVERSION_ID = 'AW-18374467102';
+export const GOOGLE_ADS_CONVERSION_LABEL = 'PQFbCOqx5uocEJ680L1E';
 
 export const GOOGLE_ADS_TAG_CONFIGURED =
   !GOOGLE_ADS_CONVERSION_ID.includes('XXXXXXXXX') &&
