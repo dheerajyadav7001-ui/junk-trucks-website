@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { 
   Truck, CheckCircle2, ArrowRight, Phone, Star, 
   Armchair, Refrigerator, Home, Hammer, TreePine, Building2,
-  Flame, Clock, Sparkles, ChevronDown, Check, X, Snowflake
+  Flame, Clock, Sparkles, ChevronDown, Check, X
 } from 'lucide-react';
 import { useBooking } from '../../context/BookingContext';
 import { 
@@ -116,12 +116,6 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
         <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
           {!isCampaignSlide && (
             <>
-              {/* Winter campaign banner */}
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 border border-white/20 backdrop-blur-xs text-xs sm:text-sm font-bold text-white">
-                <Snowflake className="w-4 h-4 text-sky-200" />
-                <span>Winter Garage Clear-Out — book before the snow piles up</span>
-              </div>
-
               <h1 className="text-2xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white leading-tight max-w-3xl mx-auto">
                 Don't hesitate to ask for anything extra — <br className="hidden sm:inline" />
                 <span className="text-[#F2661C]">your satisfaction is our top priority.</span>
