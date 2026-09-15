@@ -30,8 +30,8 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
 
   // Rotating hero photo slider for seasonal campaigns
   const HERO_SLIDES = [
-    '/truck-hero.jpg',
     '/winter-campaign.jpg',
+    '/truck-hero.jpg',
   ];
   const [heroSlide, setHeroSlide] = useState(0);
   const isCampaignSlide = HERO_SLIDES[heroSlide] === '/winter-campaign.jpg';
@@ -233,7 +233,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
               {/* Photo Thumbnail — short banner, clean, no overlaid text */}
               <div className="relative aspect-21/9 overflow-hidden bg-stone-100 shrink-0">
                 <img
-                  src={service.image || '/cover-truck.jpg'}
+                  src={service.image || '/truck-hero.jpg'}
                   alt={service.title}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   loading="lazy"

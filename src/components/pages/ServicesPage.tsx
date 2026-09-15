@@ -97,7 +97,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onNavigate }) => {
                 {/* Photo Thumbnail */}
                 <div className="relative aspect-16/10 overflow-hidden bg-stone-100">
                   <img
-                    src={srv.image || '/cover-truck.jpg'}
+                    src={srv.image || '/truck-hero.jpg'}
                     alt={srv.title}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     loading="lazy"
