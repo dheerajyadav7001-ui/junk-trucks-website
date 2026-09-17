@@ -16,46 +16,9 @@ interface KeywordLandingPageProps {
 export const KeywordLandingPage: React.FC<KeywordLandingPageProps> = ({ config }) => {
   useDocumentHead(config.title, config.metaDescription);
 
-  const { submitBooking, isSubmitting, isSuccess, bookingReference } = useBooking();
+  const { openBooking } = useBooking();
 
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
-
-  const [formData, setFormData] = useState({
-    name: '',
-    phone: '',
-    address: '',
-    neighborhood: 'Downtown / Centretown',
-    loadEstimate: '1/2 Truck Load',
-    notes: '',
-  });
-
-  const [localSubmitted, setLocalSubmitted] = useState(false);
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!formData.name || !formData.phone || !formData.address) {
-      alert('Please provide your name, phone number, and street address so we can send an accurate quote.');
-      return;
-    }
-
-    const res = await submitBooking({
-      name: formData.name,
-      phone: formData.phone,
-      address: formData.address,
-      neighborhood: formData.neighborhood,
-      serviceType: config.serviceType,
-      loadSize: formData.loadEstimate,
-      notes: formData.notes,
-    });
-
-    if (res.success) {
-      setLocalSubmitted(true);
-    }
-  };
 
   return (
     <div className="min-h-screen bg-stone-50 pb-20">
@@ -141,158 +104,29 @@ export const KeywordLandingPage: React.FC<KeywordLandingPageProps> = ({ config }
             {/* Right: prominent form above the fold */}
             <div className="lg:col-span-5">
               <div className="bg-white text-stone-900 rounded-3xl p-6 sm:p-8 shadow-2xl border-2 border-[#F2661C] relative">
-                {localSubmitted || isSuccess ? (
-                  <div className="py-8 text-center space-y-3">
-                    <div className="w-14 h-14 bg-emerald-100 text-emerald-700 rounded-full flex items-center justify-center mx-auto">
-                      <CheckCircle2 className="w-8 h-8" />
-                    </div>
-                    <h3 className="text-xl font-bold text-stone-900">
-                      Request Received!
-                    </h3>
-                    <p className="text-xs text-stone-600 leading-relaxed">
-                      We'll call you shortly at the number you provided to confirm your quote.
-                    </p>
-                    <div className="p-3 bg-stone-50 rounded-xl font-mono text-xs font-bold text-[#025337]">
-                      Reference: {bookingReference || 'JT-PENDING'}
-                    </div>
-                    <a
-                      href={`tel:${OTTAWA_PHONE.replace(/[^0-9+]/g, '')}`}
-                      className="inline-flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-[#025337] text-white font-bold text-xs"
-                    >
-                      <Phone className="w-3.5 h-3.5" /> Call Now: {OTTAWA_PHONE}
-                    </a>
-                  </div>
-                ) : (
-                  <form onSubmit={handleSubmit} className="space-y-3.5">
-                    <div className="text-left">
-                      <h3 className="text-lg font-bold text-stone-900 leading-tight">
-                        {config.formHeading}
-                      </h3>
-                      <p className="text-xs text-stone-500 mt-0.5">
-                        No credit card required. Free firm quote.
-                      </p>
-                    </div>
-
-                    <div>
-                      <label className="block text-[11px] font-bold text-stone-700 uppercase mb-1">
-                        Your Name *
-                      </label>
-                      <input
-                        type="text"
-                        name="name"
-                        required
-                        placeholder="First and Last Name"
-                        value={formData.name}
-                        onChange={handleChange}
-                        className="w-full px-3 py-2 text-xs sm:text-sm border border-stone-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F2661C]"
-                      />
-                    </div>
-
-                    <div>
-                      <label className="block text-[11px] font-bold text-stone-700 uppercase mb-1">
-                        Phone Number *
-                      </label>
-                      <input
-                        type="tel"
-                        name="phone"
-                        required
-                        placeholder="(613) 000-0000"
-                        value={formData.phone}
-                        onChange={handleChange}
-                        className="w-full px-3 py-2 text-xs sm:text-sm border border-stone-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F2661C]"
-                      />
-                    </div>
-
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                      <div>
-                        <label className="block text-[11px] font-bold text-stone-700 uppercase mb-1">
-                          Ottawa Street Address *
-                        </label>
-                        <input
-                          type="text"
-                          name="address"
-                          required
-                          placeholder="e.g. 120 Bank St"
-                          value={formData.address}
-                          onChange={handleChange}
-                          className="w-full px-3 py-2 text-xs sm:text-sm border border-stone-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F2661C]"
-                        />
-                      </div>
-
-                      <div>
-                        <label className="block text-[11px] font-bold text-stone-700 uppercase mb-1">
-                          Area / Suburb *
-                        </label>
-                        <select
-                          name="neighborhood"
-                          value={formData.neighborhood}
-                          onChange={handleChange}
-                          className="w-full px-3 py-2 text-xs sm:text-sm border border-stone-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F2661C] bg-white"
-                        >
-                          {OTTAWA_AREAS.map((a) => (
-                            <option key={a.name} value={a.name}>
-                              {a.name}
-                            </option>
-                          ))}
-                        </select>
-                      </div>
-                    </div>
-
-                    <div>
-                      <label className="block text-[11px] font-bold text-stone-700 uppercase mb-1">
-                        Estimated Job Size
-                      </label>
-                      <select
-                        name="loadEstimate"
-                        value={formData.loadEstimate}
-                        onChange={handleChange}
-                        className="w-full px-3 py-2 text-xs sm:text-sm border border-stone-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F2661C] bg-white"
-                      >
-                        <option value="Single Item (Lowest Price Guaranteed)">Single Item</option>
-                        <option value="1/4 Truck (Lowest Price Guaranteed)">1/4 Truck</option>
-                        <option value="1/2 Truck (Lowest Price Guaranteed)">1/2 Truck</option>
-                        <option value="3/4 Truck (Lowest Price Guaranteed)">3/4 Truck</option>
-                        <option value="Full 16ft Box Truck (Lowest Price Guaranteed)">Full Box Truck</option>
-                      </select>
-                    </div>
-
-                    <div>
-                      <label className="block text-[11px] font-bold text-stone-700 uppercase mb-1">
-                        Quick Description (Optional)
-                      </label>
-                      <input
-                        type="text"
-                        name="notes"
-                        placeholder="e.g. old couch, boxes, appliances..."
-                        value={formData.notes}
-                        onChange={handleChange}
-                        className="w-full px-3 py-2 text-xs border border-stone-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F2661C]"
-                      />
-                    </div>
-
-                    <button
-                      type="submit"
-                      disabled={isSubmitting}
-                      className="w-full py-3.5 rounded-xl bg-[#F2661C] text-white font-bold text-sm hover:bg-[#DB540F] transition-all shadow-md flex items-center justify-center gap-2 disabled:opacity-50"
-                    >
-                      {isSubmitting ? (
-                        <>
-                          <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                          Sending...
-                        </>
-                      ) : (
-                        <>
-                          <span>Get My Free Quote</span>
-                          <ArrowRight className="w-4 h-4" />
-                        </>
-                      )}
-                    </button>
-
-                    <p className="text-[10px] text-center text-stone-500">
-                      Real Ottawa crew. No hidden fees. No obligation.
-                    </p>
-                  </form>
-                )}
+                <div className="py-6 text-center space-y-4">
+                  <h3 className="text-lg font-bold text-stone-900 leading-tight">
+                    {config.formHeading}
+                  </h3>
+                  <p className="text-xs text-stone-500 -mt-2">
+                    Just your name, phone, email, and postal code — we'll call you back with a firm quote.
+                  </p>
+                  <button
+                    id="landing-open-booking-btn"
+                    type="button"
+                    onClick={() => openBooking(config.serviceType)}
+                    className="w-full py-3.5 rounded-xl bg-[#F2661C] text-white font-bold text-sm hover:bg-[#DB540F] transition-all shadow-md flex items-center justify-center gap-2"
+                  >
+                    Get My Free Quote
+                    <ArrowRight className="w-4 h-4" />
+                  </button>
+                  <a
+                    href={`tel:${OTTAWA_PHONE.replace(/[^0-9+]/g, '')}`}
+                    className="inline-flex items-center justify-center gap-2 w-full py-2.5 rounded-xl border border-stone-300 text-stone-700 font-semibold text-xs"
+                  >
+                    <Phone className="w-3.5 h-3.5" /> Or Call Now: {OTTAWA_PHONE}
+                  </a>
+                </div>
               </div>
             </div>
           </div>

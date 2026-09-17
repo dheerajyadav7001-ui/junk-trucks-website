@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
-import { 
-  Flame, Phone, Clock, ShieldCheck, CheckCircle2, 
-  AlertTriangle, Truck, ArrowRight, Star, Leaf, MapPin 
+import React from 'react';
+import {
+  Flame, Phone, Clock, ShieldCheck, CheckCircle2,
+  AlertTriangle, Truck, ArrowRight, Star, Leaf, MapPin
 } from 'lucide-react';
 import { useBooking } from '../../context/BookingContext';
-import { OTTAWA_PHONE, OTTAWA_AREAS, PRICING_TIERS } from '../../data/junkData';
-import { getTrackingParams } from '../../utils/tracking';
+import { OTTAWA_PHONE } from '../../data/junkData';
 import { useDocumentHead } from '../../utils/seo';
 
 export const EmergencyJunkRemovalPage: React.FC = () => {
@@ -14,47 +13,7 @@ export const EmergencyJunkRemovalPage: React.FC = () => {
     'Need junk gone today? Same-day emergency junk removal across Ottawa. Fast dispatch, upfront pricing, no hidden fees. Call now for urgent pickup.'
   );
 
-  const { submitBooking, isSubmitting, isSuccess, bookingReference } = useBooking();
-
-  const [formData, setFormData] = useState({
-    name: '',
-    phone: '',
-    address: '',
-    neighborhood: 'Downtown / Centretown',
-    loadEstimate: '1/2 Truck Load',
-    urgencyWindow: 'ASAP within 2 Hours',
-    notes: '',
-  });
-
-  const [localSubmitted, setLocalSubmitted] = useState(false);
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const handleEmergencySubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!formData.name || !formData.phone || !formData.address) {
-      alert('Please provide your name, phone number, and street address for emergency dispatch.');
-      return;
-    }
-
-    const res = await submitBooking({
-      name: formData.name,
-      phone: formData.phone,
-      address: formData.address,
-      neighborhood: formData.neighborhood,
-      serviceType: '🚨 Emergency Junk Removal Ottawa (Priority Dispatch)',
-      loadSize: formData.loadEstimate,
-      preferredTimeSlot: formData.urgencyWindow,
-      notes: `EMERGENCY DISPATCH REQUEST. Urgency: ${formData.urgencyWindow}. Details: ${formData.notes}`,
-      isUrgent: true,
-    });
-
-    if (res.success) {
-      setLocalSubmitted(true);
-    }
-  };
+  const { openBooking } = useBooking();
 
   return (
     <div className="min-h-screen bg-stone-50 pb-20">
@@ -141,178 +100,26 @@ export const EmergencyJunkRemovalPage: React.FC = () => {
                   Priority Dispatch Form
                 </div>
 
-                {localSubmitted || isSuccess ? (
-                  <div className="py-8 text-center space-y-3">
-                    <div className="w-14 h-14 bg-emerald-100 text-emerald-700 rounded-full flex items-center justify-center mx-auto">
-                      <CheckCircle2 className="w-8 h-8" />
-                    </div>
-                    <h3 className="text-xl font-bold text-stone-900">
-                      Emergency Alert Dispatched!
-                    </h3>
-                    <p className="text-xs text-stone-600 leading-relaxed">
-                      Our on-duty Ottawa dispatcher is reviewing your address at <strong>{formData.address}</strong> and will telephone you within <strong>5–10 minutes</strong>.
-                    </p>
-                    <div className="p-3 bg-stone-50 rounded-xl font-mono text-xs font-bold text-[#025337]">
-                      Reference: {bookingReference || 'EMERGENCY-ACTIVE'}
-                    </div>
-                    <a
-                      href={`tel:${OTTAWA_PHONE.replace(/[^0-9+]/g, '')}`}
-                      className="inline-flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-[#025337] text-white font-bold text-xs"
-                    >
-                      <Phone className="w-3.5 h-3.5" /> Call Now To Expedite: {OTTAWA_PHONE}
-                    </a>
-                  </div>
-                ) : (
-                  <form onSubmit={handleEmergencySubmit} className="space-y-3.5 pt-2">
-                    <div className="text-left">
-                      <h3 className="text-lg font-bold text-stone-900 leading-tight">
-                        Request Urgent Same-Day Truck
-                      </h3>
-                      <p className="text-xs text-stone-500 mt-0.5">
-                        No credit card required. Free on-site firm quote.
-                      </p>
-                    </div>
-
-                    <div>
-                      <label className="block text-[11px] font-bold text-stone-700 uppercase mb-1">
-                        Your Name *
-                      </label>
-                      <input
-                        type="text"
-                        name="name"
-                        required
-                        placeholder="First and Last Name"
-                        value={formData.name}
-                        onChange={handleChange}
-                        className="w-full px-3 py-2 text-xs sm:text-sm border border-stone-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F2661C]"
-                      />
-                    </div>
-
-                    <div>
-                      <label className="block text-[11px] font-bold text-stone-700 uppercase mb-1">
-                        Phone Number (Dispatcher Will Call) *
-                      </label>
-                      <input
-                        type="tel"
-                        name="phone"
-                        required
-                        placeholder="(613) 000-0000"
-                        value={formData.phone}
-                        onChange={handleChange}
-                        className="w-full px-3 py-2 text-xs sm:text-sm border border-stone-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F2661C]"
-                      />
-                    </div>
-
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                      <div>
-                        <label className="block text-[11px] font-bold text-stone-700 uppercase mb-1">
-                          Ottawa Street Address *
-                        </label>
-                        <input
-                          type="text"
-                          name="address"
-                          required
-                          placeholder="e.g. 120 Bank St"
-                          value={formData.address}
-                          onChange={handleChange}
-                          className="w-full px-3 py-2 text-xs sm:text-sm border border-stone-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F2661C]"
-                        />
-                      </div>
-
-                      <div>
-                        <label className="block text-[11px] font-bold text-stone-700 uppercase mb-1">
-                          Area / Suburb *
-                        </label>
-                        <select
-                          name="neighborhood"
-                          value={formData.neighborhood}
-                          onChange={handleChange}
-                          className="w-full px-3 py-2 text-xs sm:text-sm border border-stone-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F2661C] bg-white"
-                        >
-                          {OTTAWA_AREAS.map((a) => (
-                            <option key={a.name} value={a.name}>
-                              {a.name}
-                            </option>
-                          ))}
-                        </select>
-                      </div>
-                    </div>
-
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                      <div>
-                        <label className="block text-[11px] font-bold text-stone-700 uppercase mb-1">
-                          Estimated Junk Volume
-                        </label>
-                        <select
-                          name="loadEstimate"
-                          value={formData.loadEstimate}
-                          onChange={handleChange}
-                          className="w-full px-3 py-2 text-xs sm:text-sm border border-stone-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F2661C] bg-white"
-                        >
-                          <option value="Single Item (Lowest Price Guaranteed)">Single Item (Lowest Price Guaranteed)</option>
-                          <option value="1/4 Truck (Lowest Price Guaranteed)">1/4 Truck (Lowest Price Guaranteed)</option>
-                          <option value="1/2 Truck (Lowest Price Guaranteed)">1/2 Truck (Lowest Price Guaranteed)</option>
-                          <option value="3/4 Truck (Lowest Price Guaranteed)">3/4 Truck (Lowest Price Guaranteed)</option>
-                          <option value="Full 16ft Box Truck (Lowest Price Guaranteed)">Full Box Truck (Lowest Price Guaranteed)</option>
-                        </select>
-                      </div>
-
-                      <div>
-                        <label className="block text-[11px] font-bold text-stone-700 uppercase mb-1">
-                          Required Response Time
-                        </label>
-                        <select
-                          name="urgencyWindow"
-                          value={formData.urgencyWindow}
-                          onChange={handleChange}
-                          className="w-full px-3 py-2 text-xs sm:text-sm border border-stone-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F2661C] bg-orange-50 font-bold text-orange-950"
-                        >
-                          <option value="ASAP within 2 Hours">🚨 ASAP within 2 Hours</option>
-                          <option value="Today Afternoon">Today Afternoon</option>
-                          <option value="Today Evening (Before 8 PM)">Today Evening (Before 8 PM)</option>
-                          <option value="Tomorrow Morning First Thing">Tomorrow Morning</option>
-                        </select>
-                      </div>
-                    </div>
-
-                    <div>
-                      <label className="block text-[11px] font-bold text-stone-700 uppercase mb-1">
-                        Quick Item Description (Optional)
-                      </label>
-                      <input
-                        type="text"
-                        name="notes"
-                        placeholder="e.g. Basement flooded items, old mattress, renovation trash in driveway..."
-                        value={formData.notes}
-                        onChange={handleChange}
-                        className="w-full px-3 py-2 text-xs border border-stone-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F2661C]"
-                      />
-                    </div>
-
-                    <button
-                      id="emergency-form-submit-btn"
-                      type="submit"
-                      disabled={isSubmitting}
-                      className="w-full py-3.5 rounded-xl bg-[#F2661C] text-white font-bold text-sm hover:bg-[#DB540F] transition-all shadow-md flex items-center justify-center gap-2 disabled:opacity-50"
-                    >
-                      {isSubmitting ? (
-                        <>
-                          <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                          Alerting Nearest Crew...
-                        </>
-                      ) : (
-                        <>
-                          <Flame className="w-4 h-4" />
-                          Dispatch My Emergency Crew Now
-                        </>
-                      )}
-                    </button>
-
-                    <p className="text-[10px] text-center text-stone-500">
-                      ⚡ Direct radio dispatch to active Ottawa trucks. Zero cancellation fee.
-                    </p>
-                  </form>
-                )}
+                <div className="py-6 text-center space-y-4">
+                  <h3 className="text-lg font-bold text-stone-900 leading-tight">
+                    Request Urgent Same-Day Truck
+                  </h3>
+                  <p className="text-xs text-stone-500 -mt-2">
+                    No credit card required. Free on-site firm quote. Just your name, phone, email, and postal code — we call you back in minutes.
+                  </p>
+                  <button
+                    id="emergency-open-booking-btn"
+                    type="button"
+                    onClick={() => openBooking('🚨 Emergency Junk Removal Ottawa (Priority Dispatch)')}
+                    className="w-full py-3.5 rounded-xl bg-[#F2661C] text-white font-bold text-sm hover:bg-[#DB540F] transition-all shadow-md flex items-center justify-center gap-2"
+                  >
+                    <Flame className="w-4 h-4" />
+                    Dispatch My Emergency Crew Now
+                  </button>
+                  <p className="text-[10px] text-center text-stone-500">
+                    ⚡ Direct radio dispatch to active Ottawa trucks. Zero cancellation fee.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
