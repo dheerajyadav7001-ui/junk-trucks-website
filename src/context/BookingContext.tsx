@@ -25,10 +25,10 @@ const BookingContext = createContext<BookingContextType | undefined>(undefined);
 // EmailJS Configuration
 // Note: If you have active EmailJS keys, update them here. 
 // The app safely catches and logs any EmailJS errors so Formspree submission completes reliably.
-const EMAILJS_PUBLIC_KEY = 'user_junktrucks_public';
-const EMAILJS_SERVICE_ID = 'service_junktrucks';
-const EMAILJS_TEMPLATE_CUSTOMER = 'template_junk_customer_confirm';
-const EMAILJS_TEMPLATE_OWNER = 'template_junk_owner_notify';
+const EMAILJS_PUBLIC_KEY = 'XANQLM8aHvPqxLQCM';
+const EMAILJS_SERVICE_ID = 'service_ls32woy';
+const EMAILJS_TEMPLATE_CUSTOMER = 'template_0b18jpk';
+const EMAILJS_TEMPLATE_OWNER = 'template_vlh1xs7';
 const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xgojyezp';
 
 export const BookingProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
@@ -113,49 +113,37 @@ export const BookingProvider: React.FC<{ children: ReactNode }> = ({ children })
 
       // 2. Trigger EmailJS notifications (Customer confirmation & Owner dispatch notification)
       try {
-        if (EMAILJS_PUBLIC_KEY && EMAILJS_PUBLIC_KEY !== 'user_junktrucks_public') {
-          // Send Customer confirmation
-          await emailjs.send(
-            EMAILJS_SERVICE_ID,
-            EMAILJS_TEMPLATE_CUSTOMER,
-            {
-              to_name: fullPayload.name,
-              to_email: fullPayload.email,
-              booking_ref: randomRef,
-              service_type: fullPayload.serviceType,
-              load_size: fullPayload.loadSize,
-              preferred_date: fullPayload.preferredDate,
-              time_slot: fullPayload.preferredTimeSlot,
-              address: `${fullPayload.address}, ${fullPayload.neighborhood}, ${fullPayload.postalCode}`,
-            },
-            EMAILJS_PUBLIC_KEY
-          );
+        // Send Customer confirmation
+        await emailjs.send(
+          EMAILJS_SERVICE_ID,
+          EMAILJS_TEMPLATE_CUSTOMER,
+          {
+            to_name: fullPayload.name,
+            to_email: fullPayload.email,
+            booking_ref: randomRef,
+            service_type: fullPayload.serviceType,
+          },
+          EMAILJS_PUBLIC_KEY
+        );
 
-          // Send Owner notification
-          await emailjs.send(
-            EMAILJS_SERVICE_ID,
-            EMAILJS_TEMPLATE_OWNER,
-            {
-              customer_name: fullPayload.name,
-              customer_phone: fullPayload.phone,
-              customer_email: fullPayload.email,
-              booking_ref: randomRef,
-              service_type: fullPayload.serviceType,
-              load_size: fullPayload.loadSize,
-              preferred_date: fullPayload.preferredDate,
-              time_slot: fullPayload.preferredTimeSlot,
-              address: `${fullPayload.address}, ${fullPayload.neighborhood}, ${fullPayload.postalCode}`,
-              notes: fullPayload.notes,
-              utm_source: fullPayload.utm_source,
-              utm_campaign: fullPayload.utm_campaign,
-              gclid: fullPayload.gclid,
-            },
-            EMAILJS_PUBLIC_KEY
-          );
-        } else {
-          // Log simulated EmailJS dispatch in dev mode
-          console.info('EmailJS ready: Triggered customer confirmation + owner notification with ref:', randomRef);
-        }
+        // Send Owner notification
+        await emailjs.send(
+          EMAILJS_SERVICE_ID,
+          EMAILJS_TEMPLATE_OWNER,
+          {
+            customer_name: fullPayload.name,
+            customer_phone: fullPayload.phone,
+            customer_email: fullPayload.email,
+            postal_code: fullPayload.postalCode,
+            booking_ref: randomRef,
+            service_type: fullPayload.serviceType,
+            notes: fullPayload.notes,
+            utm_source: fullPayload.utm_source,
+            utm_campaign: fullPayload.utm_campaign,
+            gclid: fullPayload.gclid,
+          },
+          EMAILJS_PUBLIC_KEY
+        );
       } catch (emailError) {
         // We log EmailJS error without failing the user experience
         console.warn('EmailJS email dispatch notice:', emailError);
