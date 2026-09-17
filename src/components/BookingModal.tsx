@@ -4,7 +4,7 @@ import {
   X, CheckCircle2, AlertCircle, Phone, ShieldCheck, ArrowRight,
 } from 'lucide-react';
 import { useBooking } from '../context/BookingContext';
-import { OTTAWA_PHONE, OTTAWA_WHATSAPP_LINK } from '../data/junkData';
+import { OTTAWA_PHONE, OTTAWA_WHATSAPP_LINK, SERVICES_LIST } from '../data/junkData';
 import { WhatsAppIcon } from './WhatsAppIcon';
 
 export const BookingModal: React.FC = () => {
@@ -12,6 +12,7 @@ export const BookingModal: React.FC = () => {
     isOpen,
     closeBooking,
     selectedService,
+    setSelectedService,
     selectedLoadSize,
     submitBooking,
     isSubmitting,
@@ -185,6 +186,29 @@ export const BookingModal: React.FC = () => {
                   <span>{errorMessage}</span>
                 </div>
               )}
+
+              <div>
+                <label className="block text-xs font-semibold text-stone-700 mb-1">
+                  Type of Junk *
+                </label>
+                <select
+                  name="serviceType"
+                  required
+                  value={selectedService}
+                  onChange={(e) => setSelectedService(e.target.value)}
+                  className="w-full px-3 py-2.5 text-sm border border-stone-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#025337] bg-white"
+                >
+                  <option value="General Junk Removal">General Junk Removal</option>
+                  {SERVICES_LIST.map((srv) => (
+                    <option key={srv.id} value={srv.title}>
+                      {srv.title}
+                    </option>
+                  ))}
+                  {selectedService !== 'General Junk Removal' && !SERVICES_LIST.some((srv) => srv.title === selectedService) && (
+                    <option value={selectedService}>{selectedService}</option>
+                  )}
+                </select>
+              </div>
 
               <div>
                 <label className="block text-xs font-semibold text-stone-700 mb-1">
