@@ -281,7 +281,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                 onClick={() => openBooking(customRequest.trim() ? `Other: ${customRequest.trim()}` : 'Other / Custom Request')}
                 className="w-full px-2 py-1.5 rounded-lg bg-[#025337] hover:bg-[#012D19] text-white text-[10px] sm:text-[11px] font-bold transition-all shadow-xs flex items-center justify-center gap-1 mt-1"
               >
-                <span>Get Free Quote</span>
+                <span>Get Your Quote</span>
                 <ArrowRight className="w-3 h-3" />
               </button>
             </div>

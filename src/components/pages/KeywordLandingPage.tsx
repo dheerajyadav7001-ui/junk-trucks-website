@@ -117,7 +117,7 @@ export const KeywordLandingPage: React.FC<KeywordLandingPageProps> = ({ config }
                     onClick={() => openBooking(config.serviceType)}
                     className="w-full py-3.5 rounded-xl bg-[#F2661C] text-white font-bold text-sm hover:bg-[#DB540F] transition-all shadow-md flex items-center justify-center gap-2"
                   >
-                    Get My Free Quote
+                    Get My Quote
                     <ArrowRight className="w-4 h-4" />
                   </button>
                   <a

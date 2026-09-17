@@ -95,7 +95,7 @@ export const BookingModal: React.FC = () => {
               />
               <div>
                 <h3 className="font-bold text-lg leading-tight">
-                  Get Your Free Quote
+                  Get Your Quote
                 </h3>
                 <p className="text-xs text-stone-200 mt-0.5">
                   We'll call you back in 15–30 minutes
@@ -264,7 +264,7 @@ export const BookingModal: React.FC = () => {
                   </>
                 ) : (
                   <>
-                    Request My Free Quote
+                    Request My Quote
                     <ArrowRight className="w-4 h-4" />
                   </>
                 )}
