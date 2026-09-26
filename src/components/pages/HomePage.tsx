@@ -117,12 +117,14 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
           {!isCampaignSlide && (
             <>
               <h1 className="text-2xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white leading-tight max-w-3xl mx-auto">
-                Don't hesitate to ask for anything extra — <br className="hidden sm:inline" />
-                <span className="text-[#F2661C]">your satisfaction is our top priority.</span>
+                Junk removal that keeps it real: <br className="hidden sm:inline" />
+                <span className="text-[#F2661C]">honest pricing, 80%+ diverted from the landfill.</span>
               </h1>
 
               <p className="text-lg sm:text-xl text-stone-200 max-w-2xl mx-auto font-medium leading-relaxed">
-                Junk Trucks — Gets The Job Done.
+                No hidden fees, no vague estimates — same-day Ottawa hauling that puts your stuff to
+                Habitat for Humanity ReStore, the Salvation Army, and St. Vincent de Paul before it
+                ever sees a landfill.
               </p>
             </>
           )}
