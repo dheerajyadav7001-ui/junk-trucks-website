@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import { MapPin } from 'lucide-react';
 import { PageId } from '../types';
 import { Logo } from './Logo';
+import { LANDING_PAGES } from '../data/junkData';
 
 interface FooterProps {
-  onNavigate: (page: PageId) => void;
+  onNavigate: (page: PageId, slug?: string) => void;
 }
 
 const SERVICE_AREA_MARKERS = [
@@ -19,19 +20,23 @@ const SERVICE_AREA_MARKERS = [
 export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
   const [mapLoaded, setMapLoaded] = useState(false);
 
-  const handleLinkClick = (page: PageId, hash: string) => {
-    window.location.hash = hash;
+  const handleLinkClick = (page: PageId) => {
     onNavigate(page);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleAnchorClick = (anchorId: string) => {
-    window.location.hash = `#${anchorId}`;
     onNavigate('home');
+    window.location.hash = `#${anchorId}`;
     setTimeout(() => {
       const el = document.getElementById(anchorId);
       if (el) el.scrollIntoView({ behavior: 'smooth' });
     }, 100);
+  };
+
+  const handleLandingClick = (slug: string) => {
+    onNavigate('landing', slug);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
@@ -122,13 +127,34 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
           </div>
         </div>
 
+        {/* Popular Service Pages — real, crawlable links so Google can
+            discover each dedicated cleanout page by following a link, not
+            only via the sitemap. */}
+        <div className="py-8 border-b border-white/10">
+          <h4 className="font-bold text-white text-xs tracking-wide uppercase font-mono mb-3">
+            Popular Ottawa Cleanout Services
+          </h4>
+          <div className="flex flex-wrap gap-x-5 gap-y-2 text-sm">
+            {LANDING_PAGES.map((lp) => (
+              <a
+                key={lp.slug}
+                href={`/${lp.slug}`}
+                onClick={(e) => { e.preventDefault(); handleLandingClick(lp.slug); }}
+                className="text-stone-300 hover:text-[#F2661C] transition-colors"
+              >
+                {lp.keyword}
+              </a>
+            ))}
+          </div>
+        </div>
+
         {/* Minimal Bottom Bar */}
         <div className="pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-stone-400 gap-3">
           <p>© {new Date().getFullYear()} Junk Trucks Ottawa Inc. All rights reserved.</p>
           <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
-            <button onClick={() => handleLinkClick('services', '#services')} className="hover:text-stone-200 transition-colors">
+            <a href="/services" onClick={(e) => { e.preventDefault(); handleLinkClick('services'); }} className="hover:text-stone-200 transition-colors">
               Services
-            </button>
+            </a>
             <button onClick={() => handleAnchorClick('before-after')} className="hover:text-stone-200 transition-colors">
               Before & After
             </button>
@@ -138,9 +164,9 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             <button onClick={() => handleAnchorClick('donate')} className="hover:text-stone-200 transition-colors">
               Donate
             </button>
-            <button onClick={() => handleLinkClick('emergency', '#emergency')} className="hover:text-[#F2661C] transition-colors">
+            <a href="/emergency-junk-removal" onClick={(e) => { e.preventDefault(); handleLinkClick('emergency'); }} className="hover:text-[#F2661C] transition-colors">
               Emergency Hauling
-            </button>
+            </a>
           </div>
         </div>
       </div>

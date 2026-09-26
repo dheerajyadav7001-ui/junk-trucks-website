@@ -329,10 +329,11 @@ export const DONATION_NOT_ACCEPTED = [
 // ─────────────────────────────────────────────────────────────────────────
 // KEYWORD-MATCHED LANDING PAGES (for Google Ads single-keyword ad groups)
 // ─────────────────────────────────────────────────────────────────────────
-// Each entry powers one dedicated page at #lp/<slug>. Point one ad group's
-// final URL at one slug so the search term, the ad headline, and this
-// page's <h1> all match exactly — that match is what drives quality score
-// and conversion rate up. Ask to add more any time you have a new keyword.
+// Each entry powers one dedicated page at the real, crawlable path
+// /<slug> (e.g. junktrucks.ca/furniture-removal-ottawa) — also useful as a
+// Google Ads final URL for a matching single-keyword ad group, so the
+// search term, the ad headline, and this page's <h1> all match exactly.
+// Ask to add more any time you have a new keyword.
 export const LANDING_PAGES: LandingPageConfig[] = [
   {
     slug: 'garage-cleanout-ottawa',

@@ -15,29 +15,39 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { openBooking } = useBooking();
 
-  const navLinks: { key: string; id: PageId; label: string; hash: string }[] = [
-    { key: 'nav-home', id: 'home', label: 'Home', hash: '#home' },
-    { key: 'nav-services', id: 'services', label: 'Services', hash: '#services' },
-    { key: 'nav-before-after', id: 'home', label: 'Before & After', hash: '#before-after' },
-    { key: 'nav-faq', id: 'home', label: 'FAQ', hash: '#faq' },
-    { key: 'nav-donate', id: 'home', label: 'Donate', hash: '#donate' },
+  // "hash" here is only ever a same-page scroll anchor (#before-after,
+  // #faq, #donate) or empty for a real page change — it is never used to
+  // pick the page itself anymore, so it stays out of the URL for real
+  // page navigation (that's a real crawlable path, set via onNavigate).
+  const navLinks: { key: string; id: PageId; label: string; hash: string; path: string | null }[] = [
+    { key: 'nav-home', id: 'home', label: 'Home', hash: '', path: '/' },
+    { key: 'nav-services', id: 'services', label: 'Services', hash: '', path: '/services' },
+    { key: 'nav-before-after', id: 'home', label: 'Before & After', hash: '#before-after', path: null },
+    { key: 'nav-faq', id: 'home', label: 'FAQ', hash: '#faq', path: null },
+    { key: 'nav-donate', id: 'home', label: 'Donate', hash: '#donate', path: null },
   ];
 
   const SCROLL_ANCHOR_HASHES = ['#before-after', '#faq', '#donate'];
 
   const handleLinkClick = (id: PageId, hash: string) => {
-    window.location.hash = hash;
-    if (currentPage !== id) {
-      onNavigate(id);
-    }
     setMobileMenuOpen(false);
+
     if (SCROLL_ANCHOR_HASHES.includes(hash)) {
+      if (currentPage !== 'home') {
+        onNavigate('home');
+      }
+      window.location.hash = hash;
       setTimeout(() => {
         const el = document.getElementById(hash.replace('#', ''));
         if (el) {
           el.scrollIntoView({ behavior: 'smooth' });
         }
       }, 100);
+      return;
+    }
+
+    if (currentPage !== id) {
+      onNavigate(id);
     } else {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
@@ -48,28 +58,40 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
       {/* Main Navigation Bar */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
         {/* Logo */}
-        <button
-          onClick={() => handleLinkClick('home', '#home')}
+        <a
+          href="/"
+          onClick={(e) => { e.preventDefault(); handleLinkClick('home', ''); }}
           className="flex items-center text-left shrink-0 transition-opacity hover:opacity-95"
           aria-label="Junk Trucks Home"
         >
           <Logo logoSrc="/logo.png" showTagline={true} tagline="Gets The Job Done." />
-        </button>
+        </a>
 
         {/* Desktop Navigation Links */}
         <nav className="hidden lg:flex items-center gap-1">
           {navLinks.map((link) => {
             const isActive = SCROLL_ANCHOR_HASHES.includes(link.hash) ? false : currentPage === link.id;
+            const className = `px-3 py-2 rounded-lg text-sm font-semibold transition-colors ${
+              isActive
+                ? 'text-[#025337] bg-[#EDF5F1]'
+                : 'text-stone-700 hover:text-[#025337] hover:bg-stone-100'
+            }`;
+            // Real page links get a real <a href> (crawlable + right-click
+            // "open in new tab" works); scroll anchors stay plain buttons.
+            if (link.path) {
+              return (
+                <a
+                  key={link.key}
+                  href={link.path}
+                  onClick={(e) => { e.preventDefault(); handleLinkClick(link.id, link.hash); }}
+                  className={className}
+                >
+                  {link.label}
+                </a>
+              );
+            }
             return (
-              <button
-                key={link.key}
-                onClick={() => handleLinkClick(link.id, link.hash)}
-                className={`px-3 py-2 rounded-lg text-sm font-semibold transition-colors ${
-                  isActive
-                    ? 'text-[#025337] bg-[#EDF5F1]'
-                    : 'text-stone-700 hover:text-[#025337] hover:bg-stone-100'
-                }`}
-              >
+              <button key={link.key} onClick={() => handleLinkClick(link.id, link.hash)} className={className}>
                 {link.label}
               </button>
             );
@@ -162,16 +184,25 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
         <div className="lg:hidden border-t border-stone-200 bg-white px-4 py-4 space-y-2.5 shadow-xl">
           {navLinks.map((link) => {
             const isActive = SCROLL_ANCHOR_HASHES.includes(link.hash) ? false : currentPage === link.id;
+            const className = `w-full text-left px-3.5 py-2.5 rounded-xl text-sm font-medium transition-colors ${
+              isActive
+                ? 'bg-[#EDF5F1] text-[#025337] font-bold'
+                : 'text-stone-700 hover:bg-stone-50'
+            }`;
+            if (link.path) {
+              return (
+                <a
+                  key={link.key}
+                  href={link.path}
+                  onClick={(e) => { e.preventDefault(); handleLinkClick(link.id, link.hash); }}
+                  className={className}
+                >
+                  {link.label}
+                </a>
+              );
+            }
             return (
-              <button
-                key={link.key}
-                onClick={() => handleLinkClick(link.id, link.hash)}
-                className={`w-full text-left px-3.5 py-2.5 rounded-xl text-sm font-medium transition-colors ${
-                  isActive
-                    ? 'bg-[#EDF5F1] text-[#025337] font-bold'
-                    : 'text-stone-700 hover:bg-stone-50'
-                }`}
-              >
+              <button key={link.key} onClick={() => handleLinkClick(link.id, link.hash)} className={className}>
                 {link.label}
               </button>
             );
