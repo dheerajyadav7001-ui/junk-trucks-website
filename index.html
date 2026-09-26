@@ -18,10 +18,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet" />
 
     <!-- Structured data (schema.org LocalBusiness): tells Google this is a
-         real local business with a real rating, which is what can make a
-         star rating show up directly in search results. Every value here
-         is real -- do not inflate reviewCount/ratingValue beyond what the
-         real Google Business Profile actually shows. -->
+         real local business serving these areas. Note: aggregateRating is
+         deliberately NOT included here -- Google's structured-data policy
+         makes a business ineligible for the star-rating rich result if it
+         marks up ratings about itself on its own site ("self-serving
+         reviews"). A real star rating has to come from Google's own
+         aggregation of the Google Business Profile instead. -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -48,12 +50,7 @@
         { "@type": "Place", "name": "Gloucester" },
         { "@type": "Place", "name": "Westboro" },
         { "@type": "Place", "name": "Hintonburg" }
-      ],
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "5.0",
-        "reviewCount": "7"
-      }
+      ]
     }
     </script>
   </head>
