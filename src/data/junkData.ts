@@ -136,7 +136,7 @@ export const SERVICES_LIST: ServiceDetail[] = [
     iconName: 'Hammer',
     startingPrice: 'Lowest Price Guaranteed',
     category: 'renovation',
-    image: '/garage-after.jpg',
+    image: '/renovation-debris.jpg',
     itemsIncluded: ['Drywall & Plaster', 'Lumber & Framing Timber', 'Ceramic Tiles & Flooring', 'Cabinetry & Countertops', 'Doors, Windows & Trim'],
   },
   {
