@@ -28,17 +28,21 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
   const [faqOpenIndex, setFaqOpenIndex] = useState<number | null>(0);
   const [customRequest, setCustomRequest] = useState('');
 
-  // Rotating hero photo slider for seasonal campaigns
+  // Rotating hero photo slider for seasonal campaigns. Truck photo leads,
+  // winter campaign second. Slides hold longer (8s) and each one does a
+  // slow Ken Burns zoom while it's up front, crossfading into the next
+  // rather than a flat opacity swap.
   const HERO_SLIDES = [
-    '/winter-campaign.jpg',
     '/hero-truck-new.jpg',
+    '/winter-campaign.jpg',
   ];
+  const HERO_SLIDE_DURATION = 8000;
   const [heroSlide, setHeroSlide] = useState(0);
   const isCampaignSlide = HERO_SLIDES[heroSlide] === '/winter-campaign.jpg';
   useEffect(() => {
     const timer = setInterval(() => {
       setHeroSlide((i) => (i + 1) % HERO_SLIDES.length);
-    }, 5000);
+    }, HERO_SLIDE_DURATION);
     return () => clearInterval(timer);
   }, []);
 
@@ -85,13 +89,17 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
               key={src}
               src={src}
               alt="Junk Trucks team on site in Ottawa"
-              className={`absolute inset-0 w-full h-full transition-opacity duration-1000 ease-in-out ${
+              className={`absolute inset-0 w-full h-full ${
                 src === '/winter-campaign.jpg'
                   ? 'object-contain sm:object-cover object-top bg-[#012D19]'
                   : 'object-cover object-center'
-              } ${
-                i === heroSlide ? 'opacity-100' : 'opacity-0'
               }`}
+              style={{
+                opacity: i === heroSlide ? 1 : 0,
+                transform: i === heroSlide ? 'scale(1.09)' : 'scale(1)',
+                transition: 'opacity 1500ms ease-in-out, transform ' + HERO_SLIDE_DURATION + 'ms ease-out',
+                willChange: 'opacity, transform',
+              }}
               referrerPolicy="no-referrer"
             />
           ))}
