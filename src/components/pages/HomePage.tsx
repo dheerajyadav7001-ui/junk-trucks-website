@@ -119,9 +119,15 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
           {!isCampaignSlide && (
             <>
               <h1 className="text-2xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white leading-tight max-w-3xl mx-auto [text-shadow:_0_2px_16px_rgb(0_0_0_/_70%)]">
-                Ottawa's Fastest Junk Removal — <br className="hidden sm:inline" />
-                <span className="text-[#F2661C]">Same-Day Pickup, Lowest Price Guaranteed.</span>
+                Ottawa's Fastest Junk Removal
               </h1>
+
+              {/* Frosted pill for the guarantee — same blurred dark pill
+                  treatment as the subline below, so it stands out from the
+                  photo instead of relying on text-shadow alone. */}
+              <p className="inline-block text-xl sm:text-3xl lg:text-4xl font-black text-[#F2661C] px-6 py-3 rounded-full bg-black/60 border border-white/25 backdrop-blur-md shadow-lg [text-shadow:_0_1px_4px_rgb(0_0_0_/_80%)]">
+                Lowest Price Guaranteed.
+              </p>
 
               {/* Frosted pill behind just this line — stronger blur + darker
                   fill than a moment ago, since the previous version (25%
