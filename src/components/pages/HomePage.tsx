@@ -77,14 +77,20 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
         <div className="absolute -top-40 -right-40 w-96 h-96 bg-[#F2661C]/20 rounded-full blur-3xl pointer-events-none z-0" />
 
         <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
-          <h1 className="text-2xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white leading-tight max-w-3xl mx-auto [text-shadow:_0_2px_12px_rgb(0_0_0_/_55%)]">
-            Don't hesitate to ask for anything extra — <br className="hidden sm:inline" />
-            <span className="text-[#F2661C]">your satisfaction is our top priority.</span>
-          </h1>
+          {/* Frosted-glass panel behind the headline — same bg-white/10 +
+              border-white/20 + backdrop-blur treatment as the Call button
+              below, so the text stays crisp and readable over the busy
+              photo instead of blending into it. */}
+          <div className="inline-block max-w-3xl mx-auto px-5 py-6 sm:px-10 sm:py-8 rounded-2xl bg-white/10 border border-white/20 backdrop-blur-sm shadow-lg">
+            <h1 className="text-2xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white leading-tight [text-shadow:_0_2px_12px_rgb(0_0_0_/_55%)]">
+              Don't hesitate to ask for anything extra — <br className="hidden sm:inline" />
+              <span className="text-[#F2661C]">your satisfaction is our top priority.</span>
+            </h1>
 
-          <p className="text-lg sm:text-xl text-stone-200 max-w-2xl mx-auto font-medium leading-relaxed [text-shadow:_0_1px_8px_rgb(0_0_0_/_55%)]">
-            Junk Trucks — Gets The Job Done.
-          </p>
+            <p className="mt-4 text-lg sm:text-xl text-stone-100 font-medium leading-relaxed [text-shadow:_0_1px_8px_rgb(0_0_0_/_55%)]">
+              Junk Trucks — Gets The Job Done.
+            </p>
+          </div>
 
           <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3.5 max-w-md mx-auto">
             <button
