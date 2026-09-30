@@ -199,7 +199,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                   <div className="w-6 h-6 rounded-md bg-[#025337]/10 flex items-center justify-center shrink-0 [&>svg]:w-3.5 [&>svg]:h-3.5">
                     {getServiceIcon(service.iconName)}
                   </div>
-                  <h3 className="font-bold text-[11px] sm:text-xs text-stone-900 leading-snug group-hover:text-[#025337] transition-colors line-clamp-1">
+                  <h3 className="font-bold text-[11px] sm:text-xs text-stone-900 leading-snug group-hover:text-[#025337] transition-colors line-clamp-2">
                     {service.title}
                   </h3>
                 </div>
