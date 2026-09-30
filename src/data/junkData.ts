@@ -102,7 +102,7 @@ export const SERVICES_LIST: ServiceDetail[] = [
     startingPrice: 'Lowest Price Guaranteed',
     popular: true,
     category: 'residential',
-    image: '/truck-hero.jpg',
+    image: '/furniture-removal.jpg',
     itemsIncluded: ['Sectional Sofas & Couches', 'Mattresses & Box Springs', 'Dining Sets & Desks', 'Dressers & Wardrobes', 'Wall Units & Bookcases'],
   },
   {
@@ -113,7 +113,7 @@ export const SERVICES_LIST: ServiceDetail[] = [
     iconName: 'Refrigerator',
     startingPrice: 'Lowest Price Guaranteed',
     category: 'residential',
-    image: '/basement-after.jpg',
+    image: '/appliance-recycling.jpg',
     itemsIncluded: ['Refrigerators & Freezers', 'Washing Machines & Dryers', 'Stoves & Ranges', 'Dishwashers & Microwaves', 'Air Conditioners & Heaters'],
   },
   {
@@ -125,7 +125,7 @@ export const SERVICES_LIST: ServiceDetail[] = [
     startingPrice: 'Lowest Price Guaranteed',
     popular: true,
     category: 'residential',
-    image: '/garage-cleanout.jpg',
+    image: '/estate-cleanouts.jpg',
     itemsIncluded: ['Whole-Home Clearouts', 'Attic, Basement & Shed Clearing', 'Donation Drop-Off Receipts', 'Broom-Clean Real Estate Handover', 'Document Shredding Referrals'],
   },
   {
@@ -147,7 +147,7 @@ export const SERVICES_LIST: ServiceDetail[] = [
     iconName: 'TreePine',
     startingPrice: 'Lowest Price Guaranteed',
     category: 'renovation',
-    image: '/truck-hero.jpg',
+    image: '/yard-waste.jpg',
     itemsIncluded: ['Fallen Branches & Tree Trimmings', 'Dismantled Wooden Decks & Fences', 'Old Play Structures & Sheds', 'Bags of Leaves & Garden Overgrowth', 'Old Patio Furniture & Grills'],
   },
   {
@@ -158,7 +158,7 @@ export const SERVICES_LIST: ServiceDetail[] = [
     iconName: 'Building2',
     startingPrice: 'Lowest Price Guaranteed',
     category: 'commercial',
-    image: '/garage-cleanout.jpg',
+    image: '/commercial-cleanout.jpg',
     itemsIncluded: ['Office Desks & Ergonomic Chairs', 'Cubicle Partitions & Dividers', 'Computers, Monitors & E-Waste', 'Retail Racks & Display Units', 'Warehouse Pallets & Packaging'],
   },
 ];
