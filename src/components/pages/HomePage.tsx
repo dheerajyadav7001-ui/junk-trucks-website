@@ -31,7 +31,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
   // Rotating hero photo slider for seasonal campaigns
   const HERO_SLIDES = [
     '/winter-campaign.jpg',
-    '/truck-hero.jpg',
+    '/hero-truck-new.jpg',
   ];
   const [heroSlide, setHeroSlide] = useState(0);
   const isCampaignSlide = HERO_SLIDES[heroSlide] === '/winter-campaign.jpg';
