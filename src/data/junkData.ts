@@ -113,7 +113,7 @@ export const SERVICES_LIST: ServiceDetail[] = [
     iconName: 'Refrigerator',
     startingPrice: 'Lowest Price Guaranteed',
     category: 'residential',
-    image: '/basement-before-after.jpg',
+    image: '/basement-after.jpg',
     itemsIncluded: ['Refrigerators & Freezers', 'Washing Machines & Dryers', 'Stoves & Ranges', 'Dishwashers & Microwaves', 'Air Conditioners & Heaters'],
   },
   {
@@ -136,7 +136,7 @@ export const SERVICES_LIST: ServiceDetail[] = [
     iconName: 'Hammer',
     startingPrice: 'Lowest Price Guaranteed',
     category: 'renovation',
-    image: '/garage-before-after.jpg',
+    image: '/garage-after.jpg',
     itemsIncluded: ['Drywall & Plaster', 'Lumber & Framing Timber', 'Ceramic Tiles & Flooring', 'Cabinetry & Countertops', 'Doors, Windows & Trim'],
   },
   {
@@ -147,7 +147,7 @@ export const SERVICES_LIST: ServiceDetail[] = [
     iconName: 'TreePine',
     startingPrice: 'Lowest Price Guaranteed',
     category: 'renovation',
-    image: '/before-after-2.jpg',
+    image: '/truck-hero.jpg',
     itemsIncluded: ['Fallen Branches & Tree Trimmings', 'Dismantled Wooden Decks & Fences', 'Old Play Structures & Sheds', 'Bags of Leaves & Garden Overgrowth', 'Old Patio Furniture & Grills'],
   },
   {
