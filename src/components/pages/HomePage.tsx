@@ -123,7 +123,11 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                 <span className="text-[#F2661C]">Same-Day Pickup, Lowest Price Guaranteed.</span>
               </h1>
 
-              <p className="text-lg sm:text-xl text-white font-semibold max-w-2xl mx-auto leading-relaxed [text-shadow:_0_2px_12px_rgb(0_0_0_/_70%)]">
+              {/* Small frosted pill behind just this line — same bg-white/10 +
+                  backdrop-blur treatment as the Call button below — since it
+                  sits over a busier part of the photo than the headline above
+                  it and was getting lost. */}
+              <p className="inline-block text-lg sm:text-xl text-white font-semibold max-w-2xl mx-auto leading-relaxed px-5 py-2.5 rounded-full bg-black/25 border border-white/15 backdrop-blur-sm [text-shadow:_0_1px_6px_rgb(0_0_0_/_60%)]">
                 Don't hesitate to ask for anything extra — your satisfaction is our top priority.
               </p>
             </>
