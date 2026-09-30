@@ -158,7 +158,7 @@ export const SERVICES_LIST: ServiceDetail[] = [
     iconName: 'Building2',
     startingPrice: 'Lowest Price Guaranteed',
     category: 'commercial',
-    image: '/truck-hero.jpg',
+    image: '/garage-cleanout.jpg',
     itemsIncluded: ['Office Desks & Ergonomic Chairs', 'Cubicle Partitions & Dividers', 'Computers, Monitors & E-Waste', 'Retail Racks & Display Units', 'Warehouse Pallets & Packaging'],
   },
 ];
