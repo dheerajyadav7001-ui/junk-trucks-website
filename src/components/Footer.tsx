@@ -150,7 +150,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
 
         {/* Minimal Bottom Bar */}
         <div className="pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-stone-400 gap-3">
-          <p>© {new Date().getFullYear()} Junk Trucks Ottawa Inc. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} Junk Trucks Ottawa. All rights reserved.</p>
           <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
             <a href="/services" onClick={(e) => { e.preventDefault(); handleLinkClick('services'); }} className="hover:text-stone-200 transition-colors">
               Services

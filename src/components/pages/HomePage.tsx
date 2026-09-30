@@ -28,20 +28,6 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
   const [faqOpenIndex, setFaqOpenIndex] = useState<number | null>(0);
   const [customRequest, setCustomRequest] = useState('');
 
-  // Rotating hero photo slider for seasonal campaigns
-  const HERO_SLIDES = [
-    '/winter-campaign.jpg',
-    '/truck-hero.jpg',
-  ];
-  const [heroSlide, setHeroSlide] = useState(0);
-  const isCampaignSlide = HERO_SLIDES[heroSlide] === '/winter-campaign.jpg';
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setHeroSlide((i) => (i + 1) % HERO_SLIDES.length);
-    }, 5000);
-    return () => clearInterval(timer);
-  }, []);
-
   // Handle hash scrolling for #before-after, #faq, #donate
   useEffect(() => {
     const targetId = window.location.hash.replace('#', '');
@@ -76,59 +62,29 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
     <div className="space-y-16 pb-16">
       {/* HERO SECTION */}
       <section className="relative overflow-hidden bg-[#012D19] text-white pt-14 pb-16 sm:pt-20 sm:pb-24">
-        {/* Background photo slider — cross-fades between real job photos */}
+        {/* Background photo — single, real job photo (no rotating/seasonal slides) */}
         <div className="absolute inset-0 z-0">
-          {HERO_SLIDES.map((src, i) => (
-            <img
-              key={src}
-              src={src}
-              alt="Junk Trucks team on site in Ottawa"
-              className={`absolute inset-0 w-full h-full transition-opacity duration-1000 ease-in-out ${
-                src === '/winter-campaign.jpg'
-                  ? 'object-contain sm:object-cover object-top bg-[#012D19]'
-                  : 'object-cover object-center'
-              } ${
-                i === heroSlide ? 'opacity-100' : 'opacity-0'
-              }`}
-              referrerPolicy="no-referrer"
-            />
-          ))}
-          <div className={`absolute inset-0 bg-gradient-to-b transition-opacity duration-700 ${isCampaignSlide ? 'from-[#012D19]/15 via-[#012D19]/10 to-[#012D19]/55' : 'from-[#012D19]/85 via-[#012D19]/78 to-[#025337]/90'}`} />
+          <img
+            src="/truck-hero.jpg"
+            alt="Junk Trucks team on site in Ottawa"
+            className="absolute inset-0 w-full h-full object-cover object-center"
+            referrerPolicy="no-referrer"
+          />
+          <div className="absolute inset-0 bg-gradient-to-br from-[#012D19]/60 via-[#012D19]/30 to-[#F2661C]/25" />
         </div>
 
         {/* Subtle background glow */}
         <div className="absolute -top-40 -right-40 w-96 h-96 bg-[#F2661C]/20 rounded-full blur-3xl pointer-events-none z-0" />
 
-        {/* Slide position dots */}
-        <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-10 flex items-center gap-1.5">
-          {HERO_SLIDES.map((src, i) => (
-            <button
-              key={src}
-              onClick={() => setHeroSlide(i)}
-              aria-label={`Show slide ${i + 1}`}
-              className={`h-1.5 rounded-full transition-all duration-300 ${
-                i === heroSlide ? 'w-6 bg-white' : 'w-1.5 bg-white/40 hover:bg-white/60'
-              }`}
-            />
-          ))}
-        </div>
-
         <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
-          {!isCampaignSlide && (
-            <>
-              <h1 className="text-2xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white leading-tight max-w-3xl mx-auto">
-                Junk removal that keeps it real: <br className="hidden sm:inline" />
-                <span className="text-[#F2661C]">honest pricing, 80%+ diverted from the landfill.</span>
-              </h1>
+          <h1 className="text-2xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white leading-tight max-w-3xl mx-auto [text-shadow:_0_2px_12px_rgb(0_0_0_/_55%)]">
+            Don't hesitate to ask for anything extra — <br className="hidden sm:inline" />
+            <span className="text-[#F2661C]">your satisfaction is our top priority.</span>
+          </h1>
 
-              <p className="text-lg sm:text-xl text-stone-200 max-w-2xl mx-auto font-medium leading-relaxed">
-                No hidden fees, no vague estimates — same-day Ottawa hauling that puts your stuff to
-                Habitat for Humanity ReStore, the Salvation Army, and St. Vincent de Paul before it
-                ever sees a landfill.
-              </p>
-            </>
-          )}
-          {isCampaignSlide && <div className="pt-40 sm:pt-56 lg:pt-64" />}
+          <p className="text-lg sm:text-xl text-stone-200 max-w-2xl mx-auto font-medium leading-relaxed [text-shadow:_0_1px_8px_rgb(0_0_0_/_55%)]">
+            Junk Trucks — Gets The Job Done.
+          </p>
 
           <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3.5 max-w-md mx-auto">
             <button
