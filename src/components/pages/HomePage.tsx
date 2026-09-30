@@ -28,6 +28,20 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
   const [faqOpenIndex, setFaqOpenIndex] = useState<number | null>(0);
   const [customRequest, setCustomRequest] = useState('');
 
+  // Rotating hero photo slider for seasonal campaigns
+  const HERO_SLIDES = [
+    '/winter-campaign.jpg',
+    '/truck-hero.jpg',
+  ];
+  const [heroSlide, setHeroSlide] = useState(0);
+  const isCampaignSlide = HERO_SLIDES[heroSlide] === '/winter-campaign.jpg';
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setHeroSlide((i) => (i + 1) % HERO_SLIDES.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, []);
+
   // Handle hash scrolling for #before-after, #faq, #donate
   useEffect(() => {
     const targetId = window.location.hash.replace('#', '');
@@ -62,31 +76,59 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
     <div className="space-y-16 pb-16">
       {/* HERO SECTION */}
       <section className="relative overflow-hidden bg-[#012D19] text-white pt-14 pb-16 sm:pt-20 sm:pb-24">
-        {/* Background photo — single, real job photo (no rotating/seasonal slides).
-            Slight blur + darkened gradient keeps the photo visible instead of
-            hidden behind a panel, while still leaving the headline crisp. */}
+        {/* Background photo slider — cross-fades between real job photos.
+            Light overlay only (no blur) so the photo stays clearly visible;
+            legibility comes from the text-shadow on the headline instead. */}
         <div className="absolute inset-0 z-0">
-          <img
-            src="/truck-hero.jpg"
-            alt="Junk Trucks team on site in Ottawa"
-            className="absolute inset-0 w-full h-full object-cover object-center blur-sm scale-105"
-            referrerPolicy="no-referrer"
-          />
-          <div className="absolute inset-0 bg-gradient-to-br from-[#012D19]/70 via-[#012D19]/45 to-[#F2661C]/30" />
+          {HERO_SLIDES.map((src, i) => (
+            <img
+              key={src}
+              src={src}
+              alt="Junk Trucks team on site in Ottawa"
+              className={`absolute inset-0 w-full h-full transition-opacity duration-1000 ease-in-out ${
+                src === '/winter-campaign.jpg'
+                  ? 'object-contain sm:object-cover object-top bg-[#012D19]'
+                  : 'object-cover object-center'
+              } ${
+                i === heroSlide ? 'opacity-100' : 'opacity-0'
+              }`}
+              referrerPolicy="no-referrer"
+            />
+          ))}
+          <div className={`absolute inset-0 bg-gradient-to-br transition-opacity duration-700 ${isCampaignSlide ? 'from-[#012D19]/15 via-[#012D19]/10 to-[#012D19]/55' : 'from-[#012D19]/55 via-[#012D19]/25 to-[#F2661C]/20'}`} />
         </div>
 
         {/* Subtle background glow */}
         <div className="absolute -top-40 -right-40 w-96 h-96 bg-[#F2661C]/20 rounded-full blur-3xl pointer-events-none z-0" />
 
-        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
-          <h1 className="text-2xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white leading-tight max-w-3xl mx-auto [text-shadow:_0_2px_16px_rgb(0_0_0_/_70%)]">
-            Ottawa's Fastest Junk Removal — <br className="hidden sm:inline" />
-            <span className="text-[#F2661C]">Same-Day Pickup, Lowest Price Guaranteed.</span>
-          </h1>
+        {/* Slide position dots */}
+        <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-10 flex items-center gap-1.5">
+          {HERO_SLIDES.map((src, i) => (
+            <button
+              key={src}
+              onClick={() => setHeroSlide(i)}
+              aria-label={`Show slide ${i + 1}`}
+              className={`h-1.5 rounded-full transition-all duration-300 ${
+                i === heroSlide ? 'w-6 bg-white' : 'w-1.5 bg-white/40 hover:bg-white/60'
+              }`}
+            />
+          ))}
+        </div>
 
-          <p className="text-lg sm:text-xl text-white font-semibold max-w-2xl mx-auto leading-relaxed [text-shadow:_0_2px_12px_rgb(0_0_0_/_70%)]">
-            Don't hesitate to ask for anything extra — your satisfaction is our top priority.
-          </p>
+        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
+          {!isCampaignSlide && (
+            <>
+              <h1 className="text-2xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white leading-tight max-w-3xl mx-auto [text-shadow:_0_2px_16px_rgb(0_0_0_/_70%)]">
+                Ottawa's Fastest Junk Removal — <br className="hidden sm:inline" />
+                <span className="text-[#F2661C]">Same-Day Pickup, Lowest Price Guaranteed.</span>
+              </h1>
+
+              <p className="text-lg sm:text-xl text-white font-semibold max-w-2xl mx-auto leading-relaxed [text-shadow:_0_2px_12px_rgb(0_0_0_/_70%)]">
+                Don't hesitate to ask for anything extra — your satisfaction is our top priority.
+              </p>
+            </>
+          )}
+          {isCampaignSlide && <div className="pt-40 sm:pt-56 lg:pt-64" />}
 
           <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3.5 max-w-md mx-auto">
             <button
