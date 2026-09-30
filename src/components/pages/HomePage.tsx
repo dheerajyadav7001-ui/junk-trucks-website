@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { 
-  Truck, CheckCircle2, ArrowRight, Phone, 
+  Truck, CheckCircle2, ArrowRight, Phone, Star, 
   Armchair, Refrigerator, Home, Hammer, TreePine, Building2,
   Flame, Clock, Sparkles, ChevronDown, Check, X
 } from 'lucide-react';
 import { useBooking } from '../../context/BookingContext';
 import { 
-  SERVICES_LIST, 
+  SERVICES_LIST, TESTIMONIALS, 
   OTTAWA_PHONE, OTTAWA_WHATSAPP_LINK,
   FAQS, DONATION_ACCEPTED, DONATION_NOT_ACCEPTED
 } from '../../data/junkData';
@@ -188,9 +188,15 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
       {/* TRUST STRIP & SUB-NAV QUICK JUMPS */}
       <div className="bg-stone-50 border-y border-stone-200/80 py-3.5 -mt-16 sm:-mt-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-2 text-xs text-stone-700">
-            <CheckCircle2 className="w-4 h-4 text-[#025337] shrink-0" />
-            <span className="text-stone-600 font-medium">Fully Insured &amp; WSIB</span>
+          <div className="flex items-center gap-2.5 text-xs text-stone-700">
+            <div className="flex text-amber-400">
+              {[...Array(5)].map((_, i) => (
+                <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-400" />
+              ))}
+            </div>
+            <span className="font-bold text-stone-900">5.0 / 5 Stars</span>
+            <span className="text-stone-300">•</span>
+            <span className="text-stone-600 font-medium">7 Google Reviews · Fully Insured &amp; WSIB</span>
           </div>
 
           <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs font-semibold text-stone-600">
@@ -345,6 +351,93 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
       </section>
 
 
+      {/* ORIGINAL GOOGLE REVIEWS */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Aggregate rating stat */}
+        <div className="text-center max-w-2xl mx-auto mb-10 space-y-3">
+          <span className="text-xs font-mono font-bold text-[#F2661C] uppercase tracking-wider">
+            Customer Reviews
+          </span>
+          <h2 className="text-3xl sm:text-4xl font-black text-stone-900 tracking-tight">
+            Trusted by Ottawa Homeowners
+          </h2>
+          <div className="inline-flex items-center gap-3 px-5 py-3 rounded-2xl bg-white border border-stone-200/80 shadow-2xs">
+            <svg className="w-7 h-7 shrink-0" viewBox="0 0 24 24">
+              <path fill="#4285F4" d="M23.52 12.27c0-.85-.08-1.66-.22-2.45H12v4.64h6.48a5.55 5.55 0 0 1-2.4 3.64v2.99h3.89c2.28-2.1 3.55-5.2 3.55-8.82z"/>
+              <path fill="#34A853" d="M12 24c3.24 0 5.96-1.07 7.95-2.91l-3.89-2.99c-1.08.72-2.46 1.15-4.06 1.15-3.12 0-5.77-2.1-6.71-4.93H1.28v3.09A12 12 0 0 0 12 24z"/>
+              <path fill="#FBBC05" d="M5.29 14.32a7.2 7.2 0 0 1 0-4.64V6.59H1.28a12 12 0 0 0 0 10.82z"/>
+              <path fill="#EA4335" d="M12 4.75c1.76 0 3.35.6 4.6 1.8l3.45-3.45C17.95 1.19 15.24 0 12 0 7.31 0 3.26 2.69 1.28 6.59l4.01 3.09C6.23 6.85 8.88 4.75 12 4.75z"/>
+            </svg>
+            <div className="text-left">
+              <div className="flex items-center gap-1.5">
+                <span className="text-xl font-black text-stone-900 leading-none">5.0</span>
+                <div className="flex text-amber-400">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
+                  ))}
+                </div>
+              </div>
+              <p className="text-[11px] text-stone-500 font-medium">Google Reviews from Ottawa customers</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Google-style review cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          {TESTIMONIALS.map((testimonial) => (
+            <div
+              key={testimonial.id}
+              className="bg-white rounded-2xl p-5 border border-stone-200/80 shadow-2xs hover:shadow-md transition-all flex flex-col gap-3"
+            >
+              {/* Header — avatar, name, reviewer badge, Google mark */}
+              <div className="flex items-start justify-between gap-2">
+                <div className="flex items-center gap-2.5 min-w-0">
+                  <div
+                    className="w-9 h-9 rounded-full flex items-center justify-center text-white font-bold text-sm shrink-0"
+                    style={{ backgroundColor: testimonial.avatarColor || '#025337' }}
+                  >
+                    {testimonial.name.charAt(0).toUpperCase()}
+                  </div>
+                  <div className="min-w-0">
+                    <h3 className="font-bold text-sm text-stone-900 truncate">
+                      {testimonial.name}
+                    </h3>
+                    <p className="text-[10.5px] text-stone-500 font-medium truncate">
+                      {testimonial.userType || 'Verified Customer'}
+                    </p>
+                  </div>
+                </div>
+                <svg className="w-4.5 h-4.5 shrink-0 mt-0.5" viewBox="0 0 24 24">
+                  <path fill="#4285F4" d="M23.52 12.27c0-.85-.08-1.66-.22-2.45H12v4.64h6.48a5.55 5.55 0 0 1-2.4 3.64v2.99h3.89c2.28-2.1 3.55-5.2 3.55-8.82z"/>
+                  <path fill="#34A853" d="M12 24c3.24 0 5.96-1.07 7.95-2.91l-3.89-2.99c-1.08.72-2.46 1.15-4.06 1.15-3.12 0-5.77-2.1-6.71-4.93H1.28v3.09A12 12 0 0 0 12 24z"/>
+                  <path fill="#FBBC05" d="M5.29 14.32a7.2 7.2 0 0 1 0-4.64V6.59H1.28a12 12 0 0 0 0 10.82z"/>
+                  <path fill="#EA4335" d="M12 4.75c1.76 0 3.35.6 4.6 1.8l3.45-3.45C17.95 1.19 15.24 0 12 0 7.31 0 3.26 2.69 1.28 6.59l4.01 3.09C6.23 6.85 8.88 4.75 12 4.75z"/>
+                </svg>
+              </div>
+
+              {/* Stars & Relative Date */}
+              <div className="flex items-center gap-2 text-xs">
+                <div className="flex text-amber-400">
+                  {[...Array(testimonial.rating)].map((_, i) => (
+                    <Star key={i} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
+                  ))}
+                </div>
+                <span className="text-stone-400 text-[11px]">{testimonial.date}</span>
+              </div>
+
+              {/* Review Text */}
+              <p className="text-xs sm:text-sm text-stone-700 leading-relaxed line-clamp-4">
+                {testimonial.comment}
+              </p>
+
+              <div className="mt-auto pt-3 border-t border-stone-100 flex items-center gap-1 text-[11px] text-emerald-700 font-semibold">
+                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+                Verified Google Review
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
 
       {/* FAQ */}
       <section id="faq" className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 scroll-mt-24">
