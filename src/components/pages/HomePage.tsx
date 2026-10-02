@@ -103,7 +103,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
               referrerPolicy="no-referrer"
             />
           ))}
-          <div className={`absolute inset-0 bg-gradient-to-br transition-opacity duration-700 ${isCampaignSlide ? 'from-[#012D19]/15 via-[#012D19]/10 to-[#012D19]/55' : 'from-[#012D19]/55 via-[#012D19]/25 to-[#F2661C]/20'}`} />
+          <div className={`absolute inset-0 bg-gradient-to-b transition-opacity duration-700 ${isCampaignSlide ? 'from-[#012D19]/15 via-[#012D19]/10 to-[#012D19]/55' : 'from-[#025337]/58 via-[#025337]/62 to-[#012D19]/68'}`} />
         </div>
 
         {/* Subtle background glow */}
