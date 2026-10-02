@@ -322,31 +322,18 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
           </p>
         </div>
 
-        {/* Clean Photo Grid — pictures only, no captions or buttons.
-            items-start keeps each photo at its own natural aspect ratio
-            instead of CSS Grid stretching both cells to equal height,
-            which was cropping the second (wider) photo and cutting off
-            its BEFORE/AFTER labels. */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 items-start">
-          <div className="rounded-2xl overflow-hidden border border-stone-200/80 shadow-2xs">
-            <img
-              src="/before-after-garage-dual.jpg"
-              alt="Two garage cleanouts, before and after transformation"
-              className="w-full h-full object-cover"
-              loading="lazy"
-              referrerPolicy="no-referrer"
-            />
-          </div>
-
-          <div className="rounded-2xl overflow-hidden border border-stone-200/80 shadow-2xs">
-            <img
-              src="/before-after-2.jpg"
-              alt="Basement cleanout, before and after"
-              className="w-full h-full object-cover"
-              loading="lazy"
-              referrerPolicy="no-referrer"
-            />
-          </div>
+        {/* Single showcase photo — a wide banner-style before/after with
+            the logo centered between the two halves. Cropped to drop the
+            phone number ribbon baked into the original graphic, keeping
+            just the logo mark for a cleaner look. */}
+        <div className="rounded-2xl overflow-hidden border border-stone-200/80 shadow-md max-w-5xl mx-auto">
+          <img
+            src="/before-after-showcase.jpg"
+            alt="Garage cleanout, before and after transformation"
+            className="w-full h-auto object-cover"
+            loading="lazy"
+            referrerPolicy="no-referrer"
+          />
         </div>
       </section>
 
