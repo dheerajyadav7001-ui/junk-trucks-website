@@ -20,7 +20,7 @@
 //
 // Until real IDs are set, both safely no-op — nothing breaks, they just
 // won't collect data yet.
-export const GA4_MEASUREMENT_ID = 'G-XXXXXXXXXX';
+export const GA4_MEASUREMENT_ID = 'G-P6HBR3V0RX';
 export const CLARITY_PROJECT_ID = 'XXXXXXXXXX';
 
 export const GA4_CONFIGURED = !GA4_MEASUREMENT_ID.includes('XXXXXXXXXX');
