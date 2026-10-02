@@ -28,11 +28,13 @@ export const BookingModal: React.FC = () => {
     email: '',
     postalCode: '',
   });
+  const [validationError, setValidationError] = useState<string | null>(null);
 
   // Reset the form each time the modal is (re)opened
   useEffect(() => {
     if (isOpen && !isSuccess) {
       setFormData({ name: '', phone: '', email: '', postalCode: '' });
+      setValidationError(null);
     }
   }, [isOpen, isSuccess]);
 
@@ -41,12 +43,13 @@ export const BookingModal: React.FC = () => {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+    if (validationError) setValidationError(null);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.name || !formData.phone || !formData.email || !formData.postalCode) {
-      alert('Please fill in your name, phone number, email, and postal code so our dispatch team can call you back.');
+      setValidationError('Please fill in your name, phone number, email, and postal code so our dispatch team can call you back.');
       return;
     }
 
@@ -180,10 +183,10 @@ export const BookingModal: React.FC = () => {
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="p-6 space-y-4">
-              {errorMessage && (
+              {(validationError || errorMessage) && (
                 <div className="p-3 bg-red-50 border border-red-200 rounded-xl flex items-start gap-2.5 text-xs text-red-700">
                   <AlertCircle className="w-4 h-4 shrink-0 mt-0.5 text-red-600" />
-                  <span>{errorMessage}</span>
+                  <span>{validationError || errorMessage}</span>
                 </div>
               )}
 

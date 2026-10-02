@@ -7,6 +7,7 @@ import { Footer } from './components/Footer';
 import { FloatingWhatsApp } from './components/FloatingWhatsApp';
 import { SnowOverlay } from './components/SnowOverlay';
 import { loadGoogleAdsTag } from './utils/googleAdsTag';
+import { loadAnalytics } from './utils/analytics';
 
 // Individual Pages
 import { HomePage } from './components/pages/HomePage';
@@ -92,6 +93,7 @@ export default function App() {
   // and the remarketing audience). No-ops until real IDs are set.
   useEffect(() => {
     loadGoogleAdsTag();
+    loadAnalytics();
   }, []);
 
   // On first load: migrate any legacy #hash URL to its real path, then read

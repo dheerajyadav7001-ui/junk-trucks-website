@@ -3,6 +3,7 @@ import emailjs from '@emailjs/browser';
 import { BookingFormData, TrackingParams } from '../types';
 import { getTrackingParams, initTrackingParams } from '../utils/tracking';
 import { fireBookingConversion } from '../utils/googleAdsTag';
+import { trackEvent } from '../utils/analytics';
 
 interface BookingContextType {
   isOpen: boolean;
@@ -51,6 +52,7 @@ export const BookingProvider: React.FC<{ children: ReactNode }> = ({ children })
     setIsSuccess(false);
     setErrorMessage(null);
     setIsOpen(true);
+    trackEvent('modal_open', { service: preselectedService || selectedService });
   };
 
   const closeBooking = () => {
@@ -90,6 +92,8 @@ export const BookingProvider: React.FC<{ children: ReactNode }> = ({ children })
       utm_term: tracking.utm_term || '',
       gclid: tracking.gclid || '',
     };
+
+    trackEvent('form_submit_attempt', { service: fullPayload.serviceType });
 
     try {
       // 1. Submit to Formspree endpoint
@@ -147,11 +151,13 @@ export const BookingProvider: React.FC<{ children: ReactNode }> = ({ children })
       } catch (emailError) {
         // We log EmailJS error without failing the user experience
         console.warn('EmailJS email dispatch notice:', emailError);
+        trackEvent('emailjs_dispatch_fail', { booking_ref: randomRef });
       }
 
       setBookingReference(randomRef);
       setIsSuccess(true);
       setIsSubmitting(false);
+      trackEvent('form_submit_success', { booking_ref: randomRef, service: fullPayload.serviceType });
 
       // Report the lead to Google Ads as a conversion (fires the same tag
       // that also builds the remarketing audience). No-ops until real
@@ -164,6 +170,7 @@ export const BookingProvider: React.FC<{ children: ReactNode }> = ({ children })
       const msg = err instanceof Error ? err.message : 'An unexpected error occurred while processing your booking. Please call us directly at (343) 777-0398 for immediate dispatch.';
       setErrorMessage(msg);
       setIsSubmitting(false);
+      trackEvent('form_submit_fail', { reason: msg });
       return { success: false, error: msg };
     }
   };
