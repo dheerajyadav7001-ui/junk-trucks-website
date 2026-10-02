@@ -330,8 +330,8 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 items-start">
           <div className="rounded-2xl overflow-hidden border border-stone-200/80 shadow-2xs">
             <img
-              src="/before-after-1.jpg"
-              alt="Garage cleanout, before and after"
+              src="/before-after-garage-dual.jpg"
+              alt="Two garage cleanouts, before and after transformation"
               className="w-full h-full object-cover"
               loading="lazy"
               referrerPolicy="no-referrer"
