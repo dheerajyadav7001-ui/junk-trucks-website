@@ -93,7 +93,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                 <span className="text-lg sm:text-2xl font-semibold">Services starting at</span>
                 <span className="text-5xl sm:text-6xl font-extrabold text-[#FA7415] leading-none">$85</span>
               </p>
-              <p className="mt-1.5 text-sm sm:text-base text-slate-200">Seems cheaper, but it's fair.</p>
+              <p className="mt-1.5 text-sm sm:text-base text-slate-200">Best service at a reasonable price.</p>
             </div>
 
             <div className="flex justify-center lg:justify-start">
