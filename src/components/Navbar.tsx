@@ -130,43 +130,10 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
 
         {/* Mobile / Tablet Small Screen Actions */}
         <div className="flex lg:hidden items-center gap-2">
-          {/* Mini action icons — WhatsApp & Call are hidden below sm since
-              the header was overflowing on narrow phones (~390px), pushing
-              the hamburger menu off-screen entirely. Both are still one tap
-              away in the mobile menu below, so nothing is lost — just
-              decluttered on the smallest screens. */}
-          <div className="hidden sm:flex md:hidden items-center gap-2">
-            <a
-              href={OTTAWA_WHATSAPP_LINK}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-2 rounded-xl bg-[#25D366] text-white shadow-2xs"
-              aria-label="WhatsApp"
-            >
-              <WhatsAppIcon className="w-4 h-4" />
-            </a>
-
-            <a
-              href={`tel:${OTTAWA_PHONE.replace(/[^0-9+]/g, '')}`}
-              className="p-2 rounded-xl bg-slate-100 text-[#173B5F] border border-slate-200"
-              aria-label="Call"
-            >
-              <Phone className="w-4 h-4" />
-            </a>
-
-            <button
-              onClick={() => openBooking()}
-              className="px-3 py-2 rounded-xl bg-[#FA7415] text-white text-xs font-bold shadow-xs"
-            >
-              Book
-            </button>
-          </div>
-
-          {/* On the smallest screens (<sm), keep just one clear CTA next to
-              the hamburger instead of the full icon cluster. */}
+          {/* Phones: one clear CTA next to the hamburger — Book only. */}
           <button
             onClick={() => openBooking()}
-            className="sm:hidden px-3 py-2 rounded-xl bg-[#FA7415] text-white text-xs font-bold shadow-xs"
+            className="md:hidden px-3 py-2 rounded-xl bg-[#FA7415] text-white text-xs font-bold shadow-xs"
           >
             Book
           </button>
@@ -213,24 +180,6 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
 
           {/* Mobile Direct Action Buttons */}
           <div className="pt-3 border-t border-slate-100 flex flex-col gap-2">
-            <a
-              href={`tel:${OTTAWA_PHONE.replace(/[^0-9+]/g, '')}`}
-              className="w-full py-2.5 rounded-xl bg-[#173B5F] text-white text-center text-sm font-bold flex items-center justify-center gap-2"
-            >
-              <Phone className="w-4 h-4 text-[#FA7415]" />
-              Call Now: {OTTAWA_PHONE}
-            </a>
-
-            <a
-              href={OTTAWA_WHATSAPP_LINK}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-full py-2.5 rounded-xl bg-[#25D366] text-white text-center text-sm font-bold flex items-center justify-center gap-2 shadow-xs"
-            >
-              <WhatsAppIcon className="w-4 h-4" />
-              Chat on WhatsApp {OTTAWA_PHONE}
-            </a>
-
             <button
               onClick={() => {
                 setMobileMenuOpen(false);

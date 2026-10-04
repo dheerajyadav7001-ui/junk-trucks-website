@@ -160,7 +160,7 @@ export default function App() {
         {currentPage !== 'landing' && <Navbar currentPage={currentPage} onNavigate={handleNavigate} />}
 
         {/* Dynamic Multi-Page Router View */}
-        <main className={`flex-1 ${currentPage !== 'landing' ? 'pb-20 md:pb-0' : ''}`}>
+        <main className={`flex-1 ${currentPage !== 'landing' ? 'pb-[4.5rem] md:pb-0' : ''}`}>
           {renderActivePage()}
         </main>
 
