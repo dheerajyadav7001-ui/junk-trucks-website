@@ -202,16 +202,16 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
 
       {/* SERVICES — square photo tiles, 2-up on mobile, whole tile is tappable */}
       <section id="services" className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 scroll-mt-24">
-        <h2 className="text-2xl sm:text-3xl font-extrabold text-[#173B5F] tracking-tight text-center mb-5 sm:mb-6">
+        <h2 className="text-xl sm:text-2xl font-extrabold text-[#173B5F] tracking-tight text-center mb-4 sm:mb-5">
           What We Pick Up
         </h2>
-        <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+        <div className="grid grid-cols-3 lg:grid-cols-6 gap-2 sm:gap-3">
           {SERVICES_LIST.slice(0, 5).map((service) => (
             <button
               key={service.id}
               onClick={() => openBooking(service.title)}
               aria-label={`Book ${service.title}`}
-              className="group relative aspect-square overflow-hidden rounded-2xl bg-[#0F2742] text-left shadow-sm active:scale-[0.98] transition-transform focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FA7415]"
+              className="group relative aspect-square overflow-hidden rounded-xl bg-[#0F2742] text-left shadow-sm active:scale-[0.98] transition-transform focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FA7415]"
             >
               <img
                 src={service.image || '/truck-hero.jpg'}
@@ -221,12 +221,12 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#0F2742]/90 via-[#0F2742]/25 to-transparent" />
 
-              <div className="absolute inset-x-0 bottom-0 p-3 sm:p-4 flex items-end justify-between gap-2">
-                <h3 className="text-white font-bold text-sm sm:text-base leading-tight">
+              <div className="absolute inset-x-0 bottom-0 p-2 sm:p-2.5 flex items-end justify-between gap-1">
+                <h3 className="text-white font-bold text-[11px] sm:text-xs leading-tight">
                   {service.title}
                 </h3>
-                <span className="shrink-0 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[#FA7415] text-white flex items-center justify-center group-hover:bg-[#E0650A] transition-colors">
-                  <ArrowRight className="w-4 h-4" />
+                <span className="shrink-0 w-6 h-6 rounded-full bg-[#FA7415] text-white flex items-center justify-center group-hover:bg-[#E0650A] transition-colors">
+                  <ArrowRight className="w-3 h-3" />
                 </span>
               </div>
             </button>
@@ -235,16 +235,16 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
           {/* Anything else — same square shape, solid navy */}
           <button
             onClick={() => openBooking('Other / Custom Request')}
-            className="group relative aspect-square overflow-hidden rounded-2xl bg-[#173B5F] text-left p-4 flex flex-col justify-between active:scale-[0.98] transition-transform focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FA7415]"
+            className="group relative aspect-square overflow-hidden rounded-xl bg-[#173B5F] text-left p-2.5 sm:p-3 flex flex-col justify-between active:scale-[0.98] transition-transform focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FA7415]"
           >
-            <Sparkles className="w-7 h-7 text-[#FA7415]" />
+            <Sparkles className="w-5 h-5 text-[#FA7415]" />
             <div className="flex items-end justify-between gap-2">
               <div>
-                <h3 className="text-white font-bold text-sm sm:text-base leading-tight">Something else?</h3>
-                <p className="text-slate-300 text-xs mt-1 leading-snug">Hot tub, piano, anything — just ask.</p>
+                <h3 className="text-white font-bold text-[11px] sm:text-xs leading-tight">Something else?</h3>
+                <p className="hidden sm:block text-slate-300 text-[11px] mt-1 leading-snug">Anything — just ask.</p>
               </div>
-              <span className="shrink-0 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[#FA7415] text-white flex items-center justify-center group-hover:bg-[#E0650A] transition-colors">
-                <ArrowRight className="w-4 h-4" />
+              <span className="shrink-0 w-6 h-6 rounded-full bg-[#FA7415] text-white flex items-center justify-center group-hover:bg-[#E0650A] transition-colors">
+                <ArrowRight className="w-3 h-3" />
               </span>
             </div>
           </button>
