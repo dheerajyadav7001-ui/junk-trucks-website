@@ -200,77 +200,46 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
         <WorkGallery />
       </section>
 
-      {/* WHAT WE PICK UP — editorial photo gallery.
-          Photo → service name → arrow. One featured tile + four supporting
-          tiles + a quiet navy call-to-action. Titles sit under the photo on
-          phones/tablets and over it on desktop. Booking behaviour unchanged. */}
-      <section id="services" className="max-w-6xl mx-auto px-5 sm:px-8 py-4 sm:py-10 scroll-mt-24">
-        <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-[#173B5F] mb-8 sm:mb-12">
+      {/* WHAT WE PICK UP — compact, photo-free tiles (no AI imagery).
+          Icon → service name → arrow. Booking behaviour unchanged. */}
+      <section id="services" className="max-w-4xl mx-auto px-5 sm:px-8 py-2 sm:py-6 scroll-mt-24">
+        <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight text-[#173B5F] mb-5 sm:mb-8">
           What We Pick Up
         </h2>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 lg:auto-rows-[250px] gap-x-5 gap-y-9 sm:gap-y-10 lg:gap-5">
-          {SERVICES_LIST.slice(0, 5).map((service, i) => {
-            const featured = i === 0;
-            const layout = [
-              'sm:col-span-2 lg:col-span-7 lg:row-span-2',
-              'lg:col-span-5',
-              'lg:col-span-5',
-              'lg:col-span-4',
-              'lg:col-span-4',
-            ][i] ?? 'lg:col-span-4';
-            return (
-              <button
-                key={service.id}
-                onClick={() => openBooking(service.title)}
-                aria-label={`Book ${service.title}`}
-                className={`group text-left lg:relative lg:h-full focus:outline-none ${layout}`}
-              >
-                <div
-                  className={`relative overflow-hidden rounded-3xl bg-slate-100 lg:absolute lg:inset-0 lg:aspect-auto ${
-                    featured ? 'aspect-[4/3] sm:aspect-[2/1]' : 'aspect-[4/3]'
-                  } group-focus-visible:ring-2 group-focus-visible:ring-[#FA7415] group-focus-visible:ring-offset-2`}
-                >
-                  <img
-                    src={service.image || '/truck-hero.jpg'}
-                    alt=""
-                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-300 ease-out group-hover:scale-[1.04]"
-                    loading="lazy"
-                  />
-                  {/* Desktop only: soft shade at the bottom for the overlaid title */}
-                  <div className="hidden lg:block absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#0B2740]/55 to-transparent transition-opacity duration-300 opacity-80 group-hover:opacity-100" />
-                  <div aria-hidden="true" className="hidden lg:flex absolute inset-x-0 bottom-0 items-end justify-between gap-4 p-6">
-                    <span className={`text-white font-semibold leading-snug tracking-tight ${featured ? 'text-2xl max-w-[14ch]' : 'text-lg max-w-[16ch]'}`}>
-                      {service.title}
-                    </span>
-                    <ArrowRight className="mb-1 h-5 w-5 shrink-0 text-white/85 transition-transform duration-300 ease-out group-hover:translate-x-1" />
-                  </div>
-                </div>
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+          {SERVICES_LIST.slice(0, 5).map((service) => (
+            <button
+              key={service.id}
+              onClick={() => openBooking(service.title)}
+              aria-label={`Book ${service.title}`}
+              className="group flex flex-col justify-between gap-6 sm:gap-8 rounded-2xl bg-slate-50 hover:bg-white hover:shadow-[0_8px_24px_rgba(23,59,95,0.10)] p-4 sm:p-5 text-left transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FA7415]"
+            >
+              <span className="text-[#173B5F] group-hover:text-[#FA7415] transition-colors duration-300 [&>svg]:h-6 [&>svg]:w-6 sm:[&>svg]:h-7 sm:[&>svg]:w-7 [&>svg]:text-current">
+                {getServiceIcon(service.iconName)}
+              </span>
+              <span className="flex items-end justify-between gap-2">
+                <span className="text-sm sm:text-base font-semibold tracking-tight text-[#173B5F] leading-snug">
+                  {service.title}
+                </span>
+                <ArrowRight className="mb-0.5 h-4 w-4 shrink-0 text-[#173B5F]/40 transition-all duration-300 group-hover:translate-x-1 group-hover:text-[#FA7415]" />
+              </span>
+            </button>
+          ))}
 
-                {/* Phones and tablets: title sits under the photo */}
-                <div aria-hidden="true" className="lg:hidden mt-3.5 flex items-center justify-between gap-4 px-1">
-                  <span className="text-base sm:text-lg font-medium tracking-tight text-[#173B5F] leading-snug">
-                    {service.title}
-                  </span>
-                  <ArrowRight className="h-5 w-5 shrink-0 text-[#173B5F]/60 transition-transform duration-300 ease-out group-hover:translate-x-1" />
-                </div>
-              </button>
-            );
-          })}
-
-          {/* Something else — a call to action, deliberately quieter than the photos */}
+          {/* Something else — quiet navy call to action */}
           <button
             onClick={() => openBooking('Other / Custom Request')}
-            className="group sm:col-span-2 lg:col-span-4 flex flex-col justify-between gap-10 rounded-3xl bg-[#173B5F] p-7 sm:p-8 text-left transition-colors duration-300 hover:bg-[#0F2742] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FA7415] focus-visible:ring-offset-2 lg:h-full"
+            className="group flex flex-col justify-between gap-6 sm:gap-8 rounded-2xl bg-[#173B5F] hover:bg-[#0F2742] p-4 sm:p-5 text-left transition-colors duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FA7415] focus-visible:ring-offset-2"
           >
-            <span className="h-1 w-8 rounded-full bg-[#FA7415]" />
-            <div className="flex items-end justify-between gap-4">
-              <div>
-                <span className="block text-xl sm:text-2xl font-semibold tracking-tight text-white">Something else?</span>
-                <span className="mt-1 block text-sm sm:text-base text-slate-300">Tell us what you need gone.</span>
-              </div>
-              <ArrowRight className="mb-1 h-5 w-5 shrink-0 text-[#FA7415] transition-transform duration-300 ease-out group-hover:translate-x-1" />
-            </div>
+            <span className="h-1 w-7 rounded-full bg-[#FA7415]" />
+            <span className="flex items-end justify-between gap-2">
+              <span>
+                <span className="block text-sm sm:text-base font-semibold tracking-tight text-white">Something else?</span>
+                <span className="mt-0.5 block text-xs sm:text-sm text-slate-300">Tell us what you need gone.</span>
+              </span>
+              <ArrowRight className="mb-0.5 h-4 w-4 shrink-0 text-[#FA7415] transition-transform duration-300 group-hover:translate-x-1" />
+            </span>
           </button>
         </div>
       </section>
