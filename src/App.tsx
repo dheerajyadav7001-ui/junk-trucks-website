@@ -5,7 +5,6 @@ import { BookingModal } from './components/BookingModal';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { FloatingWhatsApp } from './components/FloatingWhatsApp';
-import { SnowOverlay } from './components/SnowOverlay';
 import { loadGoogleAdsTag } from './utils/googleAdsTag';
 import { loadAnalytics } from './utils/analytics';
 
@@ -170,8 +169,6 @@ export default function App() {
         {/* Global Floating WhatsApp Contact Quick Action */}
         <FloatingWhatsApp />
 
-        {/* Winter campaign snow effect, shown site-wide */}
-        <SnowOverlay />
 
         {/* Global Footer (hidden on focused ad landing pages) */}
         {currentPage !== 'landing' && <Footer onNavigate={handleNavigate} />}

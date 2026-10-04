@@ -76,13 +76,3 @@ html {
   scroll-behavior: smooth;
 }
 
-
-/* Winter campaign — gentle falling snow */
-@keyframes snow-fall {
-  0% {
-    transform: translateY(0) translateX(0);
-  }
-  100% {
-    transform: translateY(105vh) translateX(var(--drift, 0px));
-  }
-}

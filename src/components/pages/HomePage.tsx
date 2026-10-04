@@ -121,10 +121,10 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
       <section id="reviews" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
         {/* Aggregate rating stat */}
         <div className="text-center max-w-2xl mx-auto mb-8 space-y-3">
-          <span className="text-xs font-mono font-bold text-[#FA7415] uppercase tracking-wider">
+          <span className="text-xs font-bold text-[#FA7415] uppercase tracking-[0.18em]">
             Customer Reviews
           </span>
-          <h2 className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#173B5F] tracking-tight">
             Trusted by Ottawa Homeowners
           </h2>
           <div className="inline-flex items-center gap-3 px-5 py-3 rounded-2xl bg-white border border-slate-200/80 shadow-2xs">
@@ -221,10 +221,10 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
       {/* SERVICES TILE FORMAT WITH GOOD PICTURES */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-2xl mx-auto mb-6 sm:mb-8 space-y-1.5">
-          <span className="text-xs font-mono font-bold text-[#FA7415] uppercase tracking-wider">
+          <span className="text-xs font-bold text-[#FA7415] uppercase tracking-[0.18em]">
             Ottawa Full-Service Removal
           </span>
-          <h2 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-[#173B5F] tracking-tight">
             What We Pick Up
           </h2>
           <p className="text-sm text-slate-600">
@@ -307,10 +307,10 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
       {/* FAQ */}
       <section id="faq" className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 scroll-mt-24">
         <div className="text-center max-w-2xl mx-auto mb-10 space-y-2">
-          <span className="text-xs font-mono font-bold text-[#FA7415] uppercase tracking-wider">
+          <span className="text-xs font-bold text-[#FA7415] uppercase tracking-[0.18em]">
             Got Questions?
           </span>
-          <h2 className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#173B5F] tracking-tight">
             Frequently Asked Questions
           </h2>
         </div>
@@ -350,10 +350,10 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
       {/* DONATE */}
       <section id="donate" className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 scroll-mt-24">
         <div className="text-center max-w-2xl mx-auto mb-10 space-y-2">
-          <span className="text-xs font-mono font-bold text-[#FA7415] uppercase tracking-wider">
+          <span className="text-xs font-bold text-[#FA7415] uppercase tracking-[0.18em]">
             Eco-Friendly Promise
           </span>
-          <h2 className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#173B5F] tracking-tight">
             What Can Be Donated
           </h2>
           <p className="text-sm sm:text-base text-slate-600">

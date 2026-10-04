@@ -40,7 +40,7 @@ export const WorkGallery: React.FC = () => {
 
   return (
     <div
-      className="relative rounded-2xl overflow-hidden bg-[#0F2742] shadow-lg aspect-[4/3] sm:aspect-video max-w-5xl mx-auto"
+      className="relative rounded-2xl overflow-hidden bg-[#0F2742] shadow-lg aspect-[4/5] sm:aspect-video max-w-4xl mx-auto"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
@@ -50,11 +50,19 @@ export const WorkGallery: React.FC = () => {
           className={`absolute inset-0 transition-opacity duration-700 ${i === index ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
           aria-hidden={i !== index}
         >
+          {/* Blurred copy fills the panel so portrait and landscape both fit without cropping */}
+          <img
+            src={s.type === 'image' ? s.src : s.poster}
+            alt=""
+            aria-hidden="true"
+            className="absolute inset-0 w-full h-full object-cover blur-2xl scale-110 opacity-60"
+            loading="lazy"
+          />
           {s.type === 'image' ? (
             <img
               src={s.src}
               alt={s.alt}
-              className="w-full h-full object-cover"
+              className="relative w-full h-full object-contain"
               loading={i === 0 ? 'eager' : 'lazy'}
             />
           ) : (
@@ -62,11 +70,10 @@ export const WorkGallery: React.FC = () => {
               ref={(el) => { videoRefs.current[i] = el; }}
               src={s.src}
               poster={s.poster}
-              className="w-full h-full object-cover"
+              className="relative w-full h-full object-contain"
               muted
               playsInline
               preload="metadata"
-              controls
               onEnded={() => go(i + 1)}
               aria-label={s.alt}
             />
