@@ -87,17 +87,11 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
               Don't hesitate to ask for anything extra — <span className="text-white font-semibold">our business depends on you.</span>
             </p>
 
-            {/* Price highlight — the clear, upfront number competitors hide */}
-            <div className="inline-flex items-center gap-3 sm:gap-4 rounded-2xl bg-white/10 border border-white/25 backdrop-blur-sm px-4 sm:px-5 py-3 sm:py-4 text-left">
-              <div className="leading-none">
-                <span className="block text-[11px] font-bold uppercase tracking-[0.18em] text-slate-200">Services starting at</span>
-                <span className="block text-4xl sm:text-6xl font-extrabold text-[#FA7415] mt-1">$85</span>
-              </div>
-              <div className="border-l border-white/25 pl-3 sm:pl-4 text-xs sm:text-sm text-white font-semibold leading-snug">
-                Fair, upfront pricing.<br />
-                <span className="font-medium text-slate-200">No hidden fees, no surprises.</span>
-              </div>
-            </div>
+            {/* Price highlight */}
+            <p className="flex items-baseline justify-center lg:justify-start gap-2.5 text-white">
+              <span className="text-lg sm:text-2xl font-semibold">Services starting at</span>
+              <span className="text-5xl sm:text-6xl font-extrabold text-[#FA7415] leading-none">$85</span>
+            </p>
 
             <div className="grid grid-cols-2 sm:flex sm:flex-wrap items-center justify-center lg:justify-start gap-3">
               <button
