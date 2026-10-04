@@ -88,10 +88,13 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
             </p>
 
             {/* Price highlight */}
-            <p className="flex items-baseline justify-center lg:justify-start gap-2.5 text-white">
-              <span className="text-lg sm:text-2xl font-semibold">Services starting at</span>
-              <span className="text-5xl sm:text-6xl font-extrabold text-[#FA7415] leading-none">$85</span>
-            </p>
+            <div className="inline-block rounded-2xl bg-white/10 border border-white/25 backdrop-blur-md px-5 py-3 sm:px-6 sm:py-4 text-center lg:text-left">
+              <p className="flex items-baseline justify-center lg:justify-start gap-2.5 text-white">
+                <span className="text-lg sm:text-2xl font-semibold">Services starting at</span>
+                <span className="text-5xl sm:text-6xl font-extrabold text-[#FA7415] leading-none">$85</span>
+              </p>
+              <p className="mt-1.5 text-sm sm:text-base text-slate-200">Seems cheaper, but it's fair.</p>
+            </div>
 
             <div className="grid grid-cols-2 sm:flex sm:flex-wrap items-center justify-center lg:justify-start gap-3">
               <button
