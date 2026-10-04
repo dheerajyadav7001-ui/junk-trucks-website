@@ -96,36 +96,14 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
               <p className="mt-1.5 text-sm sm:text-base text-slate-200">Seems cheaper, but it's fair.</p>
             </div>
 
-            <div className="grid grid-cols-2 sm:flex sm:flex-wrap items-center justify-center lg:justify-start gap-3">
+            <div className="flex justify-center lg:justify-start">
               <button
                 id="hero-book-now-btn"
                 onClick={() => openBooking()}
-                className="col-span-2 w-full sm:w-auto px-8 py-3.5 rounded-lg bg-[#FA7415] text-white font-bold text-base hover:bg-[#E0650A] transition-colors"
+                className="w-full sm:w-auto px-10 py-3.5 rounded-lg bg-[#FA7415] text-white font-bold text-base hover:bg-[#E0650A] transition-colors"
               >
                 Book Now
               </button>
-              <a
-                href={OTTAWA_WHATSAPP_LINK}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full sm:w-auto px-4 sm:px-8 py-3.5 rounded-lg bg-[#25D366] text-white font-bold text-base hover:bg-[#20bd5a] transition-colors flex items-center justify-center gap-2"
-              >
-                <WhatsAppIcon className="w-4 h-4" />
-                <span>WhatsApp</span>
-              </a>
-              <a
-                href={`tel:${OTTAWA_PHONE.replace(/[^0-9+]/g, '')}`}
-                className="w-full sm:w-auto px-4 sm:px-8 py-3.5 rounded-lg border-2 border-white text-white font-bold text-base hover:bg-white hover:text-[#173B5F] transition-colors flex items-center justify-center gap-2"
-              >
-                <Phone className="w-4 h-4" />
-                <span><span className="sm:hidden">Call</span><span className="hidden sm:inline">Call {OTTAWA_PHONE}</span></span>
-              </a>
-            </div>
-
-            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-x-4 sm:gap-x-6 gap-y-1.5 text-xs sm:text-sm font-semibold text-white">
-              <span className="flex items-center gap-1.5"><Check className="w-4 h-4 text-[#FA7415]" />Upfront Pricing</span>
-              <span className="flex items-center gap-1.5"><Check className="w-4 h-4 text-[#FA7415]" />Same-Day Availability</span>
-              <span className="flex items-center gap-1.5"><Check className="w-4 h-4 text-[#FA7415]" />Locally Owned</span>
             </div>
           </div>
         </div>
