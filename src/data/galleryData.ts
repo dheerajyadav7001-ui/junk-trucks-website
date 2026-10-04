@@ -10,7 +10,6 @@ export const GALLERY_SLIDES: GallerySlide[] = [
   { type: 'video', src: '/gallery/video-1.mp4', poster: '/gallery/video-1-poster.jpg', alt: 'Junk Trucks crew on a job in Ottawa' },
   { type: 'image', src: '/gallery/job-1.jpg', alt: 'Loaded trailer after a cleanout in Ottawa' },
   { type: 'image', src: '/gallery/job-2.jpg', alt: 'Truck and trailer loaded with junk' },
-  { type: 'image', src: '/gallery/job-3.jpg', alt: 'Hot tub and lumber hauled away' },
   { type: 'video', src: '/gallery/video-2.mp4', poster: '/gallery/video-2-poster.jpg', alt: 'Junk Trucks job clip' },
   { type: 'image', src: '/gallery/job-4.jpg', alt: 'Trailer loaded and strapped down' },
   { type: 'image', src: '/gallery/job-5.jpg', alt: 'Covered load ready to haul' },

@@ -81,9 +81,6 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 lg:py-32">
           <div className="max-w-xl space-y-6 text-center lg:text-left mx-auto lg:mx-0">
-            <p className="text-xs sm:text-sm font-bold tracking-[0.18em] uppercase text-[#FA7415]">
-              Ottawa Junk Removal
-            </p>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-[1.05]">
               Junk Gone.<br />Stress Gone.
             </h1>
@@ -91,17 +88,22 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
               Fast, reliable junk removal for homes and businesses across Ottawa. We do all the lifting, loading and hauling.
             </p>
 
-            <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3">
-              <button
-                id="hero-book-now-btn"
-                onClick={() => openBooking()}
-                className="w-full sm:w-auto px-8 py-3.5 rounded-lg bg-[#FA7415] text-white font-bold text-base hover:bg-[#E0650A] transition-colors"
-              >
-                Get a Free Quote
-              </button>
+            {/* Price highlight — the clear, upfront number competitors hide */}
+            <div className="inline-flex items-center gap-4 rounded-2xl bg-white/10 border border-white/25 backdrop-blur-sm px-5 py-4 text-left">
+              <div className="leading-none">
+                <span className="block text-[11px] font-bold uppercase tracking-[0.18em] text-slate-200">Services starting at</span>
+                <span className="block text-5xl sm:text-6xl font-extrabold text-[#FA7415] mt-1">$85</span>
+              </div>
+              <div className="border-l border-white/25 pl-4 text-sm text-white font-semibold leading-snug">
+                Fair, upfront pricing.<br />
+                <span className="font-medium text-slate-200">No hidden fees, no surprises.</span>
+              </div>
+            </div>
+
+            <div className="flex justify-center lg:justify-start">
               <a
                 href={`tel:${OTTAWA_PHONE.replace(/[^0-9+]/g, '')}`}
-                className="w-full sm:w-auto px-8 py-3.5 rounded-lg border-2 border-white text-white font-bold text-base hover:bg-white hover:text-[#173B5F] transition-colors flex items-center justify-center gap-2"
+                className="w-full sm:w-auto px-8 py-3.5 rounded-lg bg-[#FA7415] text-white font-bold text-base hover:bg-[#E0650A] transition-colors flex items-center justify-center gap-2"
               >
                 <Phone className="w-4 h-4" />
                 <span>Call {OTTAWA_PHONE}</span>
