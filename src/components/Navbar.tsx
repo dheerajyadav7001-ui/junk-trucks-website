@@ -108,6 +108,17 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
             <Phone className="w-4 h-4" />
             <span>{OTTAWA_PHONE}</span>
           </a>
+          <a
+            href={OTTAWA_WHATSAPP_LINK}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1.5 px-3.5 py-2.5 rounded-lg bg-[#25D366] hover:bg-[#20bd5a] text-white text-sm font-bold transition-colors"
+            title="Chat with us on WhatsApp"
+          >
+            <WhatsAppIcon className="w-4 h-4 shrink-0" />
+            <span className="hidden xl:inline">WhatsApp</span>
+          </a>
+
           <button
             id="nav-book-now-btn"
             onClick={() => openBooking()}

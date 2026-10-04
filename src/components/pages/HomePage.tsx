@@ -72,14 +72,14 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
         <img
           src="/hero-main.jpeg"
           alt="Junk Trucks truck and trailer in Ottawa"
-          className="absolute inset-0 w-full h-full object-cover object-[70%_65%]"
+          className="absolute inset-0 w-full h-full object-cover object-[60%_70%]"
           width={1448}
           height={1086}
           fetchPriority="high"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0F2742]/95 via-[#0F2742]/75 to-[#0F2742]/20 max-lg:bg-[#0F2742]/75" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0F2742]/90 via-[#0F2742]/55 to-transparent max-lg:bg-[#0F2742]/55" />
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 lg:py-32">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 lg:py-36">
           <div className="max-w-xl space-y-6 text-center lg:text-left mx-auto lg:mx-0">
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-[1.05]">
               Junk Gone.<br />Stress Gone.
@@ -100,7 +100,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
               </div>
             </div>
 
-            <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3">
+            <div className="flex flex-col sm:flex-row sm:flex-wrap items-center justify-center lg:justify-start gap-3">
               <button
                 id="hero-book-now-btn"
                 onClick={() => openBooking()}
@@ -108,6 +108,15 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
               >
                 Book Now
               </button>
+              <a
+                href={OTTAWA_WHATSAPP_LINK}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full sm:w-auto px-8 py-3.5 rounded-lg bg-[#25D366] text-white font-bold text-base hover:bg-[#20bd5a] transition-colors flex items-center justify-center gap-2"
+              >
+                <WhatsAppIcon className="w-4 h-4" />
+                <span>WhatsApp</span>
+              </a>
               <a
                 href={`tel:${OTTAWA_PHONE.replace(/[^0-9+]/g, '')}`}
                 className="w-full sm:w-auto px-8 py-3.5 rounded-lg border-2 border-white text-white font-bold text-base hover:bg-white hover:text-[#173B5F] transition-colors flex items-center justify-center gap-2"
