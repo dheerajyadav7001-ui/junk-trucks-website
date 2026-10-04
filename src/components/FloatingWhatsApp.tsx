@@ -6,7 +6,7 @@ export const FloatingWhatsApp: React.FC = () => {
   return (
     <aside aria-label="Quick contact" className="fixed bottom-5 right-5 z-40 flex flex-col items-end gap-2 group">
       {/* Tooltip on hover */}
-      <div className="hidden sm:block opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none bg-stone-900 text-white text-xs px-3 py-1.5 rounded-lg shadow-lg">
+      <div className="hidden sm:block opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none bg-slate-900 text-white text-xs px-3 py-1.5 rounded-lg shadow-lg">
         Chat with Ottawa Dispatch
       </div>
 

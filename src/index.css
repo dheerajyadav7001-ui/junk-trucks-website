@@ -1,29 +1,29 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: 'Poppins', system-ui, -apple-system, sans-serif;
-  --font-mono: 'Poppins', system-ui, -apple-system, sans-serif;
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'Inter', system-ui, -apple-system, sans-serif;
 
-  --color-brand-green: #025337;
-  --color-brand-green-dark: #012D19;
-  --color-brand-green-light: #2B6651;
-  --color-brand-green-subtle: #EDF5F1;
+  --color-brand-green: #173B5F;
+  --color-brand-green-dark: #0F2742;
+  --color-brand-green-light: #2A5580;
+  --color-brand-green-subtle: #EEF3F8;
 
-  --color-brand-orange: #F2661C;
-  --color-brand-orange-hover: #DB540F;
-  --color-brand-orange-light: #FFF1E9;
-  --color-brand-orange-dark: #C64A0A;
+  --color-brand-orange: #FA7415;
+  --color-brand-orange-hover: #E0650A;
+  --color-brand-orange-light: #FFF2E6;
+  --color-brand-orange-dark: #C45606;
 }
 
 :root {
-  --brand-green: #025337;
-  --brand-orange: #F2661C;
+  --brand-green: #173B5F;
+  --brand-orange: #FA7415;
 }
 
 body {
-  font-family: 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-  background-color: #FBFBFA;
-  color: #1c1917;
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: #FFFFFF;
+  color: #1E293B;
   overflow-x: hidden;
 }
 
@@ -31,44 +31,44 @@ body {
 .price-tag {
   /* A refined sans replaces the old typewriter-style monospace look
      used for eyebrow labels, badges and small tags across the site. */
-  font-family: 'Poppins', system-ui, -apple-system, sans-serif;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
   letter-spacing: 0.06em;
 }
 
 /* Custom utility helpers */
 .bg-brand-green {
-  background-color: #025337;
+  background-color: #173B5F;
 }
 .bg-brand-green-dark {
-  background-color: #012D19;
+  background-color: #0F2742;
 }
 .bg-brand-green-light {
-  background-color: #2B6651;
+  background-color: #2A5580;
 }
 .bg-brand-green-subtle {
-  background-color: #EDF5F1;
+  background-color: #EEF3F8;
 }
 .text-brand-green {
-  color: #025337;
+  color: #173B5F;
 }
 .border-brand-green {
-  border-color: #025337;
+  border-color: #173B5F;
 }
 
 .bg-brand-orange {
-  background-color: #F2661C;
+  background-color: #FA7415;
 }
 .bg-brand-orange-hover:hover {
-  background-color: #DB540F;
+  background-color: #E0650A;
 }
 .bg-brand-orange-light {
-  background-color: #FFF1E9;
+  background-color: #FFF2E6;
 }
 .text-brand-orange {
-  color: #F2661C;
+  color: #FA7415;
 }
 .border-brand-orange {
-  border-color: #F2661C;
+  border-color: #FA7415;
 }
 
 /* Smooth custom scrollbars and transitions */

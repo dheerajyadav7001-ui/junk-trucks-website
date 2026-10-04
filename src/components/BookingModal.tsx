@@ -75,7 +75,7 @@ export const BookingModal: React.FC = () => {
     <AnimatePresence>
       <div
         id="booking-modal-overlay"
-        className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 md:p-6 overflow-y-auto bg-stone-900/75 backdrop-blur-xs"
+        className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 md:p-6 overflow-y-auto bg-slate-900/75 backdrop-blur-xs"
         onClick={(e) => {
           if (e.target === e.currentTarget) handleClose();
         }}
@@ -86,22 +86,22 @@ export const BookingModal: React.FC = () => {
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.96, y: 20 }}
           transition={{ duration: 0.2, ease: 'easeOut' }}
-          className="relative w-full max-w-md bg-white rounded-2xl shadow-2xl border border-stone-200 overflow-hidden my-auto"
+          className="relative w-full max-w-md bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-hidden my-auto"
         >
           {/* Header Bar */}
-          <div className="bg-[#025337] px-6 py-5 text-white flex items-center justify-between">
+          <div className="bg-[#173B5F] px-6 py-5 text-white flex items-center justify-between">
             <div className="flex items-center gap-3">
               <img
                 src="/logo.png"
                 alt="Junk Trucks Logo"
-                className="w-11 h-11 rounded-full object-cover shadow-md ring-2 ring-emerald-400/30 shrink-0"
+                className="w-11 h-11 rounded-full object-cover shadow-md ring-2 ring-sky-300/30 shrink-0"
                 referrerPolicy="no-referrer"
               />
               <div>
                 <h3 className="font-bold text-lg leading-tight">
                   Get Your Quote
                 </h3>
-                <p className="text-xs text-stone-200 mt-0.5">
+                <p className="text-xs text-slate-200 mt-0.5">
                   We'll call you back in 15–30 minutes
                 </p>
               </div>
@@ -110,7 +110,7 @@ export const BookingModal: React.FC = () => {
             <button
               id="close-booking-modal-btn"
               onClick={handleClose}
-              className="p-1.5 rounded-lg text-stone-300 hover:text-white hover:bg-white/10 transition-colors"
+              className="p-1.5 rounded-lg text-slate-300 hover:text-white hover:bg-white/10 transition-colors"
               aria-label="Close booking modal"
             >
               <X className="w-6 h-6" />
@@ -120,32 +120,32 @@ export const BookingModal: React.FC = () => {
           {/* Success View */}
           {isSuccess ? (
             <div className="p-8 text-center" id="booking-success-view">
-              <div className="w-16 h-16 bg-emerald-100 text-emerald-700 rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="w-16 h-16 bg-sky-100 text-[#173B5F] rounded-full flex items-center justify-center mx-auto mb-4">
                 <CheckCircle2 className="w-10 h-10" />
               </div>
 
-              <h4 className="text-2xl font-bold text-stone-900 mb-2">
+              <h4 className="text-2xl font-bold text-slate-900 mb-2">
                 Request Received!
               </h4>
 
-              <p className="text-stone-600 max-w-md mx-auto mb-6 text-sm">
-                Thank you, <strong className="text-stone-900">{formData.name}</strong>. Our Ottawa dispatch team has your details and will call you shortly.
+              <p className="text-slate-600 max-w-md mx-auto mb-6 text-sm">
+                Thank you, <strong className="text-slate-900">{formData.name}</strong>. Our Ottawa dispatch team has your details and will call you shortly.
               </p>
 
-              <div className="bg-stone-50 border border-stone-200 rounded-xl p-4 max-w-md mx-auto text-left mb-6 space-y-2">
-                <div className="flex justify-between items-center pb-2 border-b border-stone-200">
-                  <span className="text-xs text-stone-500 font-medium uppercase tracking-wider">Reference Code</span>
-                  <span className="font-mono font-bold text-sm text-[#025337] bg-stone-100 px-2.5 py-0.5 rounded">
+              <div className="bg-slate-50 border border-slate-200 rounded-xl p-4 max-w-md mx-auto text-left mb-6 space-y-2">
+                <div className="flex justify-between items-center pb-2 border-b border-slate-200">
+                  <span className="text-xs text-slate-500 font-medium uppercase tracking-wider">Reference Code</span>
+                  <span className="font-mono font-bold text-sm text-[#173B5F] bg-slate-100 px-2.5 py-0.5 rounded">
                     {bookingReference || 'JT-CONFIRMED'}
                   </span>
                 </div>
-                <div className="flex justify-between text-xs text-stone-600">
+                <div className="flex justify-between text-xs text-slate-600">
                   <span>Phone:</span>
-                  <span className="font-medium text-stone-800">{formData.phone}</span>
+                  <span className="font-medium text-slate-800">{formData.phone}</span>
                 </div>
-                <div className="flex justify-between text-xs text-stone-600">
+                <div className="flex justify-between text-xs text-slate-600">
                   <span>Postal Code:</span>
-                  <span className="font-medium text-stone-800">{formData.postalCode}</span>
+                  <span className="font-medium text-slate-800">{formData.postalCode}</span>
                 </div>
               </div>
 
@@ -159,7 +159,7 @@ export const BookingModal: React.FC = () => {
               <div className="flex flex-wrap gap-2.5 justify-center">
                 <a
                   href={`tel:${OTTAWA_PHONE.replace(/[^0-9+]/g, '')}`}
-                  className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-[#025337] text-white text-xs font-semibold hover:bg-[#012D19] transition-colors"
+                  className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-[#173B5F] text-white text-xs font-semibold hover:bg-[#0F2742] transition-colors"
                 >
                   <Phone className="w-3.5 h-3.5" />
                   Call: {OTTAWA_PHONE}
@@ -175,7 +175,7 @@ export const BookingModal: React.FC = () => {
                 </a>
                 <button
                   onClick={handleClose}
-                  className="px-4 py-2.5 rounded-xl border border-stone-300 text-stone-700 text-xs font-semibold hover:bg-stone-50 transition-colors"
+                  className="px-4 py-2.5 rounded-xl border border-slate-300 text-slate-700 text-xs font-semibold hover:bg-slate-50 transition-colors"
                 >
                   Done & Close
                 </button>
@@ -191,7 +191,7 @@ export const BookingModal: React.FC = () => {
               )}
 
               <div>
-                <label className="block text-xs font-semibold text-stone-700 mb-1">
+                <label className="block text-xs font-semibold text-slate-700 mb-1">
                   Type of Junk *
                 </label>
                 <select
@@ -199,7 +199,7 @@ export const BookingModal: React.FC = () => {
                   required
                   value={selectedService}
                   onChange={(e) => setSelectedService(e.target.value)}
-                  className="w-full px-3 py-2.5 text-sm border border-stone-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#025337] bg-white"
+                  className="w-full px-3 py-2.5 text-sm border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#173B5F] bg-white"
                 >
                   <option value="General Junk Removal">General Junk Removal</option>
                   {SERVICES_LIST.map((srv) => (
@@ -214,7 +214,7 @@ export const BookingModal: React.FC = () => {
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-stone-700 mb-1">
+                <label className="block text-xs font-semibold text-slate-700 mb-1">
                   Full Name *
                 </label>
                 <input
@@ -224,12 +224,12 @@ export const BookingModal: React.FC = () => {
                   placeholder="Your Name"
                   value={formData.name}
                   onChange={handleInputChange}
-                  className="w-full px-3 py-2.5 text-sm border border-stone-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#025337]"
+                  className="w-full px-3 py-2.5 text-sm border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#173B5F]"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-stone-700 mb-1">
+                <label className="block text-xs font-semibold text-slate-700 mb-1">
                   Phone Number *
                 </label>
                 <input
@@ -239,12 +239,12 @@ export const BookingModal: React.FC = () => {
                   placeholder="(613) 000-0000"
                   value={formData.phone}
                   onChange={handleInputChange}
-                  className="w-full px-3 py-2.5 text-sm border border-stone-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#025337]"
+                  className="w-full px-3 py-2.5 text-sm border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#173B5F]"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-stone-700 mb-1">
+                <label className="block text-xs font-semibold text-slate-700 mb-1">
                   Email Address *
                 </label>
                 <input
@@ -254,12 +254,12 @@ export const BookingModal: React.FC = () => {
                   placeholder="youremail@example.com"
                   value={formData.email}
                   onChange={handleInputChange}
-                  className="w-full px-3 py-2.5 text-sm border border-stone-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#025337]"
+                  className="w-full px-3 py-2.5 text-sm border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#173B5F]"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-stone-700 mb-1">
+                <label className="block text-xs font-semibold text-slate-700 mb-1">
                   Postal Code *
                 </label>
                 <input
@@ -269,12 +269,12 @@ export const BookingModal: React.FC = () => {
                   placeholder="e.g. K1Z 6X3"
                   value={formData.postalCode}
                   onChange={handleInputChange}
-                  className="w-full px-3 py-2.5 text-sm border border-stone-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#025337]"
+                  className="w-full px-3 py-2.5 text-sm border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#173B5F]"
                 />
               </div>
 
-              <div className="p-3 bg-stone-50 rounded-xl border border-stone-200 flex items-center gap-2 text-xs text-stone-600">
-                <ShieldCheck className="w-4 h-4 text-[#025337] shrink-0" />
+              <div className="p-3 bg-slate-50 rounded-xl border border-slate-200 flex items-center gap-2 text-xs text-slate-600">
+                <ShieldCheck className="w-4 h-4 text-[#173B5F] shrink-0" />
                 No obligation. We'll call to confirm items, timing, and give you guaranteed on-site pricing.
               </div>
 
@@ -282,7 +282,7 @@ export const BookingModal: React.FC = () => {
                 id="submit-booking-form-btn"
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full px-8 py-3.5 rounded-xl bg-[#F2661C] text-white font-bold text-sm hover:bg-[#DB540F] transition-all shadow-md flex items-center justify-center gap-2 disabled:opacity-50"
+                className="w-full px-8 py-3.5 rounded-xl bg-[#FA7415] text-white font-bold text-sm hover:bg-[#E0650A] transition-all shadow-md flex items-center justify-center gap-2 disabled:opacity-50"
               >
                 {isSubmitting ? (
                   <>

@@ -155,7 +155,7 @@ export default function App() {
 
   return (
     <BookingProvider>
-      <div className="min-h-screen flex flex-col bg-[#FBFBFA] text-stone-900 selection:bg-[#F2661C] selection:text-white">
+      <div className="min-h-screen flex flex-col bg-[#FFFFFF] text-slate-900 selection:bg-[#FA7415] selection:text-white">
         {/* Navigation Bar with real-path Routing (hidden on focused ad landing pages) */}
         {currentPage !== 'landing' && <Navbar currentPage={currentPage} onNavigate={handleNavigate} />}
 

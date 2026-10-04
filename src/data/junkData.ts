@@ -217,7 +217,7 @@ export const TESTIMONIALS: Testimonial[] = [
     userType: 'Local Guide · 3 reviews',
     comment: 'Fast, professional 5-star furniture removal and junk cleanout service.',
     verified: true,
-    avatarColor: '#EA580C',
+    avatarColor: '#E0650A',
   },
 ];
 
