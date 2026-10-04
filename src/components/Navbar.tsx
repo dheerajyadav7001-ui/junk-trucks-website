@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Phone, Menu, X } from 'lucide-react';
+import { Truck, Phone, Menu, X, Clock, ShieldCheck, ArrowRight } from 'lucide-react';
 import { PageId } from '../types';
+import { useBooking } from '../context/BookingContext';
 import { OTTAWA_PHONE, OTTAWA_WHATSAPP_LINK } from '../data/junkData';
 import { WhatsAppIcon } from './WhatsAppIcon';
 import { Logo } from './Logo';
@@ -12,6 +13,7 @@ interface NavbarProps {
 
 export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { openBooking } = useBooking();
 
   // "hash" here is only ever a same-page scroll anchor (#before-after,
   // #faq, #donate) or empty for a real page change — it is never used to
@@ -52,10 +54,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
   };
 
   return (
-    <header
-      className="sticky top-0 z-40 w-full border-b border-white/10 bg-[#0F2742] bg-cover bg-[position:70%_62%]"
-      style={{ backgroundImage: 'linear-gradient(rgba(15,39,66,0.88), rgba(15,39,66,0.88)), url(/hero-main.jpeg)' }}
-    >
+    <header className="sticky top-0 z-40 w-full bg-white border-b border-slate-200">
       {/* Main Navigation Bar */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
         {/* Logo */}
@@ -65,7 +64,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
           className="flex items-center text-left shrink-0 transition-opacity hover:opacity-95"
           aria-label="Junk Trucks Home"
         >
-          <Logo logoSrc="/logo.png" size="lg" theme="dark" />
+          <Logo logoSrc="/logo.png" size="lg" />
         </a>
 
         {/* Desktop Navigation Links */}
@@ -74,8 +73,8 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
             const isActive = SCROLL_ANCHOR_HASHES.includes(link.hash) ? false : currentPage === link.id;
             const className = `px-3 py-2 rounded-lg text-sm font-semibold transition-colors ${
               isActive
-                ? 'text-white bg-white/15'
-                : 'text-slate-200 hover:text-white hover:bg-white/10'
+                ? 'text-[#173B5F] bg-[#EEF3F8]'
+                : 'text-slate-700 hover:text-[#173B5F] hover:bg-slate-100'
             }`;
             // Real page links get a real <a href> (crawlable + right-click
             // "open in new tab" works); scroll anchors stay plain buttons.
@@ -99,16 +98,23 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
           })}
         </nav>
 
-        {/* Action Area: call */}
-        <div className="hidden md:flex items-center">
+        {/* Action Area: phone + quote */}
+        <div className="hidden md:flex items-center gap-3">
           <a
             href={`tel:${OTTAWA_PHONE.replace(/[^0-9+]/g, '')}`}
-            className="flex items-center gap-2 px-5 py-2.5 rounded-lg bg-[#FA7415] text-white text-sm font-bold hover:bg-[#E0650A] transition-colors"
+            className="flex items-center gap-2 text-sm font-bold text-[#173B5F] hover:text-[#FA7415] transition-colors"
             title="Call us"
           >
             <Phone className="w-4 h-4" />
             <span>{OTTAWA_PHONE}</span>
           </a>
+          <button
+            id="nav-book-now-btn"
+            onClick={() => openBooking()}
+            className="px-5 py-2.5 rounded-lg bg-[#FA7415] text-white text-sm font-bold hover:bg-[#E0650A] transition-colors"
+          >
+            Book Now
+          </button>
         </div>
 
         {/* Mobile / Tablet Small Screen Actions */}
@@ -131,28 +137,33 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
 
             <a
               href={`tel:${OTTAWA_PHONE.replace(/[^0-9+]/g, '')}`}
-              className="p-2 rounded-xl bg-[#FA7415] text-white"
+              className="p-2 rounded-xl bg-slate-100 text-[#173B5F] border border-slate-200"
               aria-label="Call"
             >
               <Phone className="w-4 h-4" />
             </a>
 
+            <button
+              onClick={() => openBooking()}
+              className="px-3 py-2 rounded-xl bg-[#FA7415] text-white text-xs font-bold shadow-xs"
+            >
+              Book
+            </button>
           </div>
 
           {/* On the smallest screens (<sm), keep just one clear CTA next to
               the hamburger instead of the full icon cluster. */}
-          <a
-            href={`tel:${OTTAWA_PHONE.replace(/[^0-9+]/g, '')}`}
-            className="sm:hidden p-2 rounded-xl bg-[#FA7415] text-white"
-            aria-label="Call"
+          <button
+            onClick={() => openBooking()}
+            className="sm:hidden px-3 py-2 rounded-xl bg-[#FA7415] text-white text-xs font-bold shadow-xs"
           >
-            <Phone className="w-4 h-4" />
-          </a>
+            Book
+          </button>
 
           {/* Hamburger Menu Toggle */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-2 rounded-xl text-white hover:bg-white/10 transition-colors"
+            className="p-2 rounded-xl text-slate-700 hover:bg-slate-100 transition-colors"
             aria-label="Toggle navigation menu"
           >
             {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -162,13 +173,13 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
 
       {/* Mobile Menu Dropdown */}
       {mobileMenuOpen && (
-        <div className="lg:hidden border-t border-white/10 bg-[#0F2742] px-4 py-4 space-y-2.5 shadow-xl">
+        <div className="lg:hidden border-t border-slate-200 bg-white px-4 py-4 space-y-2.5 shadow-xl">
           {navLinks.map((link) => {
             const isActive = SCROLL_ANCHOR_HASHES.includes(link.hash) ? false : currentPage === link.id;
             const className = `w-full text-left px-3.5 py-2.5 rounded-xl text-sm font-medium transition-colors ${
               isActive
-                ? 'bg-white/15 text-white font-bold'
-                : 'text-slate-200 hover:bg-white/10'
+                ? 'bg-[#EEF3F8] text-[#173B5F] font-bold'
+                : 'text-slate-700 hover:bg-slate-50'
             }`;
             if (link.path) {
               return (
@@ -190,12 +201,12 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
           })}
 
           {/* Mobile Direct Action Buttons */}
-          <div className="pt-3 border-t border-white/10 flex flex-col gap-2">
+          <div className="pt-3 border-t border-slate-100 flex flex-col gap-2">
             <a
               href={`tel:${OTTAWA_PHONE.replace(/[^0-9+]/g, '')}`}
-              className="w-full py-2.5 rounded-xl bg-[#FA7415] text-white text-center text-sm font-bold flex items-center justify-center gap-2"
+              className="w-full py-2.5 rounded-xl bg-[#173B5F] text-white text-center text-sm font-bold flex items-center justify-center gap-2"
             >
-              <Phone className="w-4 h-4" />
+              <Phone className="w-4 h-4 text-[#FA7415]" />
               Call Now: {OTTAWA_PHONE}
             </a>
 
@@ -208,6 +219,17 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
               <WhatsAppIcon className="w-4 h-4" />
               Chat on WhatsApp {OTTAWA_PHONE}
             </a>
+
+            <button
+              onClick={() => {
+                setMobileMenuOpen(false);
+                openBooking();
+              }}
+              className="w-full py-2.5 rounded-xl bg-[#FA7415] text-white text-center text-sm font-bold shadow-xs flex items-center justify-center gap-2"
+            >
+              <span>Book Now</span>
+              <ArrowRight className="w-4 h-4" />
+            </button>
           </div>
         </div>
       )}

@@ -85,7 +85,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
               Junk Gone.<br />Stress Gone.
             </h1>
             <p className="text-base sm:text-lg text-slate-200 leading-relaxed">
-              Fast, reliable junk removal for homes and businesses across Ottawa. We do all the lifting, loading and hauling.
+              Don't hesitate to ask for anything extra — <span className="text-white font-semibold">our business depends on you.</span>
             </p>
 
             {/* Price highlight — the clear, upfront number competitors hide */}
@@ -100,10 +100,17 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
               </div>
             </div>
 
-            <div className="flex justify-center lg:justify-start">
+            <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3">
+              <button
+                id="hero-book-now-btn"
+                onClick={() => openBooking()}
+                className="w-full sm:w-auto px-8 py-3.5 rounded-lg bg-[#FA7415] text-white font-bold text-base hover:bg-[#E0650A] transition-colors"
+              >
+                Book Now
+              </button>
               <a
                 href={`tel:${OTTAWA_PHONE.replace(/[^0-9+]/g, '')}`}
-                className="w-full sm:w-auto px-8 py-3.5 rounded-lg bg-[#FA7415] text-white font-bold text-base hover:bg-[#E0650A] transition-colors flex items-center justify-center gap-2"
+                className="w-full sm:w-auto px-8 py-3.5 rounded-lg border-2 border-white text-white font-bold text-base hover:bg-white hover:text-[#173B5F] transition-colors flex items-center justify-center gap-2"
               >
                 <Phone className="w-4 h-4" />
                 <span>Call {OTTAWA_PHONE}</span>
