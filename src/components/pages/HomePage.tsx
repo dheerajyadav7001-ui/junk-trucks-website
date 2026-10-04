@@ -138,12 +138,6 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
       <section id="reviews" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
         {/* Aggregate rating stat */}
         <div className="text-center max-w-2xl mx-auto mb-8 space-y-3">
-          <span className="text-xs font-bold text-[#FA7415] uppercase tracking-[0.18em]">
-            Customer Reviews
-          </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#173B5F] tracking-tight">
-            Trusted by Ottawa Homeowners
-          </h2>
           <div className="inline-flex items-center gap-3 px-5 py-3 rounded-2xl bg-white border border-slate-200/80 shadow-2xs">
             <svg className="w-7 h-7 shrink-0" viewBox="0 0 24 24">
               <path fill="#4285F4" d="M23.52 12.27c0-.85-.08-1.66-.22-2.45H12v4.64h6.48a5.55 5.55 0 0 1-2.4 3.64v2.99h3.89c2.28-2.1 3.55-5.2 3.55-8.82z"/>
@@ -228,15 +222,14 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
 
       {/* OUR WORK SLIDESHOW (replaces Before & After) */}
       <section id="before-after" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 scroll-mt-24">
-        <div className="text-center max-w-2xl mx-auto mb-8 space-y-2">
-          <span className="text-xs font-bold text-[#FA7415] uppercase tracking-[0.18em]">Our Work</span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#173B5F] tracking-tight">See the Crew in Action</h2>
-        </div>
         <WorkGallery />
       </section>
 
       {/* SERVICES — square photo tiles, 2-up on mobile, whole tile is tappable */}
       <section id="services" className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 scroll-mt-24">
+        <h2 className="text-2xl sm:text-3xl font-extrabold text-[#173B5F] tracking-tight text-center mb-5 sm:mb-6">
+          What We Pick Up
+        </h2>
         <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
           {SERVICES_LIST.slice(0, 5).map((service) => (
             <button
@@ -286,9 +279,6 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
       {/* FAQ */}
       <section id="faq" className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 scroll-mt-24">
         <div className="text-center max-w-2xl mx-auto mb-10 space-y-2">
-          <span className="text-xs font-bold text-[#FA7415] uppercase tracking-[0.18em]">
-            Got Questions?
-          </span>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-[#173B5F] tracking-tight">
             Frequently Asked Questions
           </h2>
