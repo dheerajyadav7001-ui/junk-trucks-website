@@ -64,26 +64,26 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
   };
 
   return (
-    <div className="space-y-10 sm:space-y-16 pb-10 sm:pb-16">
+    <div className="space-y-7 sm:space-y-16 pb-10 sm:pb-16">
       {/* HERO SECTION */}
       <section className="relative overflow-hidden bg-[#0F2742]">
         {/* Background photo with a navy gradient so the copy stays readable */}
         <img
           src="/hero-main.jpg"
           alt="Junk Trucks truck and loaded trailer on an Ottawa street"
-          className="absolute inset-0 w-full h-full object-cover object-[60%_78%]"
+          className="absolute inset-0 w-full h-full object-cover object-[68%_75%]"
           width={1448}
           height={1086}
           fetchPriority="high"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0F2742]/85 via-[#0F2742]/50 to-transparent max-lg:bg-[#0F2742]/55" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0F2742]/85 via-[#0F2742]/50 to-transparent max-lg:bg-[#0F2742]/40" />
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-14 lg:py-16">
           <div className="max-w-xl space-y-5 sm:space-y-6 text-center lg:text-left mx-auto lg:mx-0">
-            <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-white leading-[1.05]">
+            <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-white leading-[1.05] [text-shadow:0_2px_12px_rgba(0,0,0,0.5)]">
               Junk Gone.<br />Stress Gone.
             </h1>
-            <p className="text-base sm:text-lg text-slate-200 leading-relaxed">
+            <p className="text-base sm:text-lg text-slate-100 leading-relaxed [text-shadow:0_1px_8px_rgba(0,0,0,0.6)]">
               Don't hesitate to ask for anything extra — <span className="text-white font-semibold">our business depends on you.</span>
             </p>
 
@@ -110,9 +110,9 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
       </section>
 
       {/* ORIGINAL GOOGLE REVIEWS */}
-      <section id="reviews" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
+      <section id="reviews" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Aggregate rating stat */}
-        <div className="text-center max-w-2xl mx-auto mb-8 space-y-3">
+        <div className="text-center max-w-2xl mx-auto mb-5 sm:mb-8 space-y-3">
           <div className="inline-flex items-center gap-3 px-5 py-3 rounded-2xl bg-white border border-slate-200/80 shadow-2xs">
             <svg className="w-7 h-7 shrink-0" viewBox="0 0 24 24">
               <path fill="#4285F4" d="M23.52 12.27c0-.85-.08-1.66-.22-2.45H12v4.64h6.48a5.55 5.55 0 0 1-2.4 3.64v2.99h3.89c2.28-2.1 3.55-5.2 3.55-8.82z"/>
