@@ -27,7 +27,6 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
 
   const { openBooking } = useBooking();
   const [faqOpenIndex, setFaqOpenIndex] = useState<number | null>(0);
-  const [customRequest, setCustomRequest] = useState('');
   const reviewsRef = useRef<HTMLDivElement>(null);
   const scrollReviews = (dir: number) => {
     const el = reviewsRef.current;
@@ -65,7 +64,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
   };
 
   return (
-    <div className="space-y-16 pb-16">
+    <div className="space-y-10 sm:space-y-16 pb-10 sm:pb-16">
       {/* HERO SECTION */}
       <section className="relative overflow-hidden bg-[#0F2742]">
         {/* Background photo with a navy gradient so the copy stays readable */}
@@ -79,8 +78,8 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
         />
         <div className="absolute inset-0 bg-gradient-to-r from-[#0F2742]/90 via-[#0F2742]/55 to-transparent max-lg:bg-[#0F2742]/55" />
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 lg:py-36">
-          <div className="max-w-xl space-y-6 text-center lg:text-left mx-auto lg:mx-0">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-24 lg:py-36">
+          <div className="max-w-xl space-y-5 sm:space-y-6 text-center lg:text-left mx-auto lg:mx-0">
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-[1.05]">
               Junk Gone.<br />Stress Gone.
             </h1>
@@ -89,22 +88,22 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
             </p>
 
             {/* Price highlight — the clear, upfront number competitors hide */}
-            <div className="inline-flex items-center gap-4 rounded-2xl bg-white/10 border border-white/25 backdrop-blur-sm px-5 py-4 text-left">
+            <div className="inline-flex items-center gap-3 sm:gap-4 rounded-2xl bg-white/10 border border-white/25 backdrop-blur-sm px-4 sm:px-5 py-3 sm:py-4 text-left">
               <div className="leading-none">
                 <span className="block text-[11px] font-bold uppercase tracking-[0.18em] text-slate-200">Services starting at</span>
-                <span className="block text-5xl sm:text-6xl font-extrabold text-[#FA7415] mt-1">$85</span>
+                <span className="block text-4xl sm:text-6xl font-extrabold text-[#FA7415] mt-1">$85</span>
               </div>
-              <div className="border-l border-white/25 pl-4 text-sm text-white font-semibold leading-snug">
+              <div className="border-l border-white/25 pl-3 sm:pl-4 text-xs sm:text-sm text-white font-semibold leading-snug">
                 Fair, upfront pricing.<br />
                 <span className="font-medium text-slate-200">No hidden fees, no surprises.</span>
               </div>
             </div>
 
-            <div className="flex flex-col sm:flex-row sm:flex-wrap items-center justify-center lg:justify-start gap-3">
+            <div className="grid grid-cols-2 sm:flex sm:flex-wrap items-center justify-center lg:justify-start gap-3">
               <button
                 id="hero-book-now-btn"
                 onClick={() => openBooking()}
-                className="w-full sm:w-auto px-8 py-3.5 rounded-lg bg-[#FA7415] text-white font-bold text-base hover:bg-[#E0650A] transition-colors"
+                className="col-span-2 w-full sm:w-auto px-8 py-3.5 rounded-lg bg-[#FA7415] text-white font-bold text-base hover:bg-[#E0650A] transition-colors"
               >
                 Book Now
               </button>
@@ -112,21 +111,21 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                 href={OTTAWA_WHATSAPP_LINK}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full sm:w-auto px-8 py-3.5 rounded-lg bg-[#25D366] text-white font-bold text-base hover:bg-[#20bd5a] transition-colors flex items-center justify-center gap-2"
+                className="w-full sm:w-auto px-4 sm:px-8 py-3.5 rounded-lg bg-[#25D366] text-white font-bold text-base hover:bg-[#20bd5a] transition-colors flex items-center justify-center gap-2"
               >
                 <WhatsAppIcon className="w-4 h-4" />
                 <span>WhatsApp</span>
               </a>
               <a
                 href={`tel:${OTTAWA_PHONE.replace(/[^0-9+]/g, '')}`}
-                className="w-full sm:w-auto px-8 py-3.5 rounded-lg border-2 border-white text-white font-bold text-base hover:bg-white hover:text-[#173B5F] transition-colors flex items-center justify-center gap-2"
+                className="w-full sm:w-auto px-4 sm:px-8 py-3.5 rounded-lg border-2 border-white text-white font-bold text-base hover:bg-white hover:text-[#173B5F] transition-colors flex items-center justify-center gap-2"
               >
                 <Phone className="w-4 h-4" />
-                <span>Call {OTTAWA_PHONE}</span>
+                <span><span className="sm:hidden">Call</span><span className="hidden sm:inline">Call {OTTAWA_PHONE}</span></span>
               </a>
             </div>
 
-            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-x-6 gap-y-2 text-sm font-semibold text-white">
+            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-x-4 sm:gap-x-6 gap-y-1.5 text-xs sm:text-sm font-semibold text-white">
               <span className="flex items-center gap-1.5"><Check className="w-4 h-4 text-[#FA7415]" />Upfront Pricing</span>
               <span className="flex items-center gap-1.5"><Check className="w-4 h-4 text-[#FA7415]" />Same-Day Availability</span>
               <span className="flex items-center gap-1.5"><Check className="w-4 h-4 text-[#FA7415]" />Locally Owned</span>
@@ -236,89 +235,51 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
         <WorkGallery />
       </section>
 
-      {/* SERVICES TILE FORMAT WITH GOOD PICTURES */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-2xl mx-auto mb-6 sm:mb-8 space-y-1.5">
-          <span className="text-xs font-bold text-[#FA7415] uppercase tracking-[0.18em]">
-            Ottawa Full-Service Removal
-          </span>
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-[#173B5F] tracking-tight">
-            What We Pick Up
-          </h2>
-          <p className="text-sm text-slate-600">
-            We do all the heavy lifting, loading, and clean-up. No items left behind.
-          </p>
-        </div>
-
-        {/* Compact service cards — icon, title, one-line price/CTA */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 sm:gap-3">
+      {/* SERVICES — square photo tiles, 2-up on mobile, whole tile is tappable */}
+      <section id="services" className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 scroll-mt-24">
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
           {SERVICES_LIST.slice(0, 5).map((service) => (
-            <div
+            <button
               key={service.id}
-              className="bg-white rounded-xl overflow-hidden border border-slate-200/80 shadow-2xs hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 group flex flex-col"
+              onClick={() => openBooking(service.title)}
+              aria-label={`Book ${service.title}`}
+              className="group relative aspect-square overflow-hidden rounded-2xl bg-[#0F2742] text-left shadow-sm active:scale-[0.98] transition-transform focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FA7415]"
             >
-              {/* Photo Thumbnail — short banner, clean, no overlaid text */}
-              <div className="relative aspect-21/9 overflow-hidden bg-slate-100 shrink-0">
-                <img
-                  src={service.image || '/truck-hero.jpg'}
-                  alt={service.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  loading="lazy"
-                  referrerPolicy="no-referrer"
-                />
-              </div>
+              <img
+                src={service.image || '/truck-hero.jpg'}
+                alt=""
+                className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                loading="lazy"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0F2742]/90 via-[#0F2742]/25 to-transparent" />
 
-              {/* Content */}
-              <div className="p-2.5 sm:p-3 flex flex-col flex-1 gap-1.5">
-                <div className="flex items-center gap-1.5">
-                  <div className="w-6 h-6 rounded-md bg-[#173B5F]/10 flex items-center justify-center shrink-0 [&>svg]:w-3.5 [&>svg]:h-3.5">
-                    {getServiceIcon(service.iconName)}
-                  </div>
-                  <h3 className="font-bold text-[11px] sm:text-xs text-slate-900 leading-snug group-hover:text-[#173B5F] transition-colors line-clamp-2">
-                    {service.title}
-                  </h3>
-                </div>
-
-                <button
-                  onClick={() => openBooking(service.title)}
-                  className="w-full px-2 py-1.5 rounded-lg bg-[#173B5F] hover:bg-[#0F2742] text-white text-[10px] sm:text-[11px] font-bold transition-all shadow-xs flex items-center justify-center gap-1 mt-1"
-                >
-                  <span>Book Pickup</span>
-                  <ArrowRight className="w-3 h-3" />
-                </button>
+              <div className="absolute inset-x-0 bottom-0 p-3 sm:p-4 flex items-end justify-between gap-2">
+                <h3 className="text-white font-bold text-sm sm:text-base leading-tight">
+                  {service.title}
+                </h3>
+                <span className="shrink-0 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[#FA7415] text-white flex items-center justify-center group-hover:bg-[#E0650A] transition-colors">
+                  <ArrowRight className="w-4 h-4" />
+                </span>
               </div>
-            </div>
+            </button>
           ))}
 
-          {/* "Other" tile — lets the customer describe a need that doesn't fit a category */}
-          <div className="bg-[#173B5F]/5 border-2 border-dashed border-[#173B5F]/25 rounded-xl overflow-hidden flex flex-col">
-            <div className="p-2.5 sm:p-3 flex flex-col flex-1 gap-1.5">
-              <div className="flex items-center gap-1.5">
-                <div className="w-6 h-6 rounded-md bg-[#173B5F]/10 flex items-center justify-center shrink-0">
-                  <Sparkles className="w-3.5 h-3.5 text-[#173B5F]" />
-                </div>
-                <h3 className="font-bold text-[11px] sm:text-xs text-slate-900 leading-snug">
-                  Something Else?
-                </h3>
+          {/* Anything else — same square shape, solid navy */}
+          <button
+            onClick={() => openBooking('Other / Custom Request')}
+            className="group relative aspect-square overflow-hidden rounded-2xl bg-[#173B5F] text-left p-4 flex flex-col justify-between active:scale-[0.98] transition-transform focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FA7415]"
+          >
+            <Sparkles className="w-7 h-7 text-[#FA7415]" />
+            <div className="flex items-end justify-between gap-2">
+              <div>
+                <h3 className="text-white font-bold text-sm sm:text-base leading-tight">Something else?</h3>
+                <p className="text-slate-300 text-xs mt-1 leading-snug">Hot tub, piano, anything — just ask.</p>
               </div>
-
-              <input
-                type="text"
-                value={customRequest}
-                onChange={(e) => setCustomRequest(e.target.value)}
-                placeholder="e.g. old hot tub, piano..."
-                className="w-full text-[11px] sm:text-xs px-2 py-1.5 rounded-lg border border-slate-300 focus:border-[#173B5F] focus:ring-1 focus:ring-[#173B5F] outline-none bg-white placeholder:text-slate-400"
-              />
-
-              <button
-                onClick={() => openBooking(customRequest.trim() ? `Other: ${customRequest.trim()}` : 'Other / Custom Request')}
-                className="w-full px-2 py-1.5 rounded-lg bg-[#173B5F] hover:bg-[#0F2742] text-white text-[10px] sm:text-[11px] font-bold transition-all shadow-xs flex items-center justify-center gap-1 mt-1"
-              >
-                <span>Get Your Quote</span>
-                <ArrowRight className="w-3 h-3" />
-              </button>
+              <span className="shrink-0 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[#FA7415] text-white flex items-center justify-center group-hover:bg-[#E0650A] transition-colors">
+                <ArrowRight className="w-4 h-4" />
+              </span>
             </div>
-          </div>
+          </button>
         </div>
       </section>
 

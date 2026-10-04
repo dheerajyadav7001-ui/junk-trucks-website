@@ -40,7 +40,7 @@ export const WorkGallery: React.FC = () => {
 
   return (
     <div
-      className="relative rounded-2xl overflow-hidden bg-[#0F2742] shadow-lg aspect-[4/5] sm:aspect-video max-w-4xl mx-auto"
+      className="relative rounded-2xl overflow-hidden bg-[#0F2742] shadow-lg aspect-square sm:aspect-video max-w-4xl mx-auto"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >

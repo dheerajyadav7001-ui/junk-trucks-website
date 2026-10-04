@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { PageId } from './types';
 import { BookingProvider } from './context/BookingContext';
 import { BookingModal } from './components/BookingModal';
+import { MobileActionBar } from './components/MobileActionBar';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { FloatingWhatsApp } from './components/FloatingWhatsApp';
@@ -159,7 +160,7 @@ export default function App() {
         {currentPage !== 'landing' && <Navbar currentPage={currentPage} onNavigate={handleNavigate} />}
 
         {/* Dynamic Multi-Page Router View */}
-        <main className="flex-1">
+        <main className={`flex-1 ${currentPage !== 'landing' ? 'pb-20 md:pb-0' : ''}`}>
           {renderActivePage()}
         </main>
 
@@ -168,6 +169,7 @@ export default function App() {
 
         {/* Global Floating WhatsApp Contact Quick Action */}
         <FloatingWhatsApp />
+        {currentPage !== 'landing' && <MobileActionBar />}
 
 
         {/* Global Footer (hidden on focused ad landing pages) */}
