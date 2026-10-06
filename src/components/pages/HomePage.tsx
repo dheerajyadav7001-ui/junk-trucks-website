@@ -69,9 +69,9 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
       <section className="relative overflow-hidden bg-[#0F2742]">
         {/* Background photo with a navy gradient so the copy stays readable */}
         <img
-          src="/hero-main.jpg"
-          alt="Junk Trucks truck and loaded trailer on an Ottawa street"
-          className="absolute inset-0 w-full h-full object-cover object-[68%_75%]"
+          src="/hero-autumn.jpg"
+          alt="Junk Trucks truck and loaded trailer on an Ottawa street in autumn"
+          className="absolute inset-0 w-full h-full object-cover object-[60%_72%]"
           width={1448}
           height={1086}
           fetchPriority="high"
