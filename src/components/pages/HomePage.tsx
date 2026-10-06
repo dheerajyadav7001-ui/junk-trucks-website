@@ -81,7 +81,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-14 lg:py-16">
           <div className="max-w-xl space-y-5 sm:space-y-6 text-center lg:text-left mx-auto lg:mx-0">
             <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-white leading-[1.05] [text-shadow:0_2px_12px_rgba(0,0,0,0.5)]">
-              Junk Gone.<br />Stress Gone.
+              Get your sh*t<br />removed.
             </h1>
             <p className="text-base sm:text-lg text-slate-100 leading-relaxed [text-shadow:0_1px_8px_rgba(0,0,0,0.6)]">
               Don't hesitate to ask for anything extra — <span className="text-white font-semibold">our business depends on you.</span>
