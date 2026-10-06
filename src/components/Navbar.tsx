@@ -64,7 +64,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
           className="flex items-center text-left shrink-0 transition-opacity hover:opacity-95"
           aria-label="Junk Trucks Home"
         >
-          <Logo logoSrc="/logo.png" size="lg" />
+          <Logo logoSrc="/logo.png" size="lg" showTagline />
         </a>
 
         {/* Desktop Navigation Links */}

@@ -6,7 +6,6 @@ interface LogoProps {
   className?: string;
   logoSrc?: string;
   size?: 'sm' | 'md' | 'lg' | 'xl';
-  // Kept so existing call sites compile; the wordmark no longer shows a tagline.
   showTagline?: boolean;
   tagline?: string;
 }
@@ -16,6 +15,8 @@ export const Logo: React.FC<LogoProps> = ({
   className = '',
   logoSrc = '/logo.png',
   size = 'md',
+  showTagline = false,
+  tagline = 'Gets The Job Done.',
 }) => {
   const isDark = theme === 'dark';
   const [imgError, setImgError] = useState(false);
@@ -49,9 +50,16 @@ export const Logo: React.FC<LogoProps> = ({
           <Truck className="w-1/2 h-1/2 text-white" />
         </div>
       )}
-      <span className={`${textClasses} font-extrabold tracking-tight leading-none whitespace-nowrap ${isDark ? 'text-white' : 'text-[#173B5F]'}`}>
-        Junk Trucks
-      </span>
+      <div className="flex flex-col justify-center">
+        <span className={`${textClasses} font-extrabold tracking-tight leading-none whitespace-nowrap ${isDark ? 'text-white' : 'text-[#173B5F]'}`}>
+          Junk Trucks
+        </span>
+        {showTagline && (
+          <span className={`mt-1 text-[10px] sm:text-xs font-semibold tracking-wide leading-none whitespace-nowrap ${isDark ? 'text-white/70' : 'text-[#FA7415]'}`}>
+            {tagline}
+          </span>
+        )}
+      </div>
     </div>
   );
 };
