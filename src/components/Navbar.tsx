@@ -3,6 +3,7 @@ import { Truck, Phone, Menu, X, Clock, ShieldCheck, ArrowRight } from 'lucide-re
 import { PageId } from '../types';
 import { useBooking } from '../context/BookingContext';
 import { OTTAWA_PHONE, OTTAWA_WHATSAPP_LINK } from '../data/junkData';
+import { trackEvent } from '../utils/analytics';
 import { WhatsAppIcon } from './WhatsAppIcon';
 import { Logo } from './Logo';
 
@@ -130,7 +131,15 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
 
         {/* Mobile / Tablet Small Screen Actions */}
         <div className="flex lg:hidden items-center gap-2">
-          {/* Phones: one clear CTA next to the hamburger — Book only. */}
+          {/* Phones: tap-to-call icon + Book next to the hamburger. */}
+          <a
+            href={`tel:${OTTAWA_PHONE.replace(/[^0-9+]/g, '')}`}
+            onClick={() => trackEvent('call_click', { location: 'mobile_header' })}
+            className="md:hidden flex items-center justify-center w-9 h-9 rounded-xl border border-[#173B5F]/20 text-[#173B5F] bg-white"
+            aria-label="Call Junk Trucks"
+          >
+            <Phone className="w-4 h-4" />
+          </a>
           <button
             onClick={() => openBooking()}
             className="md:hidden px-3 py-2 rounded-xl bg-[#FA7415] text-white text-xs font-bold shadow-xs"
