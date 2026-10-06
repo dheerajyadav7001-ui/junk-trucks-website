@@ -1,4 +1,4 @@
-import { GOOGLE_ADS_CONVERSION_ID, GOOGLE_ADS_CONVERSION_LABEL, GOOGLE_ADS_TAG_CONFIGURED } from '../config/googleAds';
+import { GOOGLE_ADS_CONVERSION_ID, GOOGLE_ADS_CONVERSION_LABELS, GOOGLE_ADS_TAG_CONFIGURED } from '../config/googleAds';
 
 declare global {
   interface Window {
@@ -48,9 +48,11 @@ export function loadGoogleAdsTag(): void {
 export function fireBookingConversion(bookingReference: string, gclid?: string): void {
   if (typeof window === 'undefined' || !window.gtag || !GOOGLE_ADS_TAG_CONFIGURED) return;
 
-  window.gtag('event', 'conversion', {
-    send_to: `${GOOGLE_ADS_CONVERSION_ID}/${GOOGLE_ADS_CONVERSION_LABEL}`,
-    transaction_id: bookingReference,
-    ...(gclid ? { gclid } : {}),
+  GOOGLE_ADS_CONVERSION_LABELS.forEach((label) => {
+    window.gtag!('event', 'conversion', {
+      send_to: `${GOOGLE_ADS_CONVERSION_ID}/${label}`,
+      transaction_id: bookingReference,
+      ...(gclid ? { gclid } : {}),
+    });
   });
 }

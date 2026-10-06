@@ -10,7 +10,12 @@
 // Until you do, the tag safely no-ops — nothing breaks, it just won't
 // report data to Google yet.
 export const GOOGLE_ADS_CONVERSION_ID = 'AW-18374467102';
-export const GOOGLE_ADS_CONVERSION_LABEL = 'PQFbCOqx5uocEJ680L1E';
+// Google's UI font draws capital "I" and lowercase "l" identically, so the
+// 17th-from-start character is ambiguous. We send to both spellings; Google
+// ignores the one that does not exist. Replace with the single exact label
+// copied from the monospace Event snippet once confirmed.
+export const GOOGLE_ADS_CONVERSION_LABELS = ['PQFbCOqx5uocEJ680LlE', 'PQFbCOqx5uocEJ680LIE'];
+export const GOOGLE_ADS_CONVERSION_LABEL = GOOGLE_ADS_CONVERSION_LABELS[0];
 
 export const GOOGLE_ADS_TAG_CONFIGURED =
   !GOOGLE_ADS_CONVERSION_ID.includes('XXXXXXXXX') &&
