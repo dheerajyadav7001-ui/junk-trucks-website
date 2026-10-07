@@ -165,6 +165,17 @@ export const SERVICES_LIST: ServiceDetail[] = [
 
 export const TESTIMONIALS: Testimonial[] = [
   {
+    id: 'rev-6',
+    name: 'Maeva Roland',
+    area: 'Ottawa',
+    rating: 5,
+    date: '2 days ago',
+    userType: '1 review',
+    comment: 'Amazing experience for our same day junk removal ! It was quick, affordable and DJ was helpful and friendly',
+    verified: true,
+    avatarColor: '#DB2777',
+  },
+  {
     id: 'rev-1',
     name: 'Andrew Prince',
     area: 'Ottawa',
