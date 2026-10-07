@@ -24,8 +24,10 @@ export function loadAnalytics(): void {
   if (GA4_CONFIGURED && !ga4Loaded) {
     ga4Loaded = true;
     window.dataLayer = window.dataLayer || [];
-    window.gtag = window.gtag || function gtag(...args: unknown[]) {
-      window.dataLayer.push(args);
+    // Must push the `arguments` object (not an array) or gtag.js ignores it.
+    window.gtag = window.gtag || function gtag() {
+      // eslint-disable-next-line prefer-rest-params
+      window.dataLayer.push(arguments);
     };
 
     const script = document.createElement('script');

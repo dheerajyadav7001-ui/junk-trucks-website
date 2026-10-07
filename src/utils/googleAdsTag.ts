@@ -27,8 +27,12 @@ export function loadGoogleAdsTag(): void {
   tagLoaded = true;
 
   window.dataLayer = window.dataLayer || [];
-  window.gtag = function gtag(...args: unknown[]) {
-    window.dataLayer.push(args);
+  // gtag.js only understands the special `arguments` object, NOT a normal
+  // array — pushing an array (e.g. via rest params) makes every call silently
+  // ignored, so no hits or conversions are ever sent.
+  window.gtag = function gtag() {
+    // eslint-disable-next-line prefer-rest-params
+    window.dataLayer.push(arguments);
   };
 
   const script = document.createElement('script');
