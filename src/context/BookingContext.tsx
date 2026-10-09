@@ -8,6 +8,8 @@ import { trackEvent } from '../utils/analytics';
 interface BookingContextType {
   isOpen: boolean;
   openBooking: (preselectedService?: string, preselectedLoadSize?: string) => void;
+  openQuote: (preselectedService?: string) => void;
+  mode: 'book' | 'quote';
   closeBooking: () => void;
   selectedService: string;
   selectedLoadSize: string;
@@ -34,6 +36,7 @@ const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xgojyezp';
 
 export const BookingProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [mode, setMode] = useState<'book' | 'quote'>('book');
   const [selectedService, setSelectedService] = useState<string>('General Junk Removal');
   const [selectedLoadSize, setSelectedLoadSize] = useState<string>('1/2 Truck Load');
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -49,10 +52,21 @@ export const BookingProvider: React.FC<{ children: ReactNode }> = ({ children })
   const openBooking = (preselectedService?: string, preselectedLoadSize?: string) => {
     if (preselectedService) setSelectedService(preselectedService);
     if (preselectedLoadSize) setSelectedLoadSize(preselectedLoadSize);
+    setMode('book');
     setIsSuccess(false);
     setErrorMessage(null);
     setIsOpen(true);
-    trackEvent('modal_open', { service: preselectedService || selectedService });
+    trackEvent('modal_open', { service: preselectedService || selectedService, mode: 'book' });
+  };
+
+  // Lower-commitment entry point: same form, framed as a free no-obligation quote
+  const openQuote = (preselectedService?: string) => {
+    if (preselectedService) setSelectedService(preselectedService);
+    setMode('quote');
+    setIsSuccess(false);
+    setErrorMessage(null);
+    setIsOpen(true);
+    trackEvent('modal_open', { service: preselectedService || selectedService, mode: 'quote' });
   };
 
   const closeBooking = () => {
@@ -117,8 +131,8 @@ export const BookingProvider: React.FC<{ children: ReactNode }> = ({ children })
 
       // 2. Trigger EmailJS notifications (Customer confirmation & Owner dispatch notification)
       try {
-        // Send Customer confirmation
-        await emailjs.send(
+        // Send Customer confirmation (only if an email was given; never blocks the owner alert)
+        if (fullPayload.email) await emailjs.send(
           EMAILJS_SERVICE_ID,
           EMAILJS_TEMPLATE_CUSTOMER,
           {
@@ -128,7 +142,7 @@ export const BookingProvider: React.FC<{ children: ReactNode }> = ({ children })
             service_type: fullPayload.serviceType,
           },
           EMAILJS_PUBLIC_KEY
-        );
+        ).catch((e) => console.warn('Customer confirmation email failed', e));
 
         // Send Owner notification
         await emailjs.send(
@@ -180,6 +194,8 @@ export const BookingProvider: React.FC<{ children: ReactNode }> = ({ children })
       value={{
         isOpen,
         openBooking,
+        openQuote,
+        mode,
         closeBooking,
         selectedService,
         selectedLoadSize,

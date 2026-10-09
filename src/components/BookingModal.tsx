@@ -10,6 +10,7 @@ import { WhatsAppIcon } from './WhatsAppIcon';
 export const BookingModal: React.FC = () => {
   const {
     isOpen,
+    mode,
     closeBooking,
     selectedService,
     setSelectedService,
@@ -48,8 +49,8 @@ export const BookingModal: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.name || !formData.phone || !formData.email || !formData.postalCode) {
-      setValidationError('Please fill in your name, phone number, email, and postal code so our dispatch team can call you back.');
+    if (!formData.name || !formData.phone) {
+      setValidationError('Please add your name and phone number so we can call you back.');
       return;
     }
 
@@ -60,7 +61,9 @@ export const BookingModal: React.FC = () => {
       postalCode: formData.postalCode,
       serviceType: selectedService,
       loadSize: selectedLoadSize,
-      notes: 'Quick quote request — full details (address, items, timing) to be confirmed by phone.',
+      notes: mode === 'quote'
+        ? 'FREE QUOTE request — full details (address, items, timing) to be confirmed by phone.'
+        : 'BOOKING request — full details (address, items, timing) to be confirmed by phone.',
     });
   };
 
@@ -99,7 +102,7 @@ export const BookingModal: React.FC = () => {
               />
               <div>
                 <h3 className="font-bold text-lg leading-tight">
-                  Get Your Quote
+                  {mode === 'quote' ? 'Get Your Free Quote' : 'Book Your Pickup'}
                 </h3>
                 <p className="text-xs text-slate-200 mt-0.5">
                   We'll call you back in 15–30 minutes
@@ -143,10 +146,12 @@ export const BookingModal: React.FC = () => {
                   <span>Phone:</span>
                   <span className="font-medium text-slate-800">{formData.phone}</span>
                 </div>
-                <div className="flex justify-between text-xs text-slate-600">
-                  <span>Postal Code:</span>
-                  <span className="font-medium text-slate-800">{formData.postalCode}</span>
-                </div>
+                {formData.postalCode && (
+                  <div className="flex justify-between text-xs text-slate-600">
+                    <span>Postal Code:</span>
+                    <span className="font-medium text-slate-800">{formData.postalCode}</span>
+                  </div>
+                )}
               </div>
 
               <div className="bg-amber-50 border border-amber-200 rounded-xl p-3.5 max-w-md mx-auto text-left flex items-start gap-3 mb-6">
@@ -245,12 +250,11 @@ export const BookingModal: React.FC = () => {
 
               <div>
                 <label className="block text-xs font-semibold text-slate-700 mb-1">
-                  Email Address *
+                  Email Address <span className="font-normal text-slate-400">(optional)</span>
                 </label>
                 <input
                   type="email"
                   name="email"
-                  required
                   placeholder="youremail@example.com"
                   value={formData.email}
                   onChange={handleInputChange}
@@ -260,12 +264,11 @@ export const BookingModal: React.FC = () => {
 
               <div>
                 <label className="block text-xs font-semibold text-slate-700 mb-1">
-                  Postal Code *
+                  Postal Code <span className="font-normal text-slate-400">(optional)</span>
                 </label>
                 <input
                   type="text"
                   name="postalCode"
-                  required
                   placeholder="e.g. K1Z 6X3"
                   value={formData.postalCode}
                   onChange={handleInputChange}
@@ -291,7 +294,7 @@ export const BookingModal: React.FC = () => {
                   </>
                 ) : (
                   <>
-                    Request My Quote
+                    {mode === 'quote' ? 'Get My Free Quote' : 'Book My Pickup'}
                     <ArrowRight className="w-4 h-4" />
                   </>
                 )}

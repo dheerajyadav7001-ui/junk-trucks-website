@@ -25,7 +25,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
     "Ottawa's #1 eco-friendly junk removal service. Garage, basement, estate & renovation cleanouts, furniture removal. Same-day hauling, lowest price guarantee."
   );
 
-  const { openBooking } = useBooking();
+  const { openBooking, openQuote } = useBooking();
   const [faqOpenIndex, setFaqOpenIndex] = useState<number | null>(0);
   const reviewsRef = useRef<HTMLDivElement>(null);
   const scrollReviews = (dir: number) => {
@@ -80,10 +80,13 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-14 lg:py-16">
           <div className="max-w-xl space-y-5 sm:space-y-6 text-center lg:text-left mx-auto lg:mx-0">
-            <h1 className="text-[1.9rem] sm:text-5xl font-extrabold tracking-tight text-white leading-[1.05] [text-shadow:0_2px_12px_rgba(0,0,0,0.5)]">
-              Ottawa's local crew.<br />Professional every time.
+            <h1 className="text-[1.8rem] sm:text-5xl font-extrabold tracking-tight text-white leading-[1.05] [text-shadow:0_2px_12px_rgba(0,0,0,0.5)]">
+              Junk Removal in Ottawa
             </h1>
-            <p className="text-base sm:text-lg text-slate-100 leading-relaxed [text-shadow:0_1px_8px_rgba(0,0,0,0.6)]">
+            <p className="text-[1.05rem] sm:text-2xl font-semibold text-white leading-snug text-balance [text-shadow:0_1px_8px_rgba(0,0,0,0.6)]">
+              Ottawa's local crew. Professional every time.
+            </p>
+            <p className="text-base sm:text-lg text-slate-100 leading-relaxed text-balance [text-shadow:0_1px_8px_rgba(0,0,0,0.6)]">
               Small items? We'll take them <span className="text-white font-semibold">free with your booking.</span>
             </p>
 
@@ -96,14 +99,26 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
               <p className="mt-1.5 text-sm sm:text-base text-slate-200">Best service at a reasonable price.</p>
             </div>
 
-            <div className="flex justify-center lg:justify-start">
-              <button
-                id="hero-book-now-btn"
-                onClick={() => openBooking()}
-                className="w-full sm:w-auto px-10 py-3.5 rounded-lg bg-[#FA7415] text-white font-bold text-base hover:bg-[#E0650A] transition-colors"
-              >
-                Book Now
-              </button>
+            <div className="space-y-2.5">
+              <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
+                <button
+                  id="hero-book-now-btn"
+                  onClick={() => openBooking()}
+                  className="w-full sm:w-auto px-8 py-3.5 rounded-lg bg-[#FA7415] text-white font-bold text-base hover:bg-[#E0650A] transition-colors"
+                >
+                  Book Now
+                </button>
+                <button
+                  id="hero-free-quote-btn"
+                  onClick={() => openQuote()}
+                  className="w-full sm:w-auto px-8 py-3.5 rounded-lg bg-white/95 text-[#173B5F] font-bold text-base hover:bg-white transition-colors"
+                >
+                  Free Quote – No Obligation
+                </button>
+              </div>
+              <p className="text-xs sm:text-sm text-slate-200 [text-shadow:0_1px_6px_rgba(0,0,0,0.6)]">
+                Free quote · No obligation · We call you back in 15–30 minutes
+              </p>
             </div>
           </div>
         </div>
