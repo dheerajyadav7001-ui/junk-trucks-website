@@ -17,7 +17,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
   const { openBooking } = useBooking();
 
   // "hash" here is only ever a same-page scroll anchor (#before-after,
-  // #faq, #donate) or empty for a real page change — it is never used to
+  // #faq) or empty for a real page change — it is never used to
   // pick the page itself anymore, so it stays out of the URL for real
   // page navigation (that's a real crawlable path, set via onNavigate).
   const navLinks: { key: string; id: PageId; label: string; hash: string; path: string | null }[] = [
@@ -25,10 +25,10 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
     { key: 'nav-services', id: 'services', label: 'Services', hash: '', path: '/services' },
     { key: 'nav-before-after', id: 'home', label: 'Our Work', hash: '#before-after', path: null },
     { key: 'nav-faq', id: 'home', label: 'FAQ', hash: '#faq', path: null },
-    { key: 'nav-donate', id: 'home', label: 'Donate', hash: '#donate', path: null },
+    { key: 'nav-donate', id: 'donate', label: 'Donate', hash: '', path: '/donate' },
   ];
 
-  const SCROLL_ANCHOR_HASHES = ['#before-after', '#faq', '#donate'];
+  const SCROLL_ANCHOR_HASHES = ['#before-after', '#faq'];
 
   const handleLinkClick = (id: PageId, hash: string) => {
     setMobileMenuOpen(false);

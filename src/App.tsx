@@ -14,12 +14,14 @@ import { HomePage } from './components/pages/HomePage';
 import { ServicesPage } from './components/pages/ServicesPage';
 import { EmergencyJunkRemovalPage } from './components/pages/EmergencyJunkRemovalPage';
 import { KeywordLandingPage } from './components/pages/KeywordLandingPage';
+import { DonatePage } from './components/pages/DonatePage';
 import { LANDING_PAGES } from './data/junkData';
 
 // Real, crawlable path for each static page (everything except the
 // per-keyword landing pages, which live directly at /<slug>).
 const SERVICES_PATH = '/services';
 const EMERGENCY_PATH = '/emergency-junk-removal';
+const DONATE_PATH = '/donate';
 
 // Old hash routes this site used to run on, mapped to their new real path.
 // Kept so any bookmark, saved Google Ads Final URL, or old sitelink still
@@ -29,6 +31,7 @@ const LEGACY_HASH_TO_PATH: Record<string, string> = {
   services: SERVICES_PATH,
   emergency: EMERGENCY_PATH,
   'emergency-junk-removal': EMERGENCY_PATH,
+  donate: DONATE_PATH,
 };
 
 export function getSlugFromPath(pathname: string): string | null {
@@ -43,6 +46,7 @@ export function getPageFromPath(pathname: string): PageId {
   if (!slug) return 'home';
   if (slug === 'services') return 'services';
   if (slug === 'emergency-junk-removal') return 'emergency';
+  if (slug === 'donate') return 'donate';
   if (LANDING_PAGES.some((lp) => lp.slug === slug)) return 'landing';
   return 'home';
 }
@@ -75,9 +79,9 @@ function migrateLegacyHash(): void {
     return;
   }
 
-  // Same-page scroll anchors (#before-after, #faq, #donate) stay as-is —
+  // Same-page scroll anchors (#before-after, #faq) stay as-is —
   // they're not separate pages, just a scroll target on the homepage.
-  if (['before-after', 'faq', 'donate'].includes(cleanHash)) return;
+  if (['before-after', 'faq'].includes(cleanHash)) return;
 
   const mapped = LEGACY_HASH_TO_PATH[cleanHash];
   if (mapped) {
@@ -124,6 +128,8 @@ export default function App() {
         ? SERVICES_PATH
         : page === 'emergency'
         ? EMERGENCY_PATH
+        : page === 'donate'
+        ? DONATE_PATH
         : page === 'landing' && slug
         ? `/${slug}`
         : '/';
@@ -142,6 +148,8 @@ export default function App() {
         return <ServicesPage onNavigate={handleNavigate} />;
       case 'emergency':
         return <EmergencyJunkRemovalPage />;
+      case 'donate':
+        return <DonatePage />;
       case 'landing': {
         const config = LANDING_PAGES.find((lp) => lp.slug === landingSlug);
         if (!config) return <HomePage onNavigate={handleNavigate} />;

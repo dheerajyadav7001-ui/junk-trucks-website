@@ -161,9 +161,9 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             <button onClick={() => handleAnchorClick('faq')} className="hover:text-slate-200 transition-colors">
               FAQ
             </button>
-            <button onClick={() => handleAnchorClick('donate')} className="hover:text-slate-200 transition-colors">
+            <a href="/donate" onClick={(e) => { e.preventDefault(); handleLinkClick('donate'); }} className="hover:text-slate-200 transition-colors">
               Donate
-            </button>
+            </a>
             <a href="/emergency-junk-removal" onClick={(e) => { e.preventDefault(); handleLinkClick('emergency'); }} className="hover:text-[#FA7415] transition-colors">
               Emergency Hauling
             </a>

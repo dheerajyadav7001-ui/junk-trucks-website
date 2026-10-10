@@ -2,18 +2,19 @@ import React, { useState, useEffect, useRef } from 'react';
 import { 
   Truck, CheckCircle2, Phone, Star, 
   Armchair, Refrigerator, Home, Hammer, TreePine, Building2,
-  Flame, Clock, Sparkles, ChevronDown, ChevronLeft, ChevronRight, Check, X
+  Flame, Clock, Sparkles, ChevronDown, ChevronLeft, ChevronRight
 } from 'lucide-react';
 import { useBooking } from '../../context/BookingContext';
 import { 
   SERVICES_LIST, TESTIMONIALS, 
   OTTAWA_PHONE, OTTAWA_WHATSAPP_LINK,
-  FAQS, DONATION_ACCEPTED, DONATION_NOT_ACCEPTED
+  FAQS
 } from '../../data/junkData';
 import { PageId } from '../../types';
 import { WhatsAppIcon } from '../WhatsAppIcon';
 import { useDocumentHead } from '../../utils/seo';
 import { WorkGallery } from '../WorkGallery';
+import { CityPickupChecker } from '../CityPickupChecker';
 
 interface HomePageProps {
   onNavigate: (page: PageId) => void;
@@ -33,10 +34,10 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
     if (el) el.scrollBy({ left: dir * el.clientWidth * 0.8, behavior: 'smooth' });
   };
 
-  // Handle hash scrolling for #before-after, #faq, #donate
+  // Handle hash scrolling for #before-after, #faq
   useEffect(() => {
     const targetId = window.location.hash.replace('#', '');
-    if (['before-after', 'faq', 'donate'].includes(targetId)) {
+    if (['before-after', 'faq'].includes(targetId)) {
       setTimeout(() => {
         const el = document.getElementById(targetId);
         if (el) el.scrollIntoView({ behavior: 'smooth' });
@@ -287,58 +288,8 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
         </div>
       </section>
 
-      {/* DONATE */}
-      <section id="donate" className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 scroll-mt-24">
-        <div className="text-center max-w-2xl mx-auto mb-10 space-y-2">
-          <span className="text-xs font-bold text-[#FA7415] uppercase tracking-[0.18em]">
-            Eco-Friendly Promise
-          </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#173B5F] tracking-tight">
-            What Can Be Donated
-          </h2>
-          <p className="text-sm sm:text-base text-slate-600">
-            Before your items go to the landfill, we check if they can be donated.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
-          <div className="rounded-2xl border border-sky-100 bg-sky-50/50 p-6 sm:p-7 space-y-4">
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-lg bg-sky-500 flex items-center justify-center shrink-0">
-                <Check className="w-4 h-4 text-white stroke-[2.5]" />
-              </div>
-              <h3 className="text-base sm:text-lg font-bold text-[#173B5F]">Accepted for Donation</h3>
-            </div>
-            <ul className="space-y-2.5">
-              {DONATION_ACCEPTED.map((item) => (
-                <li key={item} className="flex items-start gap-2.5 text-sm text-slate-700">
-                  <Check className="w-4 h-4 text-[#173B5F] mt-0.5 shrink-0" />
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="rounded-2xl border border-slate-200 bg-slate-50 p-6 sm:p-7 space-y-4">
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-lg bg-slate-400 flex items-center justify-center shrink-0">
-                <X className="w-4 h-4 text-white stroke-[2.5]" />
-              </div>
-              <h3 className="text-base sm:text-lg font-bold text-slate-700">Not Accepted for Donation</h3>
-            </div>
-            <p className="text-xs text-slate-500 italic">Still removed as junk — just not donated.</p>
-            <ul className="space-y-2.5">
-              {DONATION_NOT_ACCEPTED.map((item) => (
-                <li key={item} className="flex items-start gap-2.5 text-sm text-slate-600">
-                  <X className="w-4 h-4 text-slate-400 mt-0.5 shrink-0" />
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-
-      </section>
+      {/* WILL THE CITY PICK IT UP? (interactive checker) */}
+      <CityPickupChecker />
     </div>
   );
 };
