@@ -99,26 +99,14 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
               <p className="mt-1.5 text-sm sm:text-base text-slate-200">Best service at a reasonable price.</p>
             </div>
 
-            <div className="space-y-2.5">
-              <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
-                <button
-                  id="hero-book-now-btn"
-                  onClick={() => openBooking()}
-                  className="w-full sm:w-auto px-8 py-3.5 rounded-lg bg-[#FA7415] text-white font-bold text-base hover:bg-[#E0650A] transition-colors"
-                >
-                  Book Now
-                </button>
-                <button
-                  id="hero-free-quote-btn"
-                  onClick={() => openQuote()}
-                  className="w-full sm:w-auto px-8 py-3.5 rounded-lg bg-white/95 text-[#173B5F] font-bold text-base hover:bg-white transition-colors"
-                >
-                  Free Quote – No Obligation
-                </button>
-              </div>
-              <p className="text-xs sm:text-sm text-slate-200 [text-shadow:0_1px_6px_rgba(0,0,0,0.6)]">
-                Free quote · No obligation · We call you back in 15–30 minutes
-              </p>
+            <div className="flex justify-center lg:justify-start">
+              <button
+                id="hero-free-quote-btn"
+                onClick={() => openQuote()}
+                className="w-full sm:w-auto px-10 py-3.5 rounded-lg bg-[#FA7415] text-white font-bold text-base hover:bg-[#E0650A] transition-colors"
+              >
+                Get Your Free Quote
+              </button>
             </div>
           </div>
         </div>
