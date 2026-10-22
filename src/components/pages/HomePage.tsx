@@ -15,6 +15,7 @@ import { WhatsAppIcon } from '../WhatsAppIcon';
 import { useDocumentHead } from '../../utils/seo';
 import { WorkGallery } from '../WorkGallery';
 import { CityPickupChecker } from '../CityPickupChecker';
+import { SnowEffect } from '../SnowEffect';
 
 interface HomePageProps {
   onNavigate: (page: PageId) => void;
@@ -68,43 +69,50 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
     <div className="space-y-7 sm:space-y-16 pb-10 sm:pb-16">
       {/* HERO SECTION */}
       <section className="relative overflow-hidden bg-[#0F2742]">
-        {/* Background photo with a navy gradient so the copy stays readable */}
+        {/* Background photo — bright, with a navy fade where the copy sits */}
         <img
-          src="/hero-autumn.jpg"
-          alt="Junk Trucks truck and loaded trailer on an Ottawa street in autumn"
-          className="absolute inset-0 w-full h-full object-cover object-[60%_72%]"
-          width={1448}
-          height={1086}
+          src="/hero-suburbia.jpg"
+          alt="Junk Trucks pickup and loaded trailer on an Ottawa street in autumn"
+          className="absolute bottom-0 inset-x-0 w-full h-auto sm:h-full sm:object-cover sm:object-[68%_75%] sm:inset-0 lg:object-[75%_70%]"
+          width={1672}
+          height={941}
           fetchPriority="high"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0F2742]/85 via-[#0F2742]/50 to-transparent max-lg:bg-[#0F2742]/40" />
+        <div className="absolute inset-0 sm:hidden bg-[linear-gradient(to_bottom,#0F2742_0%,#0F2742_60%,rgba(15,39,66,0)_78%)]" />
+        <div className="absolute inset-0 hidden sm:block lg:hidden bg-gradient-to-b from-[#0F2742]/95 via-[#0F2742]/70 to-[#0F2742]/0" />
+        <div className="absolute inset-0 hidden lg:block bg-gradient-to-r from-[#0F2742]/95 via-[#0F2742]/65 to-transparent" />
+        <SnowEffect />
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-14 lg:py-16">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-[15.5rem] sm:pt-14 sm:pb-24 lg:py-20">
           <div className="max-w-xl space-y-5 sm:space-y-6 text-center lg:text-left mx-auto lg:mx-0">
-            <h1 className="text-[1.8rem] sm:text-5xl font-extrabold tracking-tight text-white leading-[1.05] [text-shadow:0_2px_12px_rgba(0,0,0,0.5)]">
-              Junk Removal in Ottawa
+            <div className="inline-flex items-center gap-1.5 rounded-full bg-white/15 border border-white/25 backdrop-blur-sm px-3.5 py-1.5 text-sm font-semibold text-white">
+              <span className="text-[#FFB020]">★★★★★</span>
+              <span>5.0 on Google</span>
+            </div>
+
+            <h1 className="text-[2.15rem] sm:text-6xl font-extrabold tracking-tight text-white leading-[1.02] [text-shadow:0_3px_16px_rgba(0,0,0,0.55)]">
+              Junk Removal in <span className="text-[#FA7415]">Ottawa</span>
             </h1>
-            <p className="text-[1.05rem] sm:text-2xl font-semibold text-white leading-snug text-balance [text-shadow:0_1px_8px_rgba(0,0,0,0.6)]">
-              Ottawa's local crew. Professional every time.
+            <p className="text-lg sm:text-2xl font-bold text-white leading-snug text-balance [text-shadow:0_1px_8px_rgba(0,0,0,0.6)]">
+              Best service. Guaranteed upfront price.
             </p>
             <p className="text-base sm:text-lg text-slate-100 leading-relaxed text-balance [text-shadow:0_1px_8px_rgba(0,0,0,0.6)]">
-              Small items? We'll take them <span className="text-white font-semibold">free with your booking.</span>
+              Ottawa's local crew. Small items? We'll take them <span className="text-white font-semibold">free with your booking.</span>
             </p>
 
             {/* Price highlight */}
-            <div className="inline-block rounded-2xl bg-white/10 border border-white/25 backdrop-blur-md px-5 py-3 sm:px-6 sm:py-4 text-center lg:text-left">
+            <div className="inline-block rounded-2xl bg-white/12 border border-white/30 backdrop-blur-md px-5 py-3 sm:px-6 sm:py-4 text-center lg:text-left shadow-[0_8px_30px_rgba(0,0,0,0.25)]">
               <p className="flex items-baseline justify-center lg:justify-start gap-2.5 text-white">
                 <span className="text-lg sm:text-2xl font-semibold">Services starting at</span>
-                <span className="text-5xl sm:text-6xl font-extrabold text-[#FA7415] leading-none">$85</span>
+                <span className="text-5xl sm:text-6xl font-extrabold text-[#FA7415] leading-none [text-shadow:0_0_24px_rgba(250,116,21,0.55)]">$85</span>
               </p>
-              <p className="mt-1.5 text-sm sm:text-base text-slate-200">Best service at a reasonable price.</p>
             </div>
 
             <div className="flex justify-center lg:justify-start">
               <button
                 id="hero-free-quote-btn"
                 onClick={() => openQuote()}
-                className="w-full sm:w-auto px-10 py-3.5 rounded-lg bg-[#FA7415] text-white font-bold text-base hover:bg-[#E0650A] transition-colors"
+                className="w-full sm:w-auto px-10 py-4 rounded-xl bg-[#FA7415] text-white font-extrabold text-lg shadow-[0_10px_28px_rgba(250,116,21,0.5)] hover:bg-[#E0650A] hover:-translate-y-0.5 active:translate-y-0 transition-all"
               >
                 Get Your Free Quote
               </button>
@@ -246,6 +254,11 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
         </div>
       </section>
 
+      {/* OUR WORK SLIDESHOW (replaces Before & After) */}
+      <section id="before-after" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 scroll-mt-24">
+        <WorkGallery />
+      </section>
+
       {/* FAQ */}
       <section id="faq" className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 scroll-mt-24">
         <div className="text-center max-w-2xl mx-auto mb-10 space-y-2">
@@ -284,11 +297,6 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
             );
           })}
         </div>
-      </section>
-
-      {/* OUR WORK SLIDESHOW (replaces Before & After) */}
-      <section id="before-after" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 scroll-mt-24">
-        <WorkGallery />
       </section>
     </div>
   );
