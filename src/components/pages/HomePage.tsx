@@ -113,6 +113,9 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
         </div>
       </section>
 
+      {/* WILL THE CITY PICK IT UP? (interactive checker) */}
+      <CityPickupChecker />
+
       {/* ORIGINAL GOOGLE REVIEWS */}
       <section id="reviews" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Aggregate rating stat */}
@@ -199,11 +202,6 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
         </div>
       </section>
 
-      {/* OUR WORK SLIDESHOW (replaces Before & After) */}
-      <section id="before-after" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 scroll-mt-24">
-        <WorkGallery />
-      </section>
-
       {/* WHAT WE PICK UP — square photo tiles, 3 across and 3 across; whole tile is tappable */}
       <section id="services" className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 scroll-mt-24">
         <h2 className="text-2xl sm:text-3xl font-extrabold text-[#173B5F] tracking-tight text-center mb-5 sm:mb-7">
@@ -288,8 +286,10 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
         </div>
       </section>
 
-      {/* WILL THE CITY PICK IT UP? (interactive checker) */}
-      <CityPickupChecker />
+      {/* OUR WORK SLIDESHOW (replaces Before & After) */}
+      <section id="before-after" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 scroll-mt-24">
+        <WorkGallery />
+      </section>
     </div>
   );
 };
