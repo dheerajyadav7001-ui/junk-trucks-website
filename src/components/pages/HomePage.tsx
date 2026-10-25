@@ -85,17 +85,9 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-[15.5rem] sm:pt-14 sm:pb-24 lg:py-20">
           <div className="max-w-xl space-y-5 sm:space-y-6 text-center lg:text-left mx-auto lg:mx-0">
-            <div className="inline-flex items-center gap-1.5 rounded-full bg-white/15 border border-white/25 backdrop-blur-sm px-3.5 py-1.5 text-sm font-semibold text-white">
-              <span className="text-[#FFB020]">★★★★★</span>
-              <span>5.0 on Google</span>
-            </div>
-
             <h1 className="text-[2.15rem] sm:text-6xl font-extrabold tracking-tight text-white leading-[1.02] [text-shadow:0_3px_16px_rgba(0,0,0,0.55)]">
               Junk Removal in <span className="text-[#FA7415]">Ottawa</span>
             </h1>
-            <p className="text-lg sm:text-2xl font-bold text-white leading-snug text-balance [text-shadow:0_1px_8px_rgba(0,0,0,0.6)]">
-              Best service. Guaranteed upfront price.
-            </p>
             <p className="text-base sm:text-lg text-slate-100 leading-relaxed text-balance [text-shadow:0_1px_8px_rgba(0,0,0,0.6)]">
               Ottawa's local crew. Small items? We'll take them <span className="text-white font-semibold">free with your booking.</span>
             </p>
@@ -103,7 +95,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
             {/* Price highlight */}
             <div className="inline-block rounded-2xl bg-white/12 border border-white/30 backdrop-blur-md px-5 py-3 sm:px-6 sm:py-4 text-center lg:text-left shadow-[0_8px_30px_rgba(0,0,0,0.25)]">
               <p className="flex items-baseline justify-center lg:justify-start gap-2.5 text-white">
-                <span className="text-lg sm:text-2xl font-semibold">Services starting at</span>
+                <span className="text-lg sm:text-2xl font-semibold">Individual large item at</span>
                 <span className="text-5xl sm:text-6xl font-extrabold text-[#FA7415] leading-none [text-shadow:0_0_24px_rgba(250,116,21,0.55)]">$85</span>
               </p>
             </div>
