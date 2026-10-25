@@ -32,10 +32,10 @@ const esc = (s) => s.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g
 
 for (const r of routes) {
   let html = template;
-  html = html.replace(/<title>[\s\S]*?<\/title>/, `<title>${esc(r.title)}</title>`);
-  html = html.replace(/(<meta name="description" content=")[^"]*(")/, `$1${esc(r.description)}$2`);
-  html = html.replace(/(<meta property="og:title" content=")[^"]*(")/, `$1${esc(r.title)}$2`);
-  html = html.replace(/(<meta property="og:description" content=")[^"]*(")/, `$1${esc(r.description)}$2`);
+  html = html.replace(/<title>[\s\S]*?<\/title>/, () => `<title>${esc(r.title)}</title>`);
+  html = html.replace(/(<meta name="description" content=")[^"]*(")/, (_m, a, b) => `${a}${esc(r.description)}${b}`);
+  html = html.replace(/(<meta property="og:title" content=")[^"]*(")/, (_m, a, b) => `${a}${esc(r.title)}${b}`);
+  html = html.replace(/(<meta property="og:description" content=")[^"]*(")/, (_m, a, b) => `${a}${esc(r.description)}${b}`);
 
   const url = `${ORIGIN}/${r.path}`;
   const extra = [
@@ -44,13 +44,13 @@ for (const r of routes) {
     r.robots ? `<meta name="robots" content="${r.robots}" />` : '',
     ...r.jsonLd.map((o) => `<script type="application/ld+json" data-page-jsonld="1">${JSON.stringify(o).replace(/</g, '\\u003c')}</script>`),
   ].filter(Boolean).join('\n    ');
-  html = html.replace('</head>', `    ${extra}\n  </head>`);
+  html = html.replace('</head>', () => `    ${extra}\n  </head>`);
 
   if (!html.includes('<div id="root"></div>')) {
     console.error('prerender: root div not found in dist/index.html');
     process.exit(1);
   }
-  html = html.replace('<div id="root"></div>', `<div id="root">${r.bodyHtml}</div>`);
+  html = html.replace('<div id="root"></div>', () => `<div id="root">${r.bodyHtml}</div>`);
 
   const outDir = join(root, 'dist', r.path);
   mkdirSync(outDir, { recursive: true });
