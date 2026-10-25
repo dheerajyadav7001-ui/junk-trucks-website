@@ -16,6 +16,7 @@ import { useDocumentHead, HOME_TITLE, HOME_DESCRIPTION } from '../../utils/seo';
 import { WorkGallery } from '../WorkGallery';
 import { CityPickupChecker } from '../CityPickupChecker';
 import { SnowEffect } from '../SnowEffect';
+import { WINTER_OFFER, isWinterOfferActive } from '../../config/offer';
 
 interface HomePageProps {
   onNavigate: (page: PageId) => void;
@@ -85,6 +86,23 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-[15.5rem] sm:pt-14 sm:pb-24 lg:py-20">
           <div className="max-w-xl space-y-5 sm:space-y-6 text-center lg:text-left mx-auto lg:mx-0">
+            {isWinterOfferActive() && (
+              <div className="flex flex-col items-center lg:items-start gap-1">
+                <button
+                  type="button"
+                  onClick={() => openQuote()}
+                  className="inline-flex items-center gap-2 rounded-full bg-[#FA7415] hover:bg-[#E0650A] border border-white/30 px-4 py-2 text-sm sm:text-base font-bold text-white shadow-[0_6px_20px_rgba(250,116,21,0.45)] transition-colors"
+                >
+                  <span aria-hidden="true">❄</span>
+                  <span>{WINTER_OFFER.headline}</span>
+                  <span className="hidden sm:inline underline underline-offset-2">{WINTER_OFFER.cta}</span>
+                </button>
+                <p className="text-xs text-slate-200 [text-shadow:0_1px_6px_rgba(0,0,0,0.6)]">
+                  {WINTER_OFFER.endsLabel} {WINTER_OFFER.terms}
+                </p>
+              </div>
+            )}
+
             <h1 className="text-[2.15rem] sm:text-6xl font-extrabold tracking-tight text-white leading-[1.02] [text-shadow:0_3px_16px_rgba(0,0,0,0.55)]">
               Junk Removal in <span className="text-[#FA7415]">Ottawa</span>
             </h1>

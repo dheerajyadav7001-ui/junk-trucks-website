@@ -88,7 +88,7 @@ export const CityPickupChecker: React.FC = () => {
           <div className="absolute -top-16 -right-10 w-56 h-56 rounded-full bg-[#FA7415]/20 blur-3xl" aria-hidden />
           <div className="relative">
             <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#FFB27A]">Ottawa curbside rules</span>
-            <h2 className="mt-2 text-[1.7rem] sm:text-4xl font-extrabold text-white tracking-tight">Will the City pick it up?</h2>
+            <h2 className="mt-2 text-[1.7rem] sm:text-4xl font-extrabold text-white tracking-tight">Confused? Will the City pick it up, or do you need a professional?</h2>
             <p className="mt-2 text-sm sm:text-base text-slate-200 max-w-md mx-auto">
               The City collects just <span className="font-bold text-white">3 garbage items</span> every two weeks. Tap what you have and see.
             </p>
