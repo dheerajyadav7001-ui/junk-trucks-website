@@ -1,4 +1,4 @@
-import { GOOGLE_ADS_CONVERSION_ID, GOOGLE_ADS_CONVERSION_LABELS, GOOGLE_ADS_TAG_CONFIGURED } from '../config/googleAds';
+import { GOOGLE_ADS_CALL_LABELS, GOOGLE_ADS_CONVERSION_ID, GOOGLE_ADS_CONVERSION_LABELS, GOOGLE_ADS_TAG_CONFIGURED } from '../config/googleAds';
 
 declare global {
   interface Window {
@@ -42,6 +42,36 @@ export function loadGoogleAdsTag(): void {
 
   window.gtag('js', new Date());
   window.gtag('config', GOOGLE_ADS_CONVERSION_ID);
+
+  trackCallClicks();
+}
+
+let lastCallFiredAt = 0;
+let callListenerAttached = false;
+
+/** Fires the Ads "Website call click" conversion (count: one, so repeat taps within 30s are ignored). */
+export function fireCallConversion(): void {
+  if (typeof window === 'undefined' || !window.gtag || !GOOGLE_ADS_TAG_CONFIGURED) return;
+  const now = Date.now();
+  if (now - lastCallFiredAt < 30000) return;
+  lastCallFiredAt = now;
+  GOOGLE_ADS_CALL_LABELS.forEach((label) => {
+    window.gtag!('event', 'conversion', { send_to: `${GOOGLE_ADS_CONVERSION_ID}/${label}` });
+  });
+}
+
+/** One delegated listener covers every tel: link on every page. The phone dialer still opens normally. */
+function trackCallClicks(): void {
+  if (callListenerAttached || typeof document === 'undefined') return;
+  callListenerAttached = true;
+  document.addEventListener(
+    'click',
+    (e) => {
+      const el = (e.target as Element | null)?.closest?.('a[href^="tel:"]');
+      if (el) fireCallConversion();
+    },
+    true,
+  );
 }
 
 /**

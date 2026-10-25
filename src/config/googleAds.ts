@@ -17,6 +17,11 @@ export const GOOGLE_ADS_CONVERSION_ID = 'AW-18374467102';
 export const GOOGLE_ADS_CONVERSION_LABELS = ['PQFbCOqx5uocEJ680LlE', 'PQFbCOqx5uocEJ680LIE'];
 export const GOOGLE_ADS_CONVERSION_LABEL = GOOGLE_ADS_CONVERSION_LABELS[0];
 
+// "Website call click" conversion (Phone call lead). Fired when a visitor taps a
+// tel: link. Both spellings of the ambiguous I/l are sent; Google ignores the
+// one that does not exist.
+export const GOOGLE_ADS_CALL_LABELS = ['WQQLCOODuqkdEJ680LlE', 'WQQLCOODuqkdEJ680LIE'];
+
 export const GOOGLE_ADS_TAG_CONFIGURED =
   !GOOGLE_ADS_CONVERSION_ID.includes('XXXXXXXXX') &&
   !GOOGLE_ADS_CONVERSION_LABEL.includes('XXXXXXXXXXXXXXXXXXXX');
