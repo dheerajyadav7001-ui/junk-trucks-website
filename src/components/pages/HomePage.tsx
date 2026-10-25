@@ -87,19 +87,19 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-[15.5rem] sm:pt-14 sm:pb-24 lg:py-20">
           <div className="max-w-xl space-y-5 sm:space-y-6 text-center lg:text-left mx-auto lg:mx-0">
             {isWinterOfferActive() && (
-              <div className="flex flex-col items-center lg:items-start gap-1">
+              <div className="flex justify-center lg:justify-start">
                 <button
                   type="button"
                   onClick={() => openQuote()}
-                  className="inline-flex items-center gap-2 rounded-full bg-[#FA7415] hover:bg-[#E0650A] border border-white/30 px-4 py-2 text-sm sm:text-base font-bold text-white shadow-[0_6px_20px_rgba(250,116,21,0.45)] transition-colors"
+                  className="inline-flex items-center justify-center gap-1.5 whitespace-nowrap rounded-full bg-[#FA7415] hover:bg-[#E0650A] border border-white/30 px-3.5 py-2 text-[13px] sm:text-base font-bold text-white shadow-[0_6px_20px_rgba(250,116,21,0.45)] transition-colors"
                 >
                   <span aria-hidden="true">❄</span>
-                  <span>{WINTER_OFFER.headline}</span>
+                  <span>
+                    <span className="sm:hidden">20% off your whole booking · {WINTER_OFFER.shortEnd}</span>
+                    <span className="hidden sm:inline">{WINTER_OFFER.headline} · {WINTER_OFFER.endsLabel}</span>
+                  </span>
                   <span className="hidden sm:inline underline underline-offset-2">{WINTER_OFFER.cta}</span>
                 </button>
-                <p className="text-xs text-slate-200 [text-shadow:0_1px_6px_rgba(0,0,0,0.6)]">
-                  {WINTER_OFFER.endsLabel} {WINTER_OFFER.terms}
-                </p>
               </div>
             )}
 

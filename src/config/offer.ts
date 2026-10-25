@@ -5,8 +5,8 @@ export const WINTER_OFFER = {
   headline: 'Winter offer: 20% off your whole booking',
   cta: 'Claim it now',
   endsAt: '2026-11-04T23:59:59-05:00',
-  endsLabel: 'Offer ends Nov 4, 2026.',
-  terms: 'Applies to your total booking.',
+  endsLabel: 'Ends Nov 4, 2026',
+  shortEnd: 'Ends Nov 4',
 };
 
 export function isWinterOfferActive(now: number = Date.now()): boolean {
