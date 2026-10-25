@@ -84,7 +84,7 @@ export const KeywordLandingPage: React.FC<KeywordLandingPageProps> = ({ config }
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 text-xs text-slate-200 max-w-lg">
                 <div className="flex items-center gap-2">
                   <CheckCircle2 className="w-4 h-4 text-sky-300 shrink-0" />
-                  <span><strong>Lowest Price Guarantee</strong></span>
+                  <span><strong>Upfront Price</strong> before we load</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <CheckCircle2 className="w-4 h-4 text-sky-300 shrink-0" />
@@ -96,7 +96,7 @@ export const KeywordLandingPage: React.FC<KeywordLandingPageProps> = ({ config }
                 </div>
                 <div className="flex items-center gap-2">
                   <CheckCircle2 className="w-4 h-4 text-sky-300 shrink-0" />
-                  <span><strong>Fully Insured & WSIB</strong></span>
+                  <span><strong>Insured Crew</strong></span>
                 </div>
               </div>
             </div>
@@ -221,7 +221,7 @@ export const KeywordLandingPage: React.FC<KeywordLandingPageProps> = ({ config }
         <div className="bg-slate-900 text-white rounded-3xl p-8 sm:p-10 shadow-xl space-y-4">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-500/20 text-sky-300 font-mono text-xs font-bold">
             <ShieldCheck className="w-4 h-4" />
-            Lowest Price Guarantee
+            Upfront Price
           </div>
           <h3 className="text-2xl sm:text-3xl font-black">
             No surprise fees. Ever.

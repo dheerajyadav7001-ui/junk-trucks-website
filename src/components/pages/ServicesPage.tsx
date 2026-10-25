@@ -15,7 +15,7 @@ interface ServicesPageProps {
 export const ServicesPage: React.FC<ServicesPageProps> = ({ onNavigate }) => {
   useDocumentHead(
     'Junk Removal Services Ottawa | Pricing & Full Service List | Junk Trucks',
-    'Full list of Ottawa junk removal services: garage, basement & estate cleanouts, furniture removal, renovation debris hauling. Transparent pricing, lowest price guarantee.'
+    'Full list of Ottawa junk removal services: garage, basement & estate cleanouts, furniture removal, renovation debris hauling. Upfront pricing from $85.'
   );
 
   const { openBooking } = useBooking();
@@ -118,7 +118,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onNavigate }) => {
 
                   <div className="absolute bottom-3 left-3">
                     <span className="font-mono text-[11px] font-bold text-orange-300 bg-black/40 px-2 py-0.5 rounded backdrop-blur-xs">
-                      Lowest Price Guaranteed
+                      From $85
                     </span>
                   </div>
                 </div>

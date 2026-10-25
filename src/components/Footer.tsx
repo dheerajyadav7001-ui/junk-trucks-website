@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { MapPin } from 'lucide-react';
+import { SERVICE_PAGES, PRICES_PAGE } from '../data/servicePages';
 import { PageId } from '../types';
 import { Logo } from './Logo';
 import { LANDING_PAGES } from '../data/junkData';
@@ -135,6 +136,23 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             Popular Ottawa Cleanout Services
           </h4>
           <div className="flex flex-wrap gap-x-5 gap-y-2 text-sm">
+            {SERVICE_PAGES.map((sp) => (
+              <a
+                key={sp.slug}
+                href={`/${sp.slug}`}
+                onClick={(e) => { e.preventDefault(); onNavigate('service', sp.slug); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                className="text-slate-300 hover:text-[#FA7415] transition-colors"
+              >
+                {sp.name} Ottawa
+              </a>
+            ))}
+            <a
+              href={`/${PRICES_PAGE.slug}`}
+              onClick={(e) => { e.preventDefault(); onNavigate('prices'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+              className="text-slate-300 hover:text-[#FA7415] transition-colors"
+            >
+              Junk Removal Prices
+            </a>
             {LANDING_PAGES.map((lp) => (
               <a
                 key={lp.slug}

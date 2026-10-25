@@ -23,6 +23,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
   const navLinks: { key: string; id: PageId; label: string; hash: string; path: string | null }[] = [
     { key: 'nav-home', id: 'home', label: 'Home', hash: '', path: '/' },
     { key: 'nav-services', id: 'services', label: 'Services', hash: '', path: '/services' },
+    { key: 'nav-prices', id: 'prices', label: 'Prices', hash: '', path: '/junk-removal-ottawa-prices' },
     { key: 'nav-before-after', id: 'home', label: 'Our Work', hash: '#before-after', path: null },
     { key: 'nav-faq', id: 'home', label: 'FAQ', hash: '#faq', path: null },
     { key: 'nav-donate', id: 'donate', label: 'Donate', hash: '', path: '/donate' },

@@ -1,3 +1,4 @@
+import { LOAD_PRICES } from '../config/pricing';
 import { PricingTier, ServiceDetail, Testimonial, GalleryProject, FaqItem, DonationPartner, LandingPageConfig } from '../types';
 
 export const OTTAWA_PHONE = '(343) 777-0398';
@@ -18,12 +19,14 @@ export const OTTAWA_AREAS = [
   { name: 'Gatineau / Hull (On-Request)', postal: 'J8X, J8Y' },
 ];
 
+const fromPrice = (id: string) => `From $${LOAD_PRICES.find((l) => l.id === id)?.from ?? 85}`;
+
 export const PRICING_TIERS: PricingTier[] = [
   {
     id: 'single-item',
     fraction: 'Single Item',
     title: 'Single Item / Minimum',
-    price: 'Lowest Price Guaranteed',
+    price: fromPrice('single'),
     cubicYards: '1 – 2 cu. yd',
     equivalent: '1 couch, 1 mattress, or 1 refrigerator',
     features: [
@@ -37,7 +40,7 @@ export const PRICING_TIERS: PricingTier[] = [
     id: 'quarter-truck',
     fraction: '1/4 Truck',
     title: '1/4 Box Truckload',
-    price: 'Lowest Price Guaranteed',
+    price: fromPrice('quarter'),
     cubicYards: '4 cubic yards',
     equivalent: 'Equivalent to 1 full standard pickup truck bed',
     features: [
@@ -51,7 +54,7 @@ export const PRICING_TIERS: PricingTier[] = [
     id: 'half-truck',
     fraction: '1/2 Truck',
     title: '1/2 Box Truckload',
-    price: 'Lowest Price Guaranteed',
+    price: fromPrice('half'),
     cubicYards: '8 cubic yards',
     equivalent: 'Equivalent to 2 full standard pickup beds',
     popular: true,
@@ -66,7 +69,7 @@ export const PRICING_TIERS: PricingTier[] = [
     id: 'three-quarter-truck',
     fraction: '3/4 Truck',
     title: '3/4 Box Truckload',
-    price: 'Lowest Price Guaranteed',
+    price: fromPrice('three-quarter'),
     cubicYards: '12 cubic yards',
     equivalent: 'Equivalent to 3 pickup truck beds',
     features: [
@@ -80,7 +83,7 @@ export const PRICING_TIERS: PricingTier[] = [
     id: 'full-truck',
     fraction: 'Full Truck',
     title: 'Full 16ft Box Truckload',
-    price: 'Lowest Price Guaranteed',
+    price: fromPrice('full'),
     cubicYards: '16 – 18 cubic yards',
     equivalent: 'Equivalent to 4–5 full pickup truck beds',
     features: [
@@ -99,7 +102,7 @@ export const SERVICES_LIST: ServiceDetail[] = [
     shortDesc: 'Couches, mattresses, tables, and recliners hauled away and donated to Ottawa charities.',
     fullDesc: 'We do all the heavy lifting from anywhere in your home — upstairs, downstairs, or basement. Reusable furniture in good condition is delivered directly to Ottawa charity partners like the Habitat ReStore and local shelters.',
     iconName: 'Armchair',
-    startingPrice: 'Lowest Price Guaranteed',
+    startingPrice: 'From $85',
     popular: true,
     category: 'residential',
     image: '/furniture-removal.jpg',
@@ -109,9 +112,9 @@ export const SERVICES_LIST: ServiceDetail[] = [
     id: 'appliance-recycling',
     title: 'Appliance Removal & Recycling',
     shortDesc: 'Refrigerators, freezers, washers, dryers, and stoves safely removed and eco-recycled.',
-    fullDesc: 'Appliances contain valuable recyclable metals as well as hazardous refrigerants (Freon). We safely extract fluids and guarantee 100% of scrap steel, copper, and aluminum are recycled at certified Ottawa metal facilities.',
+    fullDesc: 'Appliances contain valuable recyclable metals as well as hazardous refrigerants (Freon). Fridges and freezers are handled with care and sent for recycling, and scrap metal is recycled where possible.',
     iconName: 'Refrigerator',
-    startingPrice: 'Lowest Price Guaranteed',
+    startingPrice: 'From $85',
     category: 'residential',
     image: '/appliance-recycling.jpg',
     itemsIncluded: ['Refrigerators & Freezers', 'Washing Machines & Dryers', 'Stoves & Ranges', 'Dishwashers & Microwaves', 'Air Conditioners & Heaters'],
@@ -122,7 +125,7 @@ export const SERVICES_LIST: ServiceDetail[] = [
     shortDesc: 'Patient, thorough cleanouts for garages, basements, and whole estates across Ottawa.',
     fullDesc: 'Clearing out a loved one’s home or preparing a home for sale can be overwhelming. We work closely with families and estate attorneys to identify sentimental keepsakes, donate usable household goods, and responsibly clear the rest.',
     iconName: 'Home',
-    startingPrice: 'Lowest Price Guaranteed',
+    startingPrice: 'From $85',
     popular: true,
     category: 'residential',
     image: '/estate-cleanouts.jpg',
@@ -134,7 +137,7 @@ export const SERVICES_LIST: ServiceDetail[] = [
     shortDesc: 'Drywall, lumber, tile, fixtures, and flooring hauled away cleanly without driveway bins.',
     fullDesc: 'Avoid renting an eyesore bin that damages your driveway. Our mobile crew pulls up, loads all construction waste directly into our truck, sweeps up dust and nails, and hauls it away immediately.',
     iconName: 'Hammer',
-    startingPrice: 'Lowest Price Guaranteed',
+    startingPrice: 'From $85',
     category: 'renovation',
     image: '/renovation-debris.jpg',
     itemsIncluded: ['Drywall & Plaster', 'Lumber & Framing Timber', 'Ceramic Tiles & Flooring', 'Cabinetry & Countertops', 'Doors, Windows & Trim'],
@@ -145,7 +148,7 @@ export const SERVICES_LIST: ServiceDetail[] = [
     shortDesc: 'Fallen tree branches, brush piles, hedge clippings, and dismantled fences cleared fast.',
     fullDesc: 'Ottawa storms and seasonal yard work generate massive piles that city compost bins won’t take. We chip, haul, and take organic material to Ottawa composting and mulching facilities.',
     iconName: 'TreePine',
-    startingPrice: 'Lowest Price Guaranteed',
+    startingPrice: 'From $85',
     category: 'renovation',
     image: '/yard-waste.jpg',
     itemsIncluded: ['Fallen Branches & Tree Trimmings', 'Dismantled Wooden Decks & Fences', 'Old Play Structures & Sheds', 'Bags of Leaves & Garden Overgrowth', 'Old Patio Furniture & Grills'],
@@ -154,9 +157,9 @@ export const SERVICES_LIST: ServiceDetail[] = [
     id: 'commercial-junk',
     title: 'Commercial & Office Cleanouts',
     shortDesc: 'Office furniture, cubicle partitions, e-waste, shelving, and retail junk with after-hours dispatch.',
-    fullDesc: 'Flexible after-hours and weekend scheduling so your business operations never face disruptions. We provide commercial WSIB certificates, certificates of insurance, and official tax donation receipts.',
+    fullDesc: 'Flexible after-hours and weekend scheduling so your business operations never face disruptions. Ask us about certificates of insurance and donation receipts for your business.',
     iconName: 'Building2',
-    startingPrice: 'Lowest Price Guaranteed',
+    startingPrice: 'From $85',
     category: 'commercial',
     image: '/commercial-cleanout.jpg',
     itemsIncluded: ['Office Desks & Ergonomic Chairs', 'Cubicle Partitions & Dividers', 'Computers, Monitors & E-Waste', 'Retail Racks & Display Units', 'Warehouse Pallets & Packaging'],
@@ -286,7 +289,7 @@ export const GALLERY_PROJECTS: GalleryProject[] = [
 export const FAQS: FaqItem[] = [
   {
     question: 'How does your junk removal pricing work?',
-    answer: "Our pricing is based on the volume of space your items take up in our truck \u2014 no hidden dump fees, no weight surcharges. We give you an upfront price before we start, and we guarantee it's the lowest you'll find in Ottawa."
+    answer: "Our pricing is based on the volume of space your items take up in our truck \u2014 no hidden dump fees, no weight surcharges. We give you an upfront price before we start. A single item starts from $85."
   },
   {
     question: 'What size trucks do you use?',
@@ -306,7 +309,7 @@ export const FAQS: FaqItem[] = [
   },
   {
     question: 'What happens to my junk? Do you recycle and donate?',
-    answer: "We're committed to eco-friendly disposal \u2014 over 80% of items we collect are diverted away from Ottawa landfills. We partner with local charities including Habitat for Humanity ReStore, The Salvation Army, and St. Vincent de Paul to give salvageable items a second home."
+    answer: "We're committed to eco-friendly disposal \u2014 usable items are set aside for donation and the rest is sorted for recycling or disposal. We work with local charities including Habitat for Humanity ReStore, The Salvation Army, and St. Vincent de Paul to give salvageable items a second home."
   },
   {
     question: 'Do you offer same-day or next-day junk removal in Ottawa?',
@@ -348,10 +351,10 @@ export const DONATION_NOT_ACCEPTED = [
 export const LANDING_PAGES: LandingPageConfig[] = [
   {
     slug: 'garage-cleanout-ottawa',
-    title: 'Garage Cleanout Ottawa | Lowest Price Guarantee | Junk Trucks',
-    metaDescription: 'Same-week garage cleanouts in Ottawa. We haul out tools, boxes, tires, and years of clutter. Free firm quote, lowest price guarantee, no hidden fees.',
+    title: 'Garage Cleanout Ottawa | Upfront Quote | Junk Trucks',
+    metaDescription: 'Same-week garage cleanouts in Ottawa. We haul out tools, boxes, tires, and years of clutter. Free firm quote, upfront price, no hidden fees.',
     faqs: [
-      { question: 'How much does a garage cleanout cost in Ottawa?', answer: "We give a firm, upfront quote before any work starts — no hourly guessing. Pricing depends on how much needs to go, and we guarantee the lowest price for the job. Call or fill out the form for a free quote in minutes." },
+      { question: 'How much does a garage cleanout cost in Ottawa?', answer: "We give a firm, upfront quote before any work starts — no hourly guessing. Pricing depends on how much needs to go. Call or fill out the form for a free quote in minutes." },
       { question: 'Do you clean out garages the same week?', answer: 'Yes — most Ottawa garage cleanouts can be scheduled within the same week you call, sometimes sooner.' },
       { question: "What items can't you take from a garage?", answer: "We handle almost everything — tools, tires, paint cans, shelving, boxes. A few hazardous materials may need special handling; ask us when you book and we'll advise." },
     ],
@@ -371,7 +374,7 @@ export const LANDING_PAGES: LandingPageConfig[] = [
   {
     slug: 'basement-cleanout-ottawa',
     title: 'Basement Cleanout Ottawa | Junk & Flood Debris Removal | Junk Trucks',
-    metaDescription: 'Fast basement cleanouts in Ottawa — flood damage, old furniture, storage overflow. Free quote, lowest price guarantee, same-week service.',
+    metaDescription: 'Fast basement cleanouts in Ottawa — flood damage, old furniture, storage overflow. Free quote, upfront price, same-week service.',
     faqs: [
       { question: 'Can you remove a flooded or water-damaged basement\'s contents?', answer: 'Yes — wet carpet, soaked boxes, and water-damaged furniture are some of the most common basement cleanouts we handle in Ottawa.' },
       { question: 'How fast can you get to a flooded basement?', answer: 'We prioritize flood and water-damage calls and can often be on-site within a day or two.' },
@@ -388,28 +391,6 @@ export const LANDING_PAGES: LandingPageConfig[] = [
       { emoji: '📦', title: 'Storage Overflow', desc: 'Basement become the dumping ground? We clear it out completely, room by room.' },
       { emoji: '🛋️', title: 'Old Furniture Removal', desc: 'Heavy couches, dressers, and mattresses — we carry it all out, no stairs too tricky.' },
       { emoji: '🏚️', title: 'Renovation Prep', desc: 'Clearing a basement before a reno or finishing project? We empty it in one visit.' },
-    ],
-  },
-  {
-    slug: 'furniture-removal-ottawa',
-    title: 'Furniture Removal Ottawa | Same-Day Pickup | Junk Trucks',
-    metaDescription: 'Same-day furniture removal in Ottawa — couches, mattresses, dressers, single items or full households. Free quote, no hidden fees.',
-    faqs: [
-      { question: 'Do you take a single piece of furniture, or does it need to be a full load?', answer: "Either — we'll come for a single couch or mattress with no minimum load required." },
-      { question: 'Can you remove furniture the same day I call?', answer: 'In most cases, yes — same-day furniture removal is available across Ottawa depending on scheduling.' },
-      { question: 'Do you donate usable furniture instead of dumping it?', answer: 'Wherever possible, yes — usable furniture is set aside for donation rather than landfill.' },
-    ],
-    keyword: 'Furniture Removal Ottawa',
-    badge: 'Same-Day Furniture Removal',
-    subheadline: 'Couches, mattresses, dressers, tables — we haul away single items or entire households of old furniture, same day.',
-    serviceType: 'Furniture Removal Ottawa (Ad Landing Page)',
-    formHeading: 'Get Your Furniture Removal Quote',
-    scenariosLabel: 'When Ottawa Residents Call Us',
-    scenarios: [
-      { emoji: '🛋️', title: 'New Furniture Arriving', desc: 'Old couch blocking the delivery? We clear it before your new set shows up.' },
-      { emoji: '🛏️', title: 'Old Mattress Removal', desc: 'We haul away mattresses and box springs of any size, no judgment on condition.' },
-      { emoji: '🏢', title: 'Office Furniture Cleanout', desc: 'Desks, chairs, filing cabinets — full office cleanouts for Ottawa businesses.' },
-      { emoji: '🚪', title: 'Single Item Pickup', desc: 'Just one piece to get rid of? We\'ll come for a single item, no minimum load required.' },
     ],
   },
   {

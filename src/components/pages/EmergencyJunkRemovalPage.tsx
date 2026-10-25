@@ -87,7 +87,7 @@ export const EmergencyJunkRemovalPage: React.FC = () => {
                 </div>
                 <div className="flex items-center gap-2">
                   <CheckCircle2 className="w-4 h-4 text-sky-300 shrink-0" />
-                  <span><strong>100% Insured & WSIB:</strong> Zero property risk</span>
+                  <span><strong>Insured crew:</strong> we protect your property</span>
                 </div>
               </div>
             </div>
@@ -199,7 +199,7 @@ export const EmergencyJunkRemovalPage: React.FC = () => {
             We don’t exploit emergencies.
           </h3>
           <p className="text-slate-300 text-sm max-w-xl mx-auto leading-relaxed">
-            Other companies double their rates for same-day dispatches. Junk Trucks provides our Lowest Price Guarantee regardless of urgency with zero surprise fees.
+            Other companies double their rates for same-day dispatches. Junk Trucks gives you the same upfront price regardless of urgency, with no surprise fees.
           </p>
           <div className="pt-2">
             <a

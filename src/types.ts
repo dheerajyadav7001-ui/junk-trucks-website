@@ -1,4 +1,4 @@
-export type PageId = 'home' | 'services' | 'emergency' | 'landing' | 'donate';
+export type PageId = 'home' | 'services' | 'emergency' | 'landing' | 'donate' | 'service' | 'prices' | 'adlp';
 
 export interface TrackingParams {
   utm_source?: string;

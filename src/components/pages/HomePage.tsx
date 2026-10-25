@@ -12,7 +12,7 @@ import {
 } from '../../data/junkData';
 import { PageId } from '../../types';
 import { WhatsAppIcon } from '../WhatsAppIcon';
-import { useDocumentHead } from '../../utils/seo';
+import { useDocumentHead, HOME_TITLE, HOME_DESCRIPTION } from '../../utils/seo';
 import { WorkGallery } from '../WorkGallery';
 import { CityPickupChecker } from '../CityPickupChecker';
 import { SnowEffect } from '../SnowEffect';
@@ -23,8 +23,8 @@ interface HomePageProps {
 
 export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
   useDocumentHead(
-    "Junk Trucks — Ottawa's #1 Eco-Friendly Junk Hauling & Property Cleanouts",
-    "Ottawa's #1 eco-friendly junk removal service. Garage, basement, estate & renovation cleanouts, furniture removal. Same-day hauling, lowest price guarantee."
+    HOME_TITLE,
+    HOME_DESCRIPTION
   );
 
   const { openBooking, openQuote } = useBooking();

@@ -1,8 +1,10 @@
 import { useEffect } from 'react';
 
-const DEFAULT_TITLE = "Junk Trucks — Ottawa's #1 Eco-Friendly Junk Hauling & Property Cleanouts";
-const DEFAULT_DESCRIPTION =
-  "Ottawa's #1 Eco-Friendly Residential & Commercial Junk Removal Service. Upfront transparent pricing, same-day hauling, and eco-diversion donations.";
+export const HOME_TITLE = 'Junk Trucks | Ottawa Junk Removal, Cleanouts & Hauling from $85';
+export const HOME_DESCRIPTION =
+  'Local Ottawa junk removal and cleanouts. Furniture, appliances, garage, basement and renovation debris. Upfront price from $85. Call (343) 777-0398.';
+const DEFAULT_TITLE = HOME_TITLE;
+const DEFAULT_DESCRIPTION = HOME_DESCRIPTION;
 const SITE_ORIGIN = 'https://junktrucks.ca';
 
 /**
@@ -15,7 +17,16 @@ const SITE_ORIGIN = 'https://junktrucks.ca';
  * distinct content, so every page component should call this with its own
  * title + description.
  */
-export function useDocumentHead(title?: string, description?: string) {
+export interface HeadOptions {
+  /** e.g. "noindex, follow" for ad-only pages that should stay out of search. */
+  robots?: string;
+  /** schema.org JSON-LD objects to add to the page while it is shown. */
+  jsonLd?: object[];
+}
+
+export function useDocumentHead(title?: string, description?: string, options?: HeadOptions) {
+  const jsonLdKey = options?.jsonLd ? JSON.stringify(options.jsonLd) : '';
+  const robots = options?.robots || '';
   useEffect(() => {
     const finalTitle = title || DEFAULT_TITLE;
     const finalDescription = description || DEFAULT_DESCRIPTION;
@@ -57,7 +68,38 @@ export function useDocumentHead(title?: string, description?: string) {
       document.head.appendChild(newOgUrl);
     }
 
+    // Page-level robots + structured data. Static copies of these are also
+    // written into each page's HTML at build time (scripts/prerender.mjs);
+    // these keep client-side navigation in sync.
+    let robotsMeta = document.querySelector('meta[name="robots"]');
+    if (robots) {
+      if (!robotsMeta) {
+        robotsMeta = document.createElement('meta');
+        robotsMeta.setAttribute('name', 'robots');
+        document.head.appendChild(robotsMeta);
+      }
+      robotsMeta.setAttribute('content', robots);
+    } else if (robotsMeta) {
+      robotsMeta.remove();
+    }
+
+    document.querySelectorAll('script[data-page-jsonld]').forEach((n) => n.remove());
+    const added: HTMLScriptElement[] = [];
+    if (jsonLdKey) {
+      (JSON.parse(jsonLdKey) as object[]).forEach((obj) => {
+        const s = document.createElement('script');
+        s.type = 'application/ld+json';
+        s.setAttribute('data-page-jsonld', '1');
+        s.text = JSON.stringify(obj);
+        document.head.appendChild(s);
+        added.push(s);
+      });
+    }
+
     return () => {
+      added.forEach((n) => n.remove());
+      const rm = document.querySelector('meta[name="robots"]');
+      if (rm && robots) rm.remove();
       // Reset to the site default on unmount so navigating to a page that
       // (by mistake) doesn't call this hook never inherits a stale one.
       document.title = DEFAULT_TITLE;
@@ -65,5 +107,5 @@ export function useDocumentHead(title?: string, description?: string) {
       if (ogTitle) ogTitle.setAttribute('content', DEFAULT_TITLE);
       if (ogDescription) ogDescription.setAttribute('content', DEFAULT_DESCRIPTION);
     };
-  }, [title, description]);
+  }, [title, description, robots, jsonLdKey]);
 }
