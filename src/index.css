@@ -165,7 +165,7 @@ html.bf .bg-\[\#FA7415\] { box-shadow: 0 0 0 1px rgba(255,178,122,.35), 0 8px 26
 
 /* Side strips (wide screens only) */
 .bf-side {
-  position: fixed; top: 0; bottom: 0; width: 44px; z-index: 30; pointer-events: none;
+  position: fixed; top: 0; bottom: 0; width: 32px; z-index: 30; pointer-events: none;
   display: none; align-items: center; justify-content: center; overflow: hidden;
   background: repeating-linear-gradient(135deg, #0B0B0D 0 14px, #17110C 14px 28px);
   border-color: #FA7415; border-style: solid;
@@ -173,11 +173,16 @@ html.bf .bg-\[\#FA7415\] { box-shadow: 0 0 0 1px rgba(255,178,122,.35), 0 8px 26
 .bf-side-left { left: 0; border-width: 0 2px 0 0; }
 .bf-side-right { right: 0; border-width: 0 0 0 2px; }
 .bf-side span {
-  writing-mode: vertical-rl; white-space: nowrap; font-weight: 900; font-size: 13px;
-  letter-spacing: .28em; text-transform: uppercase; color: #FA7415;
+  writing-mode: vertical-rl; white-space: nowrap; font-weight: 900; font-size: 11.5px;
+  letter-spacing: .22em; text-transform: uppercase; color: #FA7415;
 }
 .bf-side-left span { transform: rotate(180deg); }
-@media (min-width: 1500px) { .bf-side { display: flex; } }
+@media (min-width: 1024px) {
+  .bf-side { display: flex; }
+  /* reserve the strip width so page content is never covered at any zoom/width */
+  html.bf body { padding-left: 32px; padding-right: 32px; }
+  html.bf aside[aria-label="Quick contact"] { right: 44px; }
+}
 
 /* extra light chips found on the pickup checker, FAQ, badges */
 html.bf .bg-\[\#FFF6EE\],
@@ -201,12 +206,3 @@ html.bf .border-sky-200 { border-color: #3A2A22; }
 
 /* borders without an explicit colour default to currentColor (white on dark): soften them */
 :where(html.bf) *, :where(html.bf) ::before, :where(html.bf) ::after { border-color: #2B2B32; }
-
-/* Flag panels sit between the edge text strip (46px) and the 80rem content column */
-.bf-flag {
-  position: fixed; top: 0; bottom: 0; width: calc((100vw - 80rem) / 2 - 46px); z-index: 30; pointer-events: none;
-  display: none; overflow: hidden;
-}
-.bf-flag-left { left: 46px; border-right: 2px solid #FA7415; }
-.bf-flag-right { right: 46px; border-left: 2px solid #FA7415; }
-@media (min-width: 1620px) { .bf-flag { display: block; } }

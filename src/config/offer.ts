@@ -76,11 +76,3 @@ export function isWinterOfferActive(now: number = Date.now()): boolean {
 export function isBlackFridayTheme(now: number = Date.now()): boolean {
   return isOfferActive(BLACK_FRIDAY, now);
 }
-
-/**
- * Canada flag on the page sides (Black Friday theme, wide screens only).
- * NOTE: the national flag is protected under the Trademarks Act; commercial use
- * is supposed to be approved by Canadian Heritage (uds-uos@pch.gc.ca).
- * Set to false to switch the flags off and show plain text strips instead.
- */
-export const SHOW_CANADA_FLAGS = true;
