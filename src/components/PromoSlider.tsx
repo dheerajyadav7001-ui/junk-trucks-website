@@ -212,24 +212,15 @@ export const PromoSlider: React.FC<{ main: React.ReactNode }> = ({ main }) => {
 
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
-  const [reduced, setReduced] = useState(false);
   const touchX = useRef<number | null>(null);
   const count = slides.length;
 
-  useEffect(() => {
-    try {
-      setReduced(window.matchMedia('(prefers-reduced-motion: reduce)').matches);
-    } catch {
-      /* ignore */
-    }
-  }, []);
-
   // Auto-advance. Depending on `index` restarts the timer after a manual change.
   useEffect(() => {
-    if (count < 2 || paused || reduced) return;
-    const t = window.setInterval(() => setIndex((i) => (i + 1) % count), 7500);
+    if (count < 2 || paused) return;
+    const t = window.setInterval(() => setIndex((i) => (i + 1) % count), 10000);
     return () => window.clearInterval(t);
-  }, [count, paused, reduced, index]);
+  }, [count, paused, index]);
 
   const go = (dir: number) => setIndex((i) => (i + dir + count) % count);
 
@@ -247,9 +238,16 @@ export const PromoSlider: React.FC<{ main: React.ReactNode }> = ({ main }) => {
     <section
       aria-roledescription="carousel"
       aria-label="Current offers"
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
-      onFocus={() => setPaused(true)}
+      onPointerEnter={(e) => e.pointerType === 'mouse' && setPaused(true)}
+      onPointerLeave={(e) => e.pointerType === 'mouse' && setPaused(false)}
+      onFocus={(e) => {
+        // Only keyboard focus pauses; clicking a dot must not freeze the slideshow.
+        try {
+          if (e.target.matches(':focus-visible')) setPaused(true);
+        } catch {
+          /* ignore */
+        }
+      }}
       onBlur={() => setPaused(false)}
       onKeyDown={(e) => {
         if (e.key === 'ArrowLeft') go(-1);
