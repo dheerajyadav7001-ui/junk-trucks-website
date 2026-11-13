@@ -82,10 +82,21 @@ html {
    Remove the class (or let the dates pass) and the normal look returns.
    ========================================================================== */
 html.bf body,
-html.bf .bg-\[\#FFFFFF\] { background-color: #0B0B0D; color: #E5E7EB; }
-html.bf .bg-white { background-color: #151518; }
-html.bf .bg-slate-50 { background-color: #101013; }
-html.bf .bg-slate-50\/70 { background-color: rgba(16,16,19,.7); }
+html.bf body.bg-slate-50 {
+  color: #E5E7EB;
+  background-color: #0C0A09;
+  /* soft orange glows over the black, fixed so they stay put while scrolling */
+  background-image:
+    radial-gradient(900px 620px at 0% 0%, rgba(250,116,21,.20), transparent 62%),
+    radial-gradient(800px 600px at 100% 30%, rgba(250,116,21,.15), transparent 60%),
+    radial-gradient(900px 640px at 0% 75%, rgba(250,116,21,.13), transparent 60%),
+    radial-gradient(800px 560px at 100% 100%, rgba(250,116,21,.16), transparent 60%);
+  background-attachment: fixed;
+}
+html.bf .bg-\[\#FFFFFF\] { background-color: transparent; }
+html.bf .bg-white { background-color: #171412; }
+html.bf .bg-slate-50 { background-color: rgba(20,16,12,.55); }
+html.bf .bg-slate-50\/70 { background-color: rgba(20,16,12,.45); }
 html.bf .bg-slate-100 { background-color: #1D1D22; }
 html.bf .bg-slate-200 { background-color: #26262C; }
 html.bf .bg-slate-900 { background-color: #000; }
