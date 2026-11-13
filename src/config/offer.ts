@@ -67,3 +67,19 @@ export function daysLeftText(offer: Offer, now: number = Date.now()): string {
 export function isWinterOfferActive(now: number = Date.now()): boolean {
   return isOfferActive(WINTER_OFFER, now);
 }
+
+/**
+ * Black Friday theme (dark + orange). Runs only while BLACK_FRIDAY is active,
+ * then the site returns to its normal look by itself. The same dates are
+ * repeated in index.html (tiny inline script) so the page never flashes light.
+ */
+export function isBlackFridayTheme(now: number = Date.now()): boolean {
+  return isOfferActive(BLACK_FRIDAY, now);
+}
+
+/**
+ * Canada flag artwork on the page sides. LEFT OFF on purpose: the national
+ * flag is protected under the Trademarks Act and commercial use needs written
+ * approval from Canadian Heritage (uds-uos@pch.gc.ca). Turn on only after that.
+ */
+export const SHOW_CANADA_FLAGS = false;

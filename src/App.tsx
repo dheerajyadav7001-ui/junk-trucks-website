@@ -8,6 +8,7 @@ import { Footer } from './components/Footer';
 import { FloatingWhatsApp } from './components/FloatingWhatsApp';
 import { loadGoogleAdsTag } from './utils/googleAdsTag';
 import { loadAnalytics } from './utils/analytics';
+import { BlackFridayBar, BlackFridaySides, useBlackFridayTheme } from './components/BlackFridayTheme';
 
 // Individual Pages
 import { HomePage } from './components/pages/HomePage';
@@ -109,6 +110,7 @@ export default function App() {
   const [currentPage, setCurrentPage] = useState<PageId>('home');
   const [landingSlug, setLandingSlug] = useState<string | null>(null);
   const [serviceSlug, setServiceSlug] = useState<string | null>(null);
+  const blackFriday = useBlackFridayTheme();
 
   // Load the Google Ads tag once, site-wide (powers both conversion tracking
   // and the remarketing audience). No-ops until real IDs are set.
@@ -197,6 +199,8 @@ export default function App() {
   return (
     <BookingProvider>
       <div className="min-h-screen flex flex-col bg-[#FFFFFF] text-slate-900 selection:bg-[#FA7415] selection:text-white">
+        {blackFriday && currentPage !== 'landing' && currentPage !== 'adlp' && <BlackFridayBar />}
+        {blackFriday && <BlackFridaySides />}
         {/* Navigation Bar with real-path Routing (hidden on focused ad landing pages) */}
         {currentPage !== 'landing' && currentPage !== 'adlp' && <Navbar currentPage={currentPage} onNavigate={handleNavigate} />}
 
