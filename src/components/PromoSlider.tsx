@@ -31,7 +31,7 @@ const TruckDesktop: React.FC = () => (
       alt=""
       aria-hidden="true"
       width={960}
-      height={441}
+      height={438}
       loading="lazy"
       className="block w-full h-auto [-webkit-mask-image:linear-gradient(to_bottom,transparent,black_28%)] [mask-image:linear-gradient(to_bottom,transparent,black_28%)]"
     />
@@ -43,7 +43,7 @@ const TruckMobile: React.FC = () => (
     alt=""
     aria-hidden="true"
     width={960}
-    height={441}
+    height={438}
     loading="lazy"
     className="sm:hidden mt-auto block w-full h-auto pointer-events-none [-webkit-mask-image:linear-gradient(to_bottom,transparent,black_30%)] [mask-image:linear-gradient(to_bottom,transparent,black_30%)]"
   />
@@ -107,7 +107,7 @@ function blackFridaySlide(offer: Offer): Slide {
             src="/promo/black-friday-truck.webp"
             alt=""
             width={960}
-            height={441}
+            height={438}
             loading="lazy"
             fetchPriority="low"
             className="block w-full h-auto"
