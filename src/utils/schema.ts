@@ -1,7 +1,7 @@
 import { FaqItem } from '../types';
 import { PRICE_FROM } from '../config/pricing';
 
-const ORIGIN = 'https://junktrucks.ca';
+const ORIGIN = 'https://www.junktrucks.ca';
 const PHONE = '+13437770398';
 
 export function faqSchema(faqs: FaqItem[]) {

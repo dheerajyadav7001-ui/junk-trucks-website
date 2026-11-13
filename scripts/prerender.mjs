@@ -27,7 +27,7 @@ const mod = await import('data:text/javascript;base64,' + Buffer.from(code).toSt
 const routes = mod.getRoutes();
 
 const template = readFileSync(distIndex, 'utf8');
-const ORIGIN = 'https://junktrucks.ca';
+const ORIGIN = 'https://www.junktrucks.ca';
 const esc = (s) => s.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
 
 for (const r of routes) {

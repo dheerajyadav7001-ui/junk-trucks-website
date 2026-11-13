@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://junktrucks.ca/sitemap.xml
+Sitemap: https://www.junktrucks.ca/sitemap.xml

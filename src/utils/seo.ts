@@ -5,7 +5,7 @@ export const HOME_DESCRIPTION =
   'Local Ottawa junk removal and cleanouts. Furniture, appliances, garage, basement and renovation debris. Upfront price from $85. Call (343) 777-0398.';
 const DEFAULT_TITLE = HOME_TITLE;
 const DEFAULT_DESCRIPTION = HOME_DESCRIPTION;
-const SITE_ORIGIN = 'https://junktrucks.ca';
+const SITE_ORIGIN = 'https://www.junktrucks.ca';
 
 /**
  * Updates the document <title>, meta description, and canonical link for
