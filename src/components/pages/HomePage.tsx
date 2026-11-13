@@ -16,7 +16,10 @@ import { useDocumentHead, HOME_TITLE, HOME_DESCRIPTION } from '../../utils/seo';
 import { WorkGallery } from '../WorkGallery';
 import { CityPickupChecker } from '../CityPickupChecker';
 import { SnowEffect } from '../SnowEffect';
-import { WINTER_OFFER, isWinterOfferActive } from '../../config/offer';
+import { getActiveOffer } from '../../config/offer';
+import { PromoSlider } from '../PromoSlider';
+import { setClickedPromo } from '../../utils/promo';
+import { trackEvent } from '../../utils/analytics';
 
 interface HomePageProps {
   onNavigate: (page: PageId) => void;
@@ -29,6 +32,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
   );
 
   const { openBooking, openQuote } = useBooking();
+  const activeOffer = getActiveOffer();
   const [faqOpenIndex, setFaqOpenIndex] = useState<number | null>(0);
   const reviewsRef = useRef<HTMLDivElement>(null);
   const scrollReviews = (dir: number) => {
@@ -86,19 +90,23 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-[15.5rem] sm:pt-14 sm:pb-24 lg:py-20">
           <div className="max-w-xl space-y-5 sm:space-y-6 text-center lg:text-left mx-auto lg:mx-0">
-            {isWinterOfferActive() && (
+            {activeOffer && (
               <div className="flex justify-center lg:justify-start">
                 <button
                   type="button"
-                  onClick={() => openQuote()}
+                  onClick={() => {
+                    setClickedPromo(activeOffer.id);
+                    trackEvent('promo_click', { promo: activeOffer.id, location: 'hero_tile' });
+                    openQuote();
+                  }}
                   className="inline-flex items-center justify-center gap-1.5 whitespace-nowrap rounded-full bg-[#FA7415] hover:bg-[#E0650A] border border-white/30 px-3.5 py-2 text-[13px] sm:text-base font-bold text-white shadow-[0_6px_20px_rgba(250,116,21,0.45)] transition-colors"
                 >
-                  <span aria-hidden="true">❄</span>
+                  <span aria-hidden="true">{activeOffer.icon}</span>
                   <span>
-                    <span className="sm:hidden">20% off your whole booking · {WINTER_OFFER.shortEnd}</span>
-                    <span className="hidden sm:inline">{WINTER_OFFER.headline} · {WINTER_OFFER.endsLabel}</span>
+                    <span className="sm:hidden">{activeOffer.mobileText}</span>
+                    <span className="hidden sm:inline">{activeOffer.headline} · {activeOffer.endsLabel}</span>
                   </span>
-                  <span className="hidden sm:inline underline underline-offset-2">{WINTER_OFFER.cta}</span>
+                  <span className="hidden sm:inline underline underline-offset-2">{activeOffer.cta}</span>
                 </button>
               </div>
             )}
@@ -130,6 +138,9 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
           </div>
         </div>
       </section>
+
+      {/* CURRENT OFFERS (slider) */}
+      <PromoSlider />
 
       {/* WILL THE CITY PICK IT UP? (interactive checker) */}
       <CityPickupChecker />
