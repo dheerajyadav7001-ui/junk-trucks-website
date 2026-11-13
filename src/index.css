@@ -202,11 +202,11 @@ html.bf .border-sky-200 { border-color: #3A2A22; }
 /* borders without an explicit colour default to currentColor (white on dark): soften them */
 :where(html.bf) *, :where(html.bf) ::before, :where(html.bf) ::after { border-color: #2B2B32; }
 
-/* Flag panels fill the side gutters left empty by the 80rem content column */
+/* Flag panels sit between the edge text strip (46px) and the 80rem content column */
 .bf-flag {
-  position: fixed; top: 0; bottom: 0; width: calc((100vw - 80rem) / 2); z-index: 30; pointer-events: none;
+  position: fixed; top: 0; bottom: 0; width: calc((100vw - 80rem) / 2 - 46px); z-index: 30; pointer-events: none;
   display: none; overflow: hidden;
 }
-.bf-flag-left { left: 0; border-right: 2px solid #FA7415; }
-.bf-flag-right { right: 0; border-left: 2px solid #FA7415; }
-@media (min-width: 1500px) { .bf-flag { display: block; } }
+.bf-flag-left { left: 46px; border-right: 2px solid #FA7415; }
+.bf-flag-right { right: 46px; border-left: 2px solid #FA7415; }
+@media (min-width: 1620px) { .bf-flag { display: block; } }

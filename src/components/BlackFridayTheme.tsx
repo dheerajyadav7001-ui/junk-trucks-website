@@ -60,24 +60,24 @@ const FlagSide: React.FC<{ side: 'left' | 'right' }> = ({ side }) => {
   );
 };
 
-/** Decorative side panels, wide screens only. */
-export const BlackFridaySides: React.FC = () => {
-  if (SHOW_CANADA_FLAGS) {
-    return (
+/**
+ * Decorative side panels, wide screens only: the Black Friday text strip hugs
+ * each screen edge, and (on screens wide enough) a cropped flag fills the
+ * empty gutter next to it. Both are fixed overlays, so page layout is untouched.
+ */
+export const BlackFridaySides: React.FC = () => (
+  <>
+    <div className="bf-side bf-side-left" aria-hidden="true">
+      <span>Black Friday · Up to $50 off · Ends Nov 30</span>
+    </div>
+    <div className="bf-side bf-side-right" aria-hidden="true">
+      <span>Black Friday · Up to $50 off · Ends Nov 30</span>
+    </div>
+    {SHOW_CANADA_FLAGS && (
       <>
         <FlagSide side="left" />
         <FlagSide side="right" />
       </>
-    );
-  }
-  return (
-    <>
-      <div className="bf-side bf-side-left" aria-hidden="true">
-        <span>Black Friday · Up to $50 off · Ends Nov 30</span>
-      </div>
-      <div className="bf-side bf-side-right" aria-hidden="true">
-        <span>Black Friday · Up to $50 off · Ends Nov 30</span>
-      </div>
-    </>
-  );
-};
+    )}
+  </>
+);
