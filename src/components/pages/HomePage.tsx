@@ -16,10 +16,7 @@ import { useDocumentHead, HOME_TITLE, HOME_DESCRIPTION } from '../../utils/seo';
 import { WorkGallery } from '../WorkGallery';
 import { CityPickupChecker } from '../CityPickupChecker';
 import { SnowEffect } from '../SnowEffect';
-import { getActiveOffer } from '../../config/offer';
-import { PromoSlider } from '../PromoSlider';
-import { setClickedPromo } from '../../utils/promo';
-import { trackEvent } from '../../utils/analytics';
+import { WINTER_OFFER, isWinterOfferActive } from '../../config/offer';
 
 interface HomePageProps {
   onNavigate: (page: PageId) => void;
@@ -32,7 +29,6 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
   );
 
   const { openBooking, openQuote } = useBooking();
-  const activeOffer = getActiveOffer();
   const [faqOpenIndex, setFaqOpenIndex] = useState<number | null>(0);
   const reviewsRef = useRef<HTMLDivElement>(null);
   const scrollReviews = (dir: number) => {
@@ -72,76 +68,68 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
 
   return (
     <div className="space-y-7 sm:space-y-16 pb-10 sm:pb-16">
-      {/* HERO (slide 1) + running offers (extra slides) */}
-      <PromoSlider
-        main={
-          <>
-          {/* Background photo — bright, with a navy fade where the copy sits */}
-          <img
-            src="/hero-suburbia.jpg"
-            alt="Junk Trucks pickup and loaded trailer on an Ottawa street in autumn"
-            className="absolute bottom-0 inset-x-0 w-full h-auto sm:h-full sm:object-cover sm:object-[68%_75%] sm:inset-0 lg:object-[75%_70%]"
-            width={1672}
-            height={941}
-            fetchPriority="high"
-          />
-          <div className="absolute inset-0 sm:hidden bg-[linear-gradient(to_bottom,#0F2742_0%,#0F2742_60%,rgba(15,39,66,0)_78%)]" />
-          <div className="absolute inset-0 hidden sm:block lg:hidden bg-gradient-to-b from-[#0F2742]/95 via-[#0F2742]/70 to-[#0F2742]/0" />
-          <div className="absolute inset-0 hidden lg:block bg-gradient-to-r from-[#0F2742]/95 via-[#0F2742]/65 to-transparent" />
-          <SnowEffect />
+      {/* HERO SECTION */}
+      <section className="relative overflow-hidden bg-[#0F2742]">
+        {/* Background photo — bright, with a navy fade where the copy sits */}
+        <img
+          src="/hero-suburbia.jpg"
+          alt="Junk Trucks pickup and loaded trailer on an Ottawa street in autumn"
+          className="absolute bottom-0 inset-x-0 w-full h-auto sm:h-full sm:object-cover sm:object-[68%_75%] sm:inset-0 lg:object-[75%_70%]"
+          width={1672}
+          height={941}
+          fetchPriority="high"
+        />
+        <div className="absolute inset-0 sm:hidden bg-[linear-gradient(to_bottom,#0F2742_0%,#0F2742_60%,rgba(15,39,66,0)_78%)]" />
+        <div className="absolute inset-0 hidden sm:block lg:hidden bg-gradient-to-b from-[#0F2742]/95 via-[#0F2742]/70 to-[#0F2742]/0" />
+        <div className="absolute inset-0 hidden lg:block bg-gradient-to-r from-[#0F2742]/95 via-[#0F2742]/65 to-transparent" />
+        <SnowEffect />
 
-          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-[15.5rem] sm:pt-14 sm:pb-24 lg:py-20">
-            <div className="max-w-xl space-y-5 sm:space-y-6 text-center lg:text-left mx-auto lg:mx-0">
-              {activeOffer && (
-                <div className="flex justify-center lg:justify-start">
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setClickedPromo(activeOffer.id);
-                      trackEvent('promo_click', { promo: activeOffer.id, location: 'hero_tile' });
-                      openQuote();
-                    }}
-                    className="inline-flex items-center justify-center gap-1.5 whitespace-nowrap rounded-full bg-[#FA7415] hover:bg-[#E0650A] border border-white/30 px-3.5 py-2 text-[13px] sm:text-base font-bold text-white shadow-[0_6px_20px_rgba(250,116,21,0.45)] transition-colors"
-                  >
-                    <span aria-hidden="true">{activeOffer.icon}</span>
-                    <span>
-                      <span className="sm:hidden">{activeOffer.mobileText}</span>
-                      <span className="hidden sm:inline">{activeOffer.headline} · {activeOffer.endsLabel}</span>
-                    </span>
-                    <span className="hidden sm:inline underline underline-offset-2">{activeOffer.cta}</span>
-                  </button>
-                </div>
-              )}
-
-              <h1 className="text-[2.15rem] sm:text-6xl font-extrabold tracking-tight text-white leading-[1.02] [text-shadow:0_3px_16px_rgba(0,0,0,0.55)]">
-                Junk Removal in <span className="text-[#FA7415]">Ottawa</span>
-              </h1>
-              <p className="text-base sm:text-lg text-slate-100 leading-relaxed text-balance [text-shadow:0_1px_8px_rgba(0,0,0,0.6)]">
-                Ottawa's local crew. Small items? We'll take them <span className="text-white font-semibold">free with your booking.</span>
-              </p>
-
-              {/* Price highlight */}
-              <div className="inline-block rounded-2xl bg-white/12 border border-white/30 backdrop-blur-md px-5 py-3 sm:px-6 sm:py-4 text-center lg:text-left shadow-[0_8px_30px_rgba(0,0,0,0.25)]">
-                <p className="flex items-baseline justify-center lg:justify-start gap-2.5 text-white">
-                  <span className="text-lg sm:text-2xl font-semibold">Individual large item at</span>
-                  <span className="text-5xl sm:text-6xl font-extrabold text-[#FA7415] leading-none [text-shadow:0_0_24px_rgba(250,116,21,0.55)]">$85</span>
-                </p>
-              </div>
-
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-[15.5rem] sm:pt-14 sm:pb-24 lg:py-20">
+          <div className="max-w-xl space-y-5 sm:space-y-6 text-center lg:text-left mx-auto lg:mx-0">
+            {isWinterOfferActive() && (
               <div className="flex justify-center lg:justify-start">
                 <button
-                  id="hero-free-quote-btn"
+                  type="button"
                   onClick={() => openQuote()}
-                  className="w-full sm:w-auto px-10 py-4 rounded-xl bg-[#FA7415] text-white font-extrabold text-lg shadow-[0_10px_28px_rgba(250,116,21,0.5)] hover:bg-[#E0650A] hover:-translate-y-0.5 active:translate-y-0 transition-all"
+                  className="inline-flex items-center justify-center gap-1.5 whitespace-nowrap rounded-full bg-[#FA7415] hover:bg-[#E0650A] border border-white/30 px-3.5 py-2 text-[13px] sm:text-base font-bold text-white shadow-[0_6px_20px_rgba(250,116,21,0.45)] transition-colors"
                 >
-                  Get Your Free Quote
+                  <span aria-hidden="true">❄</span>
+                  <span>
+                    <span className="sm:hidden">20% off your whole booking · {WINTER_OFFER.shortEnd}</span>
+                    <span className="hidden sm:inline">{WINTER_OFFER.headline} · {WINTER_OFFER.endsLabel}</span>
+                  </span>
+                  <span className="hidden sm:inline underline underline-offset-2">{WINTER_OFFER.cta}</span>
                 </button>
               </div>
+            )}
+
+            <h1 className="text-[2.15rem] sm:text-6xl font-extrabold tracking-tight text-white leading-[1.02] [text-shadow:0_3px_16px_rgba(0,0,0,0.55)]">
+              Junk Removal in <span className="text-[#FA7415]">Ottawa</span>
+            </h1>
+            <p className="text-base sm:text-lg text-slate-100 leading-relaxed text-balance [text-shadow:0_1px_8px_rgba(0,0,0,0.6)]">
+              Ottawa's local crew. Small items? We'll take them <span className="text-white font-semibold">free with your booking.</span>
+            </p>
+
+            {/* Price highlight */}
+            <div className="inline-block rounded-2xl bg-white/12 border border-white/30 backdrop-blur-md px-5 py-3 sm:px-6 sm:py-4 text-center lg:text-left shadow-[0_8px_30px_rgba(0,0,0,0.25)]">
+              <p className="flex items-baseline justify-center lg:justify-start gap-2.5 text-white">
+                <span className="text-lg sm:text-2xl font-semibold">Individual large item at</span>
+                <span className="text-5xl sm:text-6xl font-extrabold text-[#FA7415] leading-none [text-shadow:0_0_24px_rgba(250,116,21,0.55)]">$85</span>
+              </p>
+            </div>
+
+            <div className="flex justify-center lg:justify-start">
+              <button
+                id="hero-free-quote-btn"
+                onClick={() => openQuote()}
+                className="w-full sm:w-auto px-10 py-4 rounded-xl bg-[#FA7415] text-white font-extrabold text-lg shadow-[0_10px_28px_rgba(250,116,21,0.5)] hover:bg-[#E0650A] hover:-translate-y-0.5 active:translate-y-0 transition-all"
+              >
+                Get Your Free Quote
+              </button>
             </div>
           </div>
-          </>
-        }
-      />
+        </div>
+      </section>
 
       {/* WILL THE CITY PICK IT UP? (interactive checker) */}
       <CityPickupChecker />

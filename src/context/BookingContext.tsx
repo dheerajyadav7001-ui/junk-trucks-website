@@ -4,8 +4,6 @@ import { BookingFormData, TrackingParams } from '../types';
 import { getTrackingParams, initTrackingParams } from '../utils/tracking';
 import { fireBookingConversion } from '../utils/googleAdsTag';
 import { trackEvent } from '../utils/analytics';
-import { getActiveOffer } from '../config/offer';
-import { getClickedPromo } from '../utils/promo';
 
 interface BookingContextType {
   isOpen: boolean;
@@ -122,8 +120,6 @@ export const BookingProvider: React.FC<{ children: ReactNode }> = ({ children })
         body: JSON.stringify({
           ...fullPayload,
           bookingReference: randomRef,
-          promo_clicked: getClickedPromo(),
-          offer_running: getActiveOffer()?.id || '',
           submissionTimestamp: new Date().toLocaleString('en-CA', { timeZone: 'America/Toronto' }),
         }),
       });
