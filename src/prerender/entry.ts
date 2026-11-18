@@ -4,7 +4,10 @@ import { SERVICE_PAGES, PRICES_PAGE } from '../data/servicePages';
 import { AD_LANDING, AD_LANDING_SLUG } from '../data/adLanding';
 import { LANDING_PAGES } from '../data/junkData';
 import { LOAD_PRICES, PRICE_NOTE } from '../config/pricing';
-import { breadcrumbSchema, faqSchema, serviceSchema } from '../utils/schema';
+import { breadcrumbSchema, faqSchema, serviceSchema, blogPostSchema } from '../utils/schema';
+import { BLOG_POSTS } from '../data/blogPosts';
+import { parseInline, stripInline } from '../utils/richText';
+import { BLOG_TITLE, BLOG_DESCRIPTION } from '../data/blogMeta';
 
 export interface PrerenderRoute {
   path: string; // no leading slash, e.g. "furniture-removal-ottawa"
@@ -18,9 +21,15 @@ export interface PrerenderRoute {
 const esc = (s: string) =>
   s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
+// Paragraph text with [label](/path) markup turned into real <a> tags.
+const inlineHtml = (t: string) =>
+  parseInline(t)
+    .map((p) => (typeof p === 'string' ? esc(p) : `<a href="${esc(p.href)}">${esc(p.text)}</a>`))
+    .join('');
+
 const faqHtml = (faqs: { question: string; answer: string }[]) =>
   `<h2>Frequently asked questions</h2>` +
-  faqs.map((f) => `<h3>${esc(f.question)}</h3><p>${esc(f.answer)}</p>`).join('');
+  faqs.map((f) => `<h3>${esc(f.question)}</h3><p>${esc(stripInline(f.answer))}</p>`).join('');
 
 const priceHtml = () =>
   `<h2>Junk removal prices in Ottawa</h2><ul>` +
@@ -98,6 +107,59 @@ export function getRoutes(): PrerenderRoute[] {
       description: lp.metaDescription,
       jsonLd: [faqSchema(lp.faqs)],
       bodyHtml: `<main><h1>${esc(lp.keyword)}</h1><p>${esc(lp.subheadline)}</p>${faqHtml(lp.faqs)}</main>`,
+    });
+  }
+
+  // Blog index + posts: full article text in the raw HTML.
+  routes.push({
+    path: 'blog',
+    title: BLOG_TITLE,
+    description: BLOG_DESCRIPTION,
+    jsonLd: [
+      breadcrumbSchema([
+        { name: 'Home', path: '/' },
+        { name: 'Blog', path: '/blog' },
+      ]),
+    ],
+    bodyHtml:
+      `<main><h1>Ottawa Junk Removal Guides</h1>` +
+      BLOG_POSTS.map(
+        (p) => `<article><h2><a href="/blog/${p.slug}">${esc(p.title)}</a></h2><p>${esc(p.excerpt)}</p></article>`,
+      ).join('') +
+      `<p><a href="/">Junk Trucks home</a> · <a href="tel:+13437770398">Call (343) 777-0398</a></p></main>`,
+  });
+
+  for (const p of BLOG_POSTS) {
+    const path = `/blog/${p.slug}`;
+    routes.push({
+      path: `blog/${p.slug}`,
+      title: p.title,
+      description: p.description,
+      jsonLd: [
+        blogPostSchema(p),
+        faqSchema(p.faqs),
+        breadcrumbSchema([
+          { name: 'Home', path: '/' },
+          { name: 'Blog', path: '/blog' },
+          { name: p.title, path },
+        ]),
+      ],
+      bodyHtml:
+        `<main><article><h1>${esc(p.h1)}</h1>` +
+        p.intro.map((t) => `<p>${inlineHtml(t)}</p>`).join('') +
+        p.sections
+          .map(
+            (s) =>
+              `<h2>${esc(s.heading)}</h2>` +
+              s.body.map((t) => `<p>${inlineHtml(t)}</p>`).join('') +
+              (s.bullets ? `<ul>${s.bullets.map((b) => `<li>${inlineHtml(b)}</li>`).join('')}</ul>` : '') +
+              (s.showPrices ? priceHtml() : ''),
+          )
+          .join('') +
+        (p.sourceNote ? `<p>${esc(p.sourceNote)}</p>` : '') +
+        faqHtml(p.faqs) +
+        `<p>${p.relatedServices.map((sl) => `<a href="/${sl}">${esc(sl.replace(/-ottawa$/, '').replace(/-/g, ' '))}</a>`).join(' · ')}</p>` +
+        `<p><a href="/blog">All guides</a> · <a href="tel:+13437770398">Call (343) 777-0398</a></p></article></main>`,
     });
   }
 

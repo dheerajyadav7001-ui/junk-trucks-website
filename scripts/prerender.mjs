@@ -37,6 +37,13 @@ for (const r of routes) {
   html = html.replace(/(<meta property="og:title" content=")[^"]*(")/, (_m, a, b) => `${a}${esc(r.title)}${b}`);
   html = html.replace(/(<meta property="og:description" content=")[^"]*(")/, (_m, a, b) => `${a}${esc(r.description)}${b}`);
 
+  // The shared template already carries a homepage canonical / og:url / robots
+  // tag. Drop them so each page ends up with exactly one canonical (its own)
+  // instead of two conflicting ones, which Google ignores.
+  html = html.replace(/\s*<link rel="canonical"[^>]*>/g, '');
+  html = html.replace(/\s*<meta property="og:url"[^>]*>/g, '');
+  html = html.replace(/\s*<meta name="robots"[^>]*>/g, '');
+
   const url = `${ORIGIN}/${r.path}`;
   const extra = [
     `<link rel="canonical" href="${url}" />`,

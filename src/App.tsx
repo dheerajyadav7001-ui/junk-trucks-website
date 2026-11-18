@@ -18,6 +18,9 @@ import { DonatePage } from './components/pages/DonatePage';
 import { ServicePage } from './components/pages/ServicePage';
 import { PricesPage } from './components/pages/PricesPage';
 import { AdLandingPage } from './components/pages/AdLandingPage';
+import { BlogIndexPage } from './components/pages/BlogIndexPage';
+import { BlogPostPage } from './components/pages/BlogPostPage';
+import { getBlogPost } from './data/blogPosts';
 import { LANDING_PAGES } from './data/junkData';
 import { SERVICE_PAGES, PRICES_PAGE, getServicePage } from './data/servicePages';
 import { AD_LANDING_SLUG } from './data/adLanding';
@@ -28,6 +31,7 @@ const SERVICES_PATH = '/services';
 const EMERGENCY_PATH = '/emergency-junk-removal';
 const DONATE_PATH = '/donate';
 const PRICES_PATH = `/${PRICES_PAGE.slug}`;
+const BLOG_PATH = '/blog';
 
 // Old hash routes this site used to run on, mapped to their new real path.
 // Kept so any bookmark, saved Google Ads Final URL, or old sitelink still
@@ -55,6 +59,8 @@ export function getPageFromPath(pathname: string): PageId {
   if (slug === 'donate') return 'donate';
   if (slug === PRICES_PAGE.slug) return 'prices';
   if (slug === AD_LANDING_SLUG) return 'adlp';
+  if (slug === 'blog') return 'blog';
+  if (slug.startsWith('blog/') && getBlogPost(slug.slice(5))) return 'blogPost';
   if (SERVICE_PAGES.some((sp) => sp.slug === slug)) return 'service';
   if (LANDING_PAGES.some((lp) => lp.slug === slug)) return 'landing';
   return 'home';
@@ -66,6 +72,14 @@ export function getLandingSlugFromPath(pathname: string): string | null {
   const slug = getSlugFromPath(pathname);
   if (!slug) return null;
   return LANDING_PAGES.some((lp) => lp.slug === slug) ? slug : null;
+}
+
+// Extracts the blog post slug (the part after /blog/) if the path is a post.
+export function getBlogSlugFromPath(pathname: string): string | null {
+  const slug = getSlugFromPath(pathname);
+  if (!slug || !slug.startsWith('blog/')) return null;
+  const postSlug = slug.slice(5);
+  return getBlogPost(postSlug) ? postSlug : null;
 }
 
 // Extracts the wave-1 service-page slug from the path, if it matches one.
@@ -109,6 +123,7 @@ export default function App() {
   const [currentPage, setCurrentPage] = useState<PageId>('home');
   const [landingSlug, setLandingSlug] = useState<string | null>(null);
   const [serviceSlug, setServiceSlug] = useState<string | null>(null);
+  const [blogSlug, setBlogSlug] = useState<string | null>(null);
 
   // Load the Google Ads tag once, site-wide (powers both conversion tracking
   // and the remarketing audience). No-ops until real IDs are set.
@@ -124,6 +139,7 @@ export default function App() {
     setCurrentPage(getPageFromPath(window.location.pathname));
     setLandingSlug(getLandingSlugFromPath(window.location.pathname));
     setServiceSlug(getServiceSlugFromPath(window.location.pathname));
+    setBlogSlug(getBlogSlugFromPath(window.location.pathname));
   }, []);
 
   // Sync state with real browser navigation (back/forward buttons)
@@ -132,6 +148,7 @@ export default function App() {
       setCurrentPage(getPageFromPath(window.location.pathname));
       setLandingSlug(getLandingSlugFromPath(window.location.pathname));
       setServiceSlug(getServiceSlugFromPath(window.location.pathname));
+      setBlogSlug(getBlogSlugFromPath(window.location.pathname));
       window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
@@ -151,6 +168,10 @@ export default function App() {
         ? DONATE_PATH
         : page === 'prices'
         ? PRICES_PATH
+        : page === 'blog'
+        ? BLOG_PATH
+        : page === 'blogPost' && slug
+        ? `${BLOG_PATH}/${slug}`
         : page === 'service' && slug
         ? `/${slug}`
         : page === 'landing' && slug
@@ -163,7 +184,17 @@ export default function App() {
     setCurrentPage(page);
     setLandingSlug(page === 'landing' ? slug ?? null : null);
     setServiceSlug(page === 'service' ? slug ?? null : null);
+    setBlogSlug(page === 'blogPost' ? slug ?? null : null);
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  // Navigate by real site path (used for links inside blog posts).
+  const handleNavigatePath = (path: string) => {
+    const clean = path.split('#')[0].split('?')[0];
+    const page = getPageFromPath(clean);
+    const slug = getSlugFromPath(clean);
+    if (page === 'blogPost' && slug) handleNavigate('blogPost', slug.slice(5));
+    else handleNavigate(page, slug ?? undefined);
   };
 
   const renderActivePage = () => {
@@ -178,6 +209,13 @@ export default function App() {
         return <PricesPage onNavigate={handleNavigate} />;
       case 'adlp':
         return <AdLandingPage />;
+      case 'blog':
+        return <BlogIndexPage onNavigatePath={handleNavigatePath} />;
+      case 'blogPost': {
+        const post = blogSlug ? getBlogPost(blogSlug) : undefined;
+        if (!post) return <BlogIndexPage onNavigatePath={handleNavigatePath} />;
+        return <BlogPostPage post={post} onNavigatePath={handleNavigatePath} />;
+      }
       case 'service': {
         const sp = serviceSlug ? getServicePage(serviceSlug) : undefined;
         if (!sp) return <HomePage onNavigate={handleNavigate} />;

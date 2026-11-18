@@ -4,6 +4,7 @@ import { SERVICE_PAGES, PRICES_PAGE } from '../data/servicePages';
 import { PageId } from '../types';
 import { Logo } from './Logo';
 import { LANDING_PAGES } from '../data/junkData';
+import { BLOG_POSTS } from '../data/blogPosts';
 
 interface FooterProps {
   onNavigate: (page: PageId, slug?: string) => void;
@@ -166,6 +167,23 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
           </div>
         </div>
 
+        {/* Latest guides — crawlable links to every blog post */}
+        <div className="py-8 border-b border-white/10">
+          <h4 className="font-bold text-white text-xs tracking-wide uppercase font-mono mb-3">Ottawa Junk Removal Guides</h4>
+          <div className="flex flex-wrap gap-x-5 gap-y-2 text-sm">
+            {BLOG_POSTS.map((bp) => (
+              <a
+                key={bp.slug}
+                href={`/blog/${bp.slug}`}
+                onClick={(e) => { e.preventDefault(); onNavigate('blogPost', bp.slug); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                className="text-slate-300 hover:text-[#FA7415] transition-colors"
+              >
+                {bp.title}
+              </a>
+            ))}
+          </div>
+        </div>
+
         {/* Minimal Bottom Bar */}
         <div className="pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-400 gap-3">
           <p>© {new Date().getFullYear()} Junk Trucks Ottawa. All rights reserved.</p>
@@ -179,6 +197,9 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             <button onClick={() => handleAnchorClick('faq')} className="hover:text-slate-200 transition-colors">
               FAQ
             </button>
+            <a href="/blog" onClick={(e) => { e.preventDefault(); handleLinkClick('blog'); }} className="hover:text-slate-200 transition-colors">
+              Blog
+            </a>
             <a href="/donate" onClick={(e) => { e.preventDefault(); handleLinkClick('donate'); }} className="hover:text-slate-200 transition-colors">
               Donate
             </a>

@@ -26,6 +26,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
     { key: 'nav-prices', id: 'prices', label: 'Prices', hash: '', path: '/junk-removal-ottawa-prices' },
     { key: 'nav-before-after', id: 'home', label: 'Our Work', hash: '#before-after', path: null },
     { key: 'nav-faq', id: 'home', label: 'FAQ', hash: '#faq', path: null },
+    { key: 'nav-blog', id: 'blog', label: 'Blog', hash: '', path: '/blog' },
     { key: 'nav-donate', id: 'donate', label: 'Donate', hash: '', path: '/donate' },
   ];
 
@@ -72,7 +73,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
         {/* Desktop Navigation Links */}
         <nav className="hidden lg:flex items-center gap-1">
           {navLinks.map((link) => {
-            const isActive = SCROLL_ANCHOR_HASHES.includes(link.hash) ? false : currentPage === link.id;
+            const isActive = SCROLL_ANCHOR_HASHES.includes(link.hash) ? false : currentPage === link.id || (link.id === 'blog' && currentPage === 'blogPost');
             const className = `px-3 py-2 rounded-lg text-sm font-semibold transition-colors ${
               isActive
                 ? 'text-[#173B5F] bg-[#EEF3F8]'
@@ -163,7 +164,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
       {mobileMenuOpen && (
         <div className="lg:hidden border-t border-slate-200 bg-white px-4 py-4 space-y-2.5 shadow-xl">
           {navLinks.map((link) => {
-            const isActive = SCROLL_ANCHOR_HASHES.includes(link.hash) ? false : currentPage === link.id;
+            const isActive = SCROLL_ANCHOR_HASHES.includes(link.hash) ? false : currentPage === link.id || (link.id === 'blog' && currentPage === 'blogPost');
             const className = `w-full text-left px-3.5 py-2.5 rounded-xl text-sm font-medium transition-colors ${
               isActive
                 ? 'bg-[#EEF3F8] text-[#173B5F] font-bold'

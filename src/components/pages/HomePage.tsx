@@ -17,9 +17,10 @@ import { WorkGallery } from '../WorkGallery';
 import { CityPickupChecker } from '../CityPickupChecker';
 import { SnowEffect } from '../SnowEffect';
 import { getHeroOffer } from '../../config/offer';
+import { BLOG_POSTS } from '../../data/blogPosts';
 
 interface HomePageProps {
-  onNavigate: (page: PageId) => void;
+  onNavigate: (page: PageId, slug?: string) => void;
 }
 
 export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
@@ -268,6 +269,39 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
       {/* OUR WORK SLIDESHOW (replaces Before & After) */}
       <section id="before-after" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 scroll-mt-24">
         <WorkGallery />
+      </section>
+
+      {/* LATEST GUIDES — internal links to the blog */}
+      <section id="guides" className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 scroll-mt-24">
+        <div className="text-center max-w-2xl mx-auto mb-8 space-y-2">
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-[#173B5F] tracking-tight">Ottawa Junk Removal Guides</h2>
+          <p className="text-sm text-slate-600">City rules, pricing and cleanout checklists, in plain language.</p>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {BLOG_POSTS.slice(0, 3).map((bp) => (
+            <a
+              key={bp.slug}
+              href={`/blog/${bp.slug}`}
+              onClick={(e) => { e.preventDefault(); onNavigate('blogPost', bp.slug); }}
+              className="group bg-white rounded-2xl border border-slate-200 overflow-hidden hover:border-[#173B5F] transition-colors"
+            >
+              <img src={bp.image} alt="" loading="lazy" className="w-full h-32 object-cover" />
+              <div className="p-4">
+                <span className="block text-[11px] font-mono uppercase font-bold text-[#FA7415]">{bp.category}</span>
+                <span className="block text-sm font-bold text-slate-900 mt-1 group-hover:text-[#173B5F] leading-snug">{bp.title}</span>
+              </div>
+            </a>
+          ))}
+        </div>
+        <div className="text-center mt-5">
+          <a
+            href="/blog"
+            onClick={(e) => { e.preventDefault(); onNavigate('blog'); }}
+            className="text-sm font-bold text-[#173B5F] hover:text-[#FA7415]"
+          >
+            See all guides →
+          </a>
+        </div>
       </section>
 
       {/* FAQ */}
