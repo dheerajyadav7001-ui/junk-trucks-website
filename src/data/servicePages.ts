@@ -133,7 +133,7 @@ export const SERVICE_PAGES: ServicePageConfig[] = [
           'We serve Ottawa including Downtown, Kanata, Stittsville, Nepean, Barrhaven, Orléans, Gloucester, Westboro, Hintonburg, South Keys and Manotick. Gatineau is available on request.',
       },
     ],
-    related: ['furniture-removal-ottawa', 'mattress-removal-ottawa', 'appliance-removal-ottawa', 'garbage-removal-ottawa'],
+    related: ['furniture-removal-ottawa', 'estate-cleanout-ottawa', 'renovation-debris-removal-ottawa', 'garbage-removal-ottawa'],
     reviewIds: ['rev-1', 'rev-6', 'rev-3'],
   },
   {
@@ -224,7 +224,7 @@ export const SERVICE_PAGES: ServicePageConfig[] = [
           'Yes. The crew comes in and carries everything out, so you do not have to move anything to the curb.',
       },
     ],
-    related: ['junk-removal-ottawa', 'appliance-removal-ottawa', 'furniture-removal-ottawa', 'mattress-removal-ottawa'],
+    related: ['junk-removal-ottawa', 'appliance-removal-ottawa', 'estate-cleanout-ottawa', 'renovation-debris-removal-ottawa'],
     reviewIds: ['rev-2', 'rev-1', 'rev-3'],
   },
   {
@@ -339,16 +339,44 @@ export const SERVICE_PAGES: ServicePageConfig[] = [
         ],
       },
       {
+        heading: 'Your options for getting rid of an old mattress in Ottawa',
+        body: [
+          'There is more than one way to deal with an old mattress, and the right one depends on how much effort, time and money you want to spend.',
+          'Curbside: the City of Ottawa says large items such as mattresses and furniture can be put out on your collection day, before 7 am. The City also has a limit on how many garbage items you can set out, and the rules change, so check ottawa.ca (the Waste Explorer tool is the quickest way) before you rely on it.',
+          'Drop it off yourself: you can take a mattress to the Trail Road Waste Facility, but that means a vehicle big enough to carry it, loading it yourself, and paying a fee at the scale house.',
+          'Ask the store: some retailers will take the old mattress away when they deliver a new one. It is worth asking before you buy.',
+          'Have us take it: we come to the room, carry it out and haul it away. This is the simplest option if you live in an apartment, have stairs, do not have a truck, or are clearing more than a mattress.',
+        ],
+      },
+      {
         heading: 'Mattresses and the City curbside limit',
         body: [
-          'The City counts a mattress and a box spring as one bulky item each toward its curbside limit. If you are over the limit or cannot carry them out, a pickup from us is the simpler option. Always confirm current rules on ottawa.ca.',
+          'A mattress and a box spring each count as a bulky item. If you are putting out other garbage the same week, or you cannot carry them to the curb, a pickup from us is the simpler option. Always confirm current rules on ottawa.ca.',
+        ],
+      },
+      {
+        heading: 'Removing a mattress from an apartment or condo',
+        body: [
+          'Tight stairwells and shared elevators are where mattresses get stuck. Tell us the floor, whether there is an elevator, and whether your building needs you to book it in advance, and we plan the carry before we arrive.',
+          'Do not drag the mattress along the hallway on your own. It marks the walls and floors, and some buildings charge for the damage. Leaving the carrying to the crew keeps the hallway clean.',
         ],
       },
       {
         heading: 'Can a mattress be donated?',
         body: [
           'Charities generally cannot accept stained or damaged mattresses. If yours is clean and in good condition, tell us when you book and we will see whether it can be set aside. Otherwise it is removed for disposal.',
-          'If there is a bed bug or mold problem, mention it when you book so the crew can plan how to handle it.',
+        ],
+      },
+      {
+        heading: 'Bed bugs, mold or a wet mattress',
+        body: [
+          'If a mattress has bed bugs, mold or water damage, say so when you book. Seal it in plastic if you can, and leave it where it is rather than moving it through the rest of the home, so the problem does not spread. The crew will plan how to carry it out.',
+        ],
+      },
+      {
+        heading: 'Getting a price for a mattress pickup',
+        body: [
+          'A single mattress starts from $85. A mattress with a box spring and frame is priced by the space it takes in the truck, and a bedroom clear-out with a dresser and nightstands is usually a quarter truck or more. Send a photo through the quote form and we confirm the price before loading.',
         ],
       },
     ],
@@ -375,6 +403,11 @@ export const SERVICE_PAGES: ServicePageConfig[] = [
         answer: 'Yes. Tell us what is going when you book and we price it together.',
       },
       {
+        question: 'Can you take a mattress from a second floor, a basement or a condo?',
+        answer:
+          'Yes. The crew carries it down stairs or through the elevator. Tell us the floor and any building rules, such as elevator booking, when you book.',
+      },
+      {
         question: 'Can my old mattress be donated?',
         answer:
           'Only if it is clean and in good condition. Charities generally cannot take stained or damaged mattresses.',
@@ -382,10 +415,20 @@ export const SERVICE_PAGES: ServicePageConfig[] = [
       {
         question: 'Will the City take my old mattress?',
         answer:
-          'The City collects a limited number of bulky items at the curb, and a mattress counts as one. Use the checker on the garbage removal page and confirm current rules on ottawa.ca.',
+          'The City says large items such as mattresses can be put out at the curb on collection day, but its garbage item limits and rules change. Use the checker on the garbage removal page and confirm current rules on ottawa.ca.',
+      },
+      {
+        question: 'What if the mattress has bed bugs?',
+        answer:
+          'Tell us when you book. Seal it in plastic if you can and keep it in its room, and the crew will plan how to carry it out without spreading the problem.',
+      },
+      {
+        question: 'Can I just drop a mattress at the landfill myself?',
+        answer:
+          'You can take it to the Trail Road Waste Facility, but you need a vehicle, you do the loading, and a fee applies at the scale house. A pickup from us includes the crew, the loading and the disposal.',
       },
     ],
-    related: ['furniture-removal-ottawa', 'junk-removal-ottawa', 'garbage-removal-ottawa', 'appliance-removal-ottawa'],
+    related: ['furniture-removal-ottawa', 'junk-removal-ottawa', 'garbage-removal-ottawa', 'estate-cleanout-ottawa'],
     reviewIds: ['rev-3', 'rev-4', 'rev-1'],
   },
   {
@@ -465,8 +508,223 @@ export const SERVICE_PAGES: ServicePageConfig[] = [
           'Appliances are generally not part of regular curbside collection. Try the checker on the garbage removal page and confirm current rules on ottawa.ca.',
       },
     ],
-    related: ['junk-removal-ottawa', 'furniture-removal-ottawa', 'garbage-removal-ottawa', 'mattress-removal-ottawa'],
+    related: ['junk-removal-ottawa', 'furniture-removal-ottawa', 'estate-cleanout-ottawa', 'mattress-removal-ottawa'],
     reviewIds: ['rev-5', 'rev-1', 'rev-4'],
+  },
+  {
+    slug: 'estate-cleanout-ottawa',
+    name: 'Estate Cleanout',
+    h1: 'Estate Cleanout in Ottawa',
+    title: 'Estate Cleanout Ottawa | Full-Home Cleanouts | Junk Trucks',
+    metaDescription:
+      'Estate and full-home cleanouts in Ottawa. A local crew does the carrying, donation sorting is included where possible, and you get a firm price first. Free quote.',
+    badge: 'Respectful estate & full-home cleanouts',
+    heroSub:
+      'Clearing a loved one’s home is hard enough. Our Ottawa crew handles the lifting, the sorting and the hauling, and you know the price before we start.',
+    serviceType: 'Estate Cleanout',
+    image: '/estate-cleanouts.jpg',
+    imageAlt: 'Junk Trucks crew clearing a home during an estate cleanout in Ottawa',
+    intro: [
+      'An estate cleanout is more than a junk job. There are family decisions, sentimental things to find, and often a closing date or a landlord deadline on the calendar. We take the physical work off your hands: we walk through with you, remove what is left, and leave the property empty and swept.',
+      'It is the same service whether the home is being sold, handed back to a landlord, or simply downsized. We price by the space everything takes up in the truck, so a small condo and a four-bedroom house are quoted differently, and we confirm the price before anything is loaded.',
+    ],
+    sections: [
+      {
+        heading: 'What an estate cleanout involves',
+        body: [
+          'We start with a walkthrough, in person or from photos, so we understand what is staying, what is going and how much there is. You tell us what the family wants to keep and point out anything that should be set aside for donation.',
+          'On the day, the crew carries everything out from every floor, including basements, attics and garages, loads the truck, and sweeps up. Usable furniture and household goods are set aside for donation wherever possible, and the rest is removed for disposal or recycling.',
+        ],
+      },
+      {
+        heading: 'Before the crew arrives: a short checklist',
+        body: ['A little preparation makes the day faster and less stressful. These are the things families most often tell us they are glad they did first.'],
+        bullets: [
+          'Confirm who has the authority to clear the home. If the estate is going through probate, ask the family lawyer about timing before anything is removed',
+          'Find the important papers: wills, deeds, bank and insurance records, passports and tax documents',
+          'Collect jewellery, cash, keys, photographs and anything else of value or sentiment',
+          'Walk the home with family and tag what each person wants to keep',
+          'Decide what should go to donation and mention it when you book',
+          'Check parking, stairs and elevator access, and let us know about any building rules',
+        ],
+      },
+      {
+        heading: 'Keep, donate or dispose: how the sorting works',
+        body: [
+          'We are not appraisers, so valuables and anything with sentimental meaning should be taken out before the crew starts. After that, the rule is simple: whatever is left in the areas we are clearing is removed unless you tell us to leave it.',
+          'Furniture, housewares and clothing in good condition are set aside for charities. Broken furniture, old mattresses, damaged items and general debris go for disposal, and appliances and electronics are sent for recycling where possible.',
+        ],
+      },
+      {
+        heading: 'Clearing a home for a sale or a closing',
+        body: [
+          'When there is a real estate closing, a listing date or a landlord deadline, timing matters. We can usually clear a full property within days. Tell us the date you are working against when you request a quote, and we will say what is realistic.',
+          'If you live out of town, a family member can walk the home with the crew while you approve the price by phone.',
+        ],
+      },
+      {
+        heading: 'What we cannot take',
+        body: [
+          'For safety and environmental reasons we do not take hazardous materials such as paint, solvents, propane tanks, asbestos or medical waste. If you find items like these while sorting, set them aside and ask us about them when you book.',
+        ],
+      },
+    ],
+    take: [
+      'Furniture, from sofas to wardrobes',
+      'Mattresses and bed frames',
+      'Appliances, working or not',
+      'Boxes, books and household goods',
+      'Basement, attic and garage contents',
+      'Patio sets and other yard items',
+    ],
+    dontTake: ['Wet paint and chemicals', 'Propane tanks', 'Asbestos', 'Biohazard medical waste'],
+    faqs: [
+      {
+        question: 'How much does an estate cleanout cost in Ottawa?',
+        answer:
+          'We price by the space your items take in the truck. A single item starts from $85, and a full truck starts from $649. A whole house is often more than one load, so we confirm the price from a walkthrough or photos before we start.',
+      },
+      {
+        question: 'How quickly can you clear a full home for an estate sale or closing?',
+        answer: 'We can usually clear a full property within days when working against a real estate closing deadline. Tell us your date when you request a quote.',
+      },
+      {
+        question: 'Do you handle donation sorting during an estate cleanout?',
+        answer: 'Yes. Usable furniture and household goods are set aside for donation wherever possible.',
+      },
+      {
+        question: 'Does someone need to be at the home?',
+        answer:
+          'We recommend that someone from the family is there for the start so we know exactly what stays and what goes. After that, the crew can work on its own.',
+      },
+      {
+        question: 'What about valuables and personal papers?',
+        answer:
+          'Please remove valuables, documents, photographs and keepsakes before we start. We are not appraisers, so anything left in the areas we are clearing is treated as part of the cleanout.',
+      },
+      {
+        question: 'Is an estate cleanout the same as a property clean out?',
+        answer: 'Yes. We use the terms interchangeably for a full-property clearance, whether it is for an estate, a sale or a landlord turnover.',
+      },
+      {
+        question: 'Do you clean the house afterwards?',
+        answer: 'We sweep up after loading. We do not do a deep clean, so you may want a cleaner booked before the property is listed.',
+      },
+    ],
+    related: ['junk-removal-ottawa', 'furniture-removal-ottawa', 'appliance-removal-ottawa', 'mattress-removal-ottawa'],
+    reviewIds: ['rev-2', 'rev-5', 'rev-6'],
+  },
+  {
+    slug: 'renovation-debris-removal-ottawa',
+    name: 'Renovation Debris Removal',
+    h1: 'Renovation Debris Removal in Ottawa',
+    title: 'Renovation Debris Removal Ottawa | Construction Waste | Junk Trucks',
+    metaDescription:
+      'Renovation and construction debris removal in Ottawa: drywall, flooring, cabinets, tile and demo waste. Homeowners and contractors, one-time or recurring pickups.',
+    badge: 'Homeowners & contractors · From $85',
+    heroSub:
+      'Drywall, flooring, cabinets and demo waste cleared from your job site, so the renovation can keep moving and you are not left with a pile in the driveway.',
+    serviceType: 'Renovation & Construction Debris',
+    image: '/renovation-debris.jpg',
+    imageAlt: 'Renovation debris being loaded onto a Junk Trucks truck in Ottawa',
+    intro: [
+      'Every renovation ends with a pile: torn-out cabinets, old flooring, drywall offcuts, a bathroom’s worth of tile. We carry it out, load the truck and take it away, so the work area stays safe and your crew or your weekend does not get taken over by waste.',
+      'We work with homeowners who have a one-time job and with contractors and property managers who need regular job-site pickups. Either way, you get a price before we load.',
+    ],
+    sections: [
+      {
+        heading: 'What counts as renovation debris',
+        body: ['If it came out of the walls, floors or fixtures during a renovation, we can usually take it.'],
+        bullets: [
+          'Drywall, plaster and lath',
+          'Old flooring, carpet and underlay',
+          'Kitchen cabinets, counters and vanities',
+          'Tile, tubs, toilets and sinks',
+          'Scrap lumber, trim, doors and windows',
+          'Packaging, offcuts and general demo waste',
+        ],
+      },
+      {
+        heading: 'Why renovation waste cannot just go out with the garbage',
+        body: [
+          'The City of Ottawa does not collect construction and renovation waste with regular garbage. Materials such as plaster, drywall, wood and concrete are meant to go to the Trail Road Waste Facility or another landfill.',
+          'Doing that yourself means renting or borrowing a truck, loading it by hand, driving out to the landfill and paying a fee. A pickup from us includes the crew, the loading and the disposal, and you do not make the trip.',
+        ],
+      },
+      {
+        heading: 'Plan your debris pickups around the phases of the job',
+        body: [
+          'On a small project, one pickup at the end is enough. On a bigger one, it helps to clear the debris at the key stages.',
+        ],
+        bullets: [
+          'After demolition: take out the old kitchen, bathroom or flooring in one trip so trades can start',
+          'Mid-project: clear drywall offcuts and packaging so the site stays safe and easy to work in',
+          'At the finish: remove the last of the waste so the space is ready to be cleaned and used',
+        ],
+      },
+      {
+        heading: 'Homeowners and contractors',
+        body: [
+          'Homeowners usually need one pickup after a kitchen, bathroom or basement project. Contractors and property managers often prefer scheduled pickups for the length of a project, and we set up ongoing job-site cleanouts across Ottawa.',
+          'If you are running a multi-week renovation, tell us the address, the dates and roughly how much waste to expect, and we will suggest a schedule.',
+        ],
+      },
+      {
+        heading: 'Tips to make a debris pickup go smoothly',
+        body: ['A few small steps keep the job faster and can keep the cost down.'],
+        bullets: [
+          'Keep debris together in one accessible spot, such as a garage or driveway',
+          'Bag dust and small offcuts so they do not scatter',
+          'Tell us about heavy materials such as concrete, tile or shingles, because they can be priced differently',
+          'Keep paint, solvents and chemicals separate, because we cannot take them',
+          'If an older home is being demolished and you are unsure what the plaster, tile or insulation contains, have it tested first, because we cannot take asbestos',
+        ],
+      },
+    ],
+    take: [
+      'Drywall and plaster',
+      'Flooring, carpet and underlay',
+      'Cabinets, vanities and counters',
+      'Tile, tubs and toilets',
+      'Scrap lumber and trim',
+      'Doors, windows and fixtures',
+    ],
+    dontTake: ['Wet paint and chemicals', 'Propane tanks', 'Asbestos', 'Biohazard medical waste'],
+    faqs: [
+      {
+        question: 'How much does renovation debris removal cost in Ottawa?',
+        answer:
+          'We price by the space the debris takes in the truck. A single item starts from $85, a quarter truck from $199, a half truck from $349 and a full truck from $649. Very heavy materials such as concrete may be priced differently, so tell us when you book.',
+      },
+      {
+        question: 'What construction debris can you remove?',
+        answer: 'Drywall, old cabinets, flooring, tile, scrap lumber and general demo debris. We clear the job site so the work can keep moving.',
+      },
+      {
+        question: 'Can I put renovation waste out with my regular garbage?',
+        answer:
+          'No. The City of Ottawa does not collect construction and renovation waste with regular garbage. It goes to the Trail Road Waste Facility or another landfill, or you can have us haul it.',
+      },
+      {
+        question: 'Do you offer recurring pickups for a multi-week renovation?',
+        answer: 'Yes. We work with Ottawa contractors and homeowners on scheduled debris pickups for the length of a project.',
+      },
+      {
+        question: 'Do you work directly with contractors and property managers?',
+        answer: 'Yes. We set up contractor accounts for ongoing job-site cleanouts across Ottawa.',
+      },
+      {
+        question: 'Do you take asbestos or hazardous materials?',
+        answer:
+          'No. We cannot take asbestos, wet paint, solvents, propane tanks or other hazardous materials. If you are unsure about an older material, have it tested before demolition.',
+      },
+      {
+        question: 'Do I need to carry the debris outside first?',
+        answer: 'No. The crew carries it out from the work area, including upstairs rooms and basements.',
+      },
+    ],
+    related: ['junk-removal-ottawa', 'garbage-removal-ottawa', 'furniture-removal-ottawa', 'estate-cleanout-ottawa'],
+    reviewIds: ['rev-1', 'rev-2', 'rev-3'],
   },
 ];
 
