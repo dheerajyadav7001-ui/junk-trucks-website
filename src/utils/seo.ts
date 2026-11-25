@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 
-export const HOME_TITLE = 'Junk Trucks | Ottawa Junk Removal, Cleanouts & Hauling from $85';
+export const HOME_TITLE = 'Junk Removal Ottawa from $85 | Junk Trucks';
 export const HOME_DESCRIPTION =
-  'Local Ottawa junk removal and cleanouts. Furniture, appliances, garage, basement and renovation debris. Upfront price from $85. Call (343) 777-0398.';
+  'Ottawa junk removal from $85: furniture, appliances, garage, estate and renovation cleanouts. Price confirmed before we load. Rated 5.0 on Google.';
 const DEFAULT_TITLE = HOME_TITLE;
 const DEFAULT_DESCRIPTION = HOME_DESCRIPTION;
 const SITE_ORIGIN = 'https://www.junktrucks.ca';
