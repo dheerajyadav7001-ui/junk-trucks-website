@@ -2,7 +2,7 @@
 // building only (no React, no DOM), so it can be bundled and run in Node.
 import { SERVICE_PAGES, PRICES_PAGE } from '../data/servicePages';
 import { AD_LANDING, AD_LANDING_SLUG } from '../data/adLanding';
-import { LANDING_PAGES } from '../data/junkData';
+import { LANDING_PAGES, OTTAWA_AREAS, TESTIMONIALS } from '../data/junkData';
 import { LOAD_PRICES, PRICE_NOTE } from '../config/pricing';
 import { breadcrumbSchema, faqSchema, serviceSchema, blogPostSchema } from '../utils/schema';
 import { BLOG_POSTS } from '../data/blogPosts';
@@ -36,6 +36,60 @@ const priceHtml = () =>
   LOAD_PRICES.map((p) => `<li>${esc(p.label)}: from $${p.from}</li>`).join('') +
   `</ul><p>${esc(PRICE_NOTE)}</p>`;
 
+
+// ---- Internal links in the raw HTML (menu, related pages, areas, reviews, footer) ----
+// The React app builds the same navigation in the browser; having it in the static
+// HTML as well means Google can follow the links between pages without running scripts.
+const SERVICE_LINKS = SERVICE_PAGES.map((sp) => ({ href: `/${sp.slug}`, text: `${sp.name} in Ottawa` }));
+const EXTRA_LINKS = LANDING_PAGES.map((lp) => ({ href: `/${lp.slug}`, text: lp.keyword }));
+const linkList = (items: { href: string; text: string }[]) =>
+  `<ul>${items.map((l) => `<li><a href="${l.href}">${esc(l.text)}</a></li>`).join('')}</ul>`;
+
+const topNavHtml = () =>
+  `<nav aria-label="Main"><a href="/">Junk Trucks</a> · <a href="/services">Services</a> · ` +
+  `<a href="/junk-removal-ottawa-prices">Prices</a> · <a href="/blog">Blog</a> · ` +
+  `<a href="/emergency-junk-removal">Emergency junk removal</a> · <a href="/donate">Donations</a> · ` +
+  `<a href="tel:+13437770398">(343) 777-0398</a></nav>`;
+
+const footerHtml = (currentPath: string) => {
+  const skip = (l: { href: string }) => l.href !== `/${currentPath}`;
+  return (
+    `<footer><h2>Junk removal services in Ottawa</h2>` +
+    linkList([...SERVICE_LINKS, ...EXTRA_LINKS].filter(skip)) +
+    `<h2>More from Junk Trucks</h2>` +
+    linkList(
+      [
+        { href: '/junk-removal-ottawa-prices', text: 'Junk removal prices in Ottawa' },
+        { href: '/blog', text: 'Ottawa junk removal guides' },
+        { href: '/emergency-junk-removal', text: 'Emergency junk removal' },
+        { href: '/donate', text: 'Donation partners' },
+        { href: '/services', text: 'All services' },
+        { href: '/', text: 'Junk Trucks home' },
+      ].filter(skip),
+    ) +
+    `<p>Serving ${OTTAWA_AREAS.map((a) => esc(a.name.replace(/ \(On-Request\)/, ''))).join(', ')}.</p></footer>`
+  );
+};
+
+const relatedServicesHtml = (slugs: string[]) => {
+  const items = slugs
+    .map((sl) => SERVICE_PAGES.find((sp) => sp.slug === sl))
+    .filter(Boolean)
+    .map((sp) => ({ href: `/${sp!.slug}`, text: `${sp!.name} in Ottawa` }));
+  return items.length ? `<h2>Related services</h2>${linkList(items)}` : '';
+};
+
+const areasHtml = () =>
+  `<h2>Areas we serve in Ottawa</h2><ul>${OTTAWA_AREAS.map((a) => `<li>${esc(a.name)}</li>`).join('')}</ul>`;
+
+const reviewsHtml = (ids: string[]) => {
+  const items = ids.map((id) => TESTIMONIALS.find((t) => t.id === id)).filter(Boolean) as typeof TESTIMONIALS;
+  return items.length
+    ? `<h2>What Ottawa customers say</h2>` +
+        items.map((t) => `<blockquote><p>${esc(t.comment)}</p><p>${esc(t.name)}, Google review</p></blockquote>`).join('')
+    : '';
+};
+
 export function getRoutes(): PrerenderRoute[] {
   const routes: PrerenderRoute[] = [];
 
@@ -68,6 +122,9 @@ export function getRoutes(): PrerenderRoute[] {
           .join('') +
         `<h2>What we take</h2><ul>${p.take.map((t) => `<li>${esc(t)}</li>`).join('')}</ul>` +
         faqHtml(p.faqs) +
+        reviewsHtml(p.reviewIds) +
+        relatedServicesHtml(p.related) +
+        areasHtml() +
         `<p><a href="tel:+13437770398">Call (343) 777-0398</a></p></main>`,
     });
   }
@@ -163,5 +220,13 @@ export function getRoutes(): PrerenderRoute[] {
     });
   }
 
-  return routes;
+  // Add the site menu and a footer with links to every service page to each indexable page.
+  return routes.map((r) =>
+    r.path === AD_LANDING_SLUG
+      ? r
+      : { ...r, bodyHtml: topNavHtml() + r.bodyHtml + footerHtml(r.path) },
+  );
 }
+
+// Links-only block for the homepage (its content is built in the browser).
+export const getHomeLinksHtml = () => topNavHtml() + footerHtml('');

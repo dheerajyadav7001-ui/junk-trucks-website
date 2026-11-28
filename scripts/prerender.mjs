@@ -63,4 +63,11 @@ for (const r of routes) {
   mkdirSync(outDir, { recursive: true });
   writeFileSync(join(outDir, 'index.html'), html);
 }
+// Homepage: keep the template as is, but put the menu and service links in the raw HTML.
+if (typeof mod.getHomeLinksHtml === 'function' && template.includes('<div id="root"></div>')) {
+  writeFileSync(
+    distIndex,
+    template.replace('<div id="root"></div>', () => `<div id="root">${mod.getHomeLinksHtml()}</div>`),
+  );
+}
 console.log(`prerender: wrote ${routes.length} pages`);
