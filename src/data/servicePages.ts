@@ -1,4 +1,5 @@
 import { FaqItem } from '../types';
+import { SERVICE_EXTRAS } from './servicePagesExtra';
 
 // ─────────────────────────────────────────────────────────────────────────
 // WAVE 1 SERVICE PAGES (organic SEO pages — full site navigation)
@@ -40,7 +41,7 @@ export interface ServicePageConfig {
   reviewIds: string[];
 }
 
-export const SERVICE_PAGES: ServicePageConfig[] = [
+const BASE_SERVICE_PAGES: ServicePageConfig[] = [
   {
     slug: 'junk-removal-ottawa',
     name: 'Junk Removal',
@@ -727,6 +728,12 @@ export const SERVICE_PAGES: ServicePageConfig[] = [
     reviewIds: ['rev-1', 'rev-2', 'rev-3'],
   },
 ];
+
+// Merge in the extra sections and FAQs (see servicePagesExtra.ts).
+export const SERVICE_PAGES: ServicePageConfig[] = BASE_SERVICE_PAGES.map((p) => {
+  const extra = SERVICE_EXTRAS[p.slug];
+  return extra ? { ...p, sections: [...p.sections, ...extra.sections], faqs: [...p.faqs, ...extra.faqs] } : p;
+});
 
 export const PRICES_PAGE = {
   slug: 'junk-removal-ottawa-prices',

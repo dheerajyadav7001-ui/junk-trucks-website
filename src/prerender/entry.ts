@@ -2,7 +2,7 @@
 // building only (no React, no DOM), so it can be bundled and run in Node.
 import { SERVICE_PAGES, PRICES_PAGE } from '../data/servicePages';
 import { AD_LANDING, AD_LANDING_SLUG } from '../data/adLanding';
-import { LANDING_PAGES, OTTAWA_AREAS, TESTIMONIALS } from '../data/junkData';
+import { LANDING_PAGES, OTTAWA_AREAS, TESTIMONIALS, FAQS } from '../data/junkData';
 import { LOAD_PRICES, PRICE_NOTE } from '../config/pricing';
 import { breadcrumbSchema, faqSchema, serviceSchema, blogPostSchema } from '../utils/schema';
 import { BLOG_POSTS } from '../data/blogPosts';
@@ -228,5 +228,17 @@ export function getRoutes(): PrerenderRoute[] {
   );
 }
 
-// Links-only block for the homepage (its content is built in the browser).
-export const getHomeLinksHtml = () => topNavHtml() + footerHtml('');
+// Homepage raw HTML: the page itself is built in the browser, so put the main
+// text (intro, services, prices, reviews, areas, FAQ) and the links in the HTML too.
+export const getHomeLinksHtml = () =>
+  topNavHtml() +
+  `<main><h1>Junk Removal in Ottawa</h1>` +
+  `<p>Junk Trucks is a local Ottawa junk removal crew. Tell us what has to go, get an upfront price, and we do the lifting, loading and hauling. Single items start from $85.</p>` +
+  `<h2>Junk removal services in Ottawa</h2>` +
+  linkList(SERVICE_LINKS) +
+  priceHtml() +
+  reviewsHtml(['rev-5', 'rev-7', 'rev-8', 'rev-9', 'rev-10', 'rev-6']) +
+  areasHtml() +
+  faqHtml(FAQS) +
+  `<p><a href="tel:+13437770398">Call (343) 777-0398</a></p></main>` +
+  footerHtml('');
